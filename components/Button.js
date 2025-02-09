@@ -1,3 +1,4 @@
+import { primary } from "@/lib/color";
 import styled, { css } from "styled-components";
 
 export const ButtonStyle = css`
@@ -5,7 +6,7 @@ export const ButtonStyle = css`
   padding: 5px 15px;
   cursor: pointer;
   border-radius: 5px;
-  max-width: 150px;
+  max-width: 137px;
   text-decoration: none;
 
   ${(props) =>
@@ -16,15 +17,15 @@ export const ButtonStyle = css`
   ${(props) =>
     props.primary &&
     css`
-      background-color: #5542f6;
+      background-color: ${primary};
       color: #fff;
     `}
-  ${(props) =>
+    ${(props) =>
     props.size === "l" &&
     css`
       font-size: 1.2rem;
       padding: 10px 20px;
-    `}
+    `};
 `;
 
 export const StyledButton = styled.button`

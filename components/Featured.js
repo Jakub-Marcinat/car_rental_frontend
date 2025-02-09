@@ -1,49 +1,114 @@
 import styled from "styled-components";
-import Center from "./Center";
-import ButtonLink from "./ButtonLink";
 
 const Bg = styled.div`
-  background-color: #222;
+  background-color: rgba(0, 0, 0, 0.8);
   color: #fff;
-  padding: 50px 0;
+  padding: 60px 0;
+  display: flex;
+  justify-content: center;
 `;
 
-const Title = styled.h1`
-  margin: 0;
-  font-weight: normal;
+const Card = styled.div`
+  background: rgba(255, 255, 255, 0.1);
+  padding: 20px;
+  border-radius: 16px;
+  box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.3);
+  text-align: center;
+  max-width: 400px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0px 12px 30px rgba(0, 0, 0, 0.5);
+  }
+`;
+
+const ImageWrapper = styled.div`
+  overflow: hidden;
+  border-radius: 12px;
+
+  img {
+    width: 100%;
+    border-radius: 12px;
+    transition: transform 0.3s ease;
+
+    &:hover {
+      transform: scale(1.05);
+    }
+  }
+`;
+
+const Title = styled.h2`
+  font-size: 1.8rem;
+  margin: 20px 0 10px;
+  font-weight: 600;
 `;
 
 const Desc = styled.p`
-  color: #aaa;
-  font-size: 0.8rem;
-`;
-
-const Wrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  img {
-    max-width: 50%;
-  }
+  color: #ddd;
+  font-size: 1rem;
 `;
 
 export default function Featured({ product }) {
   return (
-    <div>
-      <Bg>
-        <Center>
-          <Wrapper>
-            <div>
-              <img src="/cars/Arteon 2.0.jpg" alt="Arteon" />
-            </div>
-            <Title>{product ? product.title : "Loading"}</Title>
+    <Bg className="flex gap-8">
+      <Card>
+        <ImageWrapper>
+          <img src="/cars/Arteon 2.0.jpg" alt="Arteon" />
+        </ImageWrapper>
 
-            <Desc>Automat Benzín 235kW</Desc>
-            <ButtonLink href={"/products/" + product._id}>
-              Rezervovať
-            </ButtonLink>
-          </Wrapper>
-        </Center>
-      </Bg>
-    </div>
+        <Title>{product.title}</Title>
+        <div className="flex gap-3 text-white/60">
+          <p>Automat</p>
+          <p>Benzín</p>
+          <p>235kW</p>
+        </div>
+        <a
+          className="text-black bg-yellow-500 px-12 py-3 rounded-lg mt-2"
+          href={"/products/" + product._id}
+        >
+          Rezervovať
+        </a>
+      </Card>
+
+      <Card>
+        <ImageWrapper>
+          <img src="/cars/Arteon 2.0.jpg" alt="Arteon" />
+        </ImageWrapper>
+        <Title>{product.title}</Title>
+        <div className="flex gap-3 text-white/60">
+          <p>Automat</p>
+          <p>Benzín</p>
+          <p>235kW</p>
+        </div>
+        <a
+          className="text-black bg-yellow-500 px-12 py-3 rounded-lg mt-2"
+          href={"/products/" + product._id}
+        >
+          Rezervovať
+        </a>
+      </Card>
+
+      <Card>
+        <ImageWrapper>
+          <img src="/cars/Arteon 2.0.jpg" alt="Arteon" />
+        </ImageWrapper>
+        <Title>{product.title}</Title>
+        <div className="flex gap-3 text-white/60">
+          <p>Automat</p>
+          <p>Benzín</p>
+          <p>235kW</p>
+        </div>
+        <a
+          className="text-black bg-yellow-500 px-12 py-3 rounded-lg mt-2"
+          href={"/products/" + product._id}
+        >
+          Rezervovať
+        </a>
+      </Card>
+    </Bg>
   );
 }
