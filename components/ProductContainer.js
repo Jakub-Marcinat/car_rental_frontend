@@ -1,6 +1,8 @@
 import styled from "styled-components";
 import Button from "./Button";
 import Link from "next/link";
+import { useCallback, useContext } from "react";
+import { CartContext } from "./CartContext";
 
 const ProductWrapper = styled.div`
   background: #2b2b2b;
@@ -59,7 +61,9 @@ const PriceRow = styled.div`
   align-items: center;
   justify-content: space-around;
   width: 100%;
+  padding-left: 5px;
 
+  gap: 150px;
   margin-top: 10px;
 `;
 
@@ -70,6 +74,7 @@ const Price = styled.div`
 `;
 
 export default function ProductContainer({ _id, title, price, images }) {
+  const { addProduct } = useContext(CartContext);
   const url = "/product/" + _id;
 
   return (
@@ -81,7 +86,7 @@ export default function ProductContainer({ _id, title, price, images }) {
         <Title href={url}>{title}</Title>
         <PriceRow>
           <Price>{price}€</Price>
-          <Button primary size={"l"}>
+          <Button onClick={() => addProduct(_id)} primary size={"l"}>
             Rezervovať
           </Button>
         </PriceRow>

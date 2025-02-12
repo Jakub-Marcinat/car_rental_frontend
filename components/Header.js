@@ -1,6 +1,8 @@
 import Link from "next/link";
 import styled from "styled-components";
 import Center from "./Center";
+import { useContext } from "react";
+import { CartContext } from "./CartContext";
 
 const StyledHeader = styled.header`
   background-color: #222;
@@ -28,17 +30,19 @@ const NavLink = styled(Link)`
 `;
 
 export default function Header() {
+  const { cartProducts } = useContext(CartContext);
   return (
     <StyledHeader>
       <Center>
         <Wrapper>
-          <Logo href={"/"}>Car rental niger</Logo>
+          <Logo href={"/"}>COR KLAS</Logo>
           <StyledNav>
             <NavLink href={"/"}>Domov</NavLink>
             <NavLink href={"/ponuka"}>Ponuka vozidiel</NavLink>
-            <NavLink href={"/kategorie"}>Kategórie</NavLink>
             <NavLink href={"/ucet"}>Môj účet</NavLink>
-            <NavLink href={"/rezervacia"}>Moja objednávka</NavLink>
+            <NavLink href={"/cart"}>
+              Moja objednávka ({cartProducts.length})
+            </NavLink>
             <NavLink href={"/kontakt"}>Kontakt</NavLink>
             <NavLink href={"/o-nas"}>O nás</NavLink>
           </StyledNav>

@@ -1,4 +1,6 @@
+import { useContext } from "react";
 import styled from "styled-components";
+import { CartContext } from "./CartContext";
 
 const Bg = styled.div`
   background-color: rgba(0, 0, 0, 0.8);
@@ -53,6 +55,11 @@ const Desc = styled.p`
 `;
 
 export default function Featured({ product }) {
+  const { addProduct } = useContext(CartContext);
+  function addFeaturedToCart() {
+    addProduct(product._id);
+  }
+
   return (
     <Bg className="flex gap-8">
       <Card>
@@ -66,12 +73,12 @@ export default function Featured({ product }) {
           <p>Benzín</p>
           <p>235kW</p>
         </div>
-        <a
+        <button
+          onClick={addFeaturedToCart}
           className="text-black bg-yellow-500 px-12 py-3 rounded-lg mt-2"
-          href={"/products/" + product._id}
         >
           Rezervovať
-        </a>
+        </button>
       </Card>
 
       <Card>
@@ -84,12 +91,13 @@ export default function Featured({ product }) {
           <p>Benzín</p>
           <p>235kW</p>
         </div>
-        <a
+        <button
+          onClick={addFeaturedToCart}
           className="text-black bg-yellow-500 px-12 py-3 rounded-lg mt-2"
           href={"/products/" + product._id}
         >
           Rezervovať
-        </a>
+        </button>
       </Card>
 
       <Card>
@@ -102,12 +110,13 @@ export default function Featured({ product }) {
           <p>Benzín</p>
           <p>235kW</p>
         </div>
-        <a
+        <button
+          onClick={addFeaturedToCart}
           className="text-black bg-yellow-500 px-12 py-3 rounded-lg mt-2"
           href={"/products/" + product._id}
         >
           Rezervovať
-        </a>
+        </button>
       </Card>
     </Bg>
   );

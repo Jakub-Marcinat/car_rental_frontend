@@ -1,26 +1,33 @@
+import { useContext } from "react";
+import { CartContext } from "./CartContext";
+
 export default function Hero() {
+  const { cartProducts } = useContext(CartContext);
+
   return (
     <main className="bg-hero-pattern bg-cover bg-center bg-no-repeat w-full h-screen text-white flex flex-col">
       {/* Navigation Section */}
       <header className="flex justify-between items-center px-10 py-5">
-        <div className="text-5xl font-bold tracking-widest">COR KLAS</div>
-        <nav className="flex space-x-6 text-xl mr-36">
+        <div className="max-xl:text-5xl text-3xl font-bold tracking-widest">
+          COR KLAS
+        </div>
+        <nav className="flex space-x-6 max-xl:text-xl max-xl:mr-36">
           <a href="#home" className="hover:text-yellow-500">
             Domov
           </a>
-          <a href="#about" className="hover:text-yellow-500">
+          <a href="#products" className="hover:text-yellow-500">
             Ponuka vozidiel
           </a>
-          <a href="#services" className="hover:text-yellow-500">
+          <a href="#myaccount" className="hover:text-yellow-500">
             Môj účet
           </a>
-          <a href="#fleets" className="hover:text-yellow-500">
-            Moja objednávka
+          <a href="/cart" className="hover:text-yellow-500">
+            Moja objednávka ({cartProducts.length})
           </a>
-          <a href="#fleets" className="hover:text-yellow-500">
+          <a href="#contact" className="hover:text-yellow-500">
             Kontakt
           </a>
-          <a href="#cooperation" className="hover:text-yellow-500">
+          <a href="#aboutus" className="hover:text-yellow-500">
             O nás
           </a>
         </nav>
@@ -42,31 +49,31 @@ export default function Hero() {
         <div className="bg-gray-900 bg-opacity-80 px-12 py-8 mb-12 rounded-xl w-11/12 max-w-[1000px]">
           <div className="grid grid-cols-3 gap-4 ">
             <div className="flex flex-col">
-              <label className="text-xl font-semibold mb-2 ml-1">
+              <label className="max-xl:text-xl font-semibold mb-2 ml-1">
                 Adresa vyzdvihnutia
               </label>
               <input
                 type="text"
                 placeholder="Trenčín"
-                className="px-4 py-2 rounded-lg text-xl bg-gray-800 border border-gray-700 focus:ring focus:ring-yellow-500"
+                className="px-4 py-2 rounded-lg max-xl:text-xl bg-gray-800 border border-gray-700 focus:ring focus:ring-yellow-500"
               />
             </div>
             <div className="flex flex-col">
-              <label className="text-xl font-semibold mb-2">
+              <label className="max-xl:text-xl font-semibold mb-2">
                 Dátum vyzdvihnutia
               </label>
               <input
                 type="date"
-                className="px-4 py-2 rounded-lg text-xl bg-gray-800 border border-gray-700 focus:ring focus:ring-yellow-500"
+                className="px-4 py-2 rounded-lg max-xl:text-xl bg-gray-800 border border-gray-700 focus:ring focus:ring-yellow-500"
               />
             </div>
             <div className="flex flex-col">
-              <label className="text-xl font-semibold mb-2">
+              <label className="max-xl:text-xl font-semibold mb-2">
                 Dátum vrátenia
               </label>
               <input
                 type="date"
-                className="px-4 py-2 rounded-lg text-xl bg-gray-800 border border-gray-700 focus:ring focus:ring-yellow-500"
+                className="px-4 py-2 rounded-lg max-xl:text-xl bg-gray-800 border border-gray-700 focus:ring focus:ring-yellow-500"
               />
             </div>
             {/* <div className="flex flex-col">
@@ -78,7 +85,7 @@ export default function Hero() {
             </div> */}
           </div>
           <div className="flex justify-end mt-4">
-            <button className="px-8 py-3 bg-yellow-500 rounded-lg text-black text-xl font-semibold hover:bg-yellow-600">
+            <button className="px-8 py-3 bg-yellow-500 rounded-lg text-black max-xl:text-xl font-semibold hover:bg-yellow-600">
               CTA
             </button>
           </div>
