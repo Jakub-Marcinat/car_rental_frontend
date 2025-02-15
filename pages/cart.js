@@ -100,53 +100,60 @@ export default function CartPage() {
           {!!cartProducts?.length && (
             <Box>
               <h2>Informácie o objednávke</h2>
-              <Input
-                type="text"
-                placeholder="Meno"
-                value={name}
-                name="name"
-                onChange={(ev) => setName(ev.target.value)}
-              />
-              <Input
-                type="text"
-                placeholder="Email"
-                value={email}
-                name="email"
-                onChange={(ev) => setEmail(ev.target.value)}
-              />
-              <Input
-                type="text"
-                placeholder="Ulica"
-                value={streetAdress}
-                name="streetAdress"
-                onChange={(ev) => setStreetAdress(ev.target.value)}
-              />
-              <CityHolder>
+              <form method="POST" action="/api/checkout">
                 <Input
                   type="text"
-                  placeholder="Mesto"
-                  value={city}
-                  name="city"
-                  onChange={(ev) => setcity(ev.target.value)}
+                  placeholder="Meno"
+                  value={name}
+                  name="name"
+                  onChange={(ev) => setName(ev.target.value)}
                 />
                 <Input
                   type="text"
-                  placeholder="PSČ"
-                  value={postalCode}
-                  name="postalCode"
-                  onChange={(ev) => setPostalCode(ev.target.value)}
+                  placeholder="Email"
+                  value={email}
+                  name="email"
+                  onChange={(ev) => setEmail(ev.target.value)}
                 />
-              </CityHolder>
-              <Input
-                type="text"
-                placeholder="Krajina"
-                value={country}
-                name="country"
-                onChange={(ev) => setCountry(ev.target.value)}
-              />
-              <Button black block>
-                Pokračovať
-              </Button>
+                <Input
+                  type="text"
+                  placeholder="Ulica"
+                  value={streetAdress}
+                  name="streetAdress"
+                  onChange={(ev) => setStreetAdress(ev.target.value)}
+                />
+                <CityHolder>
+                  <Input
+                    type="text"
+                    placeholder="Mesto"
+                    value={city}
+                    name="city"
+                    onChange={(ev) => setcity(ev.target.value)}
+                  />
+                  <Input
+                    type="text"
+                    placeholder="PSČ"
+                    value={postalCode}
+                    name="postalCode"
+                    onChange={(ev) => setPostalCode(ev.target.value)}
+                  />
+                </CityHolder>
+                <Input
+                  type="text"
+                  placeholder="Krajina"
+                  value={country}
+                  name="country"
+                  onChange={(ev) => setCountry(ev.target.value)}
+                />
+                <input
+                  type="hidden"
+                  name="products"
+                  value={cartProducts.join(",")}
+                />
+                <Button black block>
+                  Pokračovať
+                </Button>
+              </form>
             </Box>
           )}
         </ColumnsWrapper>
