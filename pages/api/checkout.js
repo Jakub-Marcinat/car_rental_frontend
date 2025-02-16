@@ -23,7 +23,7 @@ export default async function handler(req, res) {
       (p) => p._id.toString() === productId
     );
     if (productInfo) {
-      lineItems.push({
+        lineItems.push({
         price_data: {
           currency: "EUR",
           productData: { name: productInfo.title },

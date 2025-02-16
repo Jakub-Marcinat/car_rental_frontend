@@ -12,6 +12,10 @@ export function CartContextProvider({ children }) {
     }
   }, [cartProducts]);
 
+  function clearCart() {
+    setCartProducts([]);
+  }
+
   useEffect(() => {
     if (ls && ls.getItem("objednavka")) {
       setCartProducts(JSON.parse(ls.getItem("objednavka")));
@@ -23,7 +27,7 @@ export function CartContextProvider({ children }) {
   }
 
   return (
-    <CartContext.Provider value={{ cartProducts, setCartProducts, addProduct }}>
+    <CartContext.Provider value={{ cartProducts, setCartProducts, addProduct, clearCart }}>
       {children}
     </CartContext.Provider>
   );

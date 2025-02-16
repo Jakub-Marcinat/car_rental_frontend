@@ -48,7 +48,7 @@ const CityHolder = styled.div`
 `;
 
 export default function CartPage() {
-  const { cartProducts } = useContext(CartContext);
+  const { cartProducts, clearCart } = useContext(CartContext);
   const [products, setProducts] = useState([]);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -63,6 +63,7 @@ export default function CartPage() {
       });
     }
   }, [cartProducts]);
+
   return (
     <>
       <Header />
@@ -150,7 +151,7 @@ export default function CartPage() {
                   name="products"
                   value={cartProducts.join(",")}
                 />
-                <Button black block>
+                <Button black block onClick={clearCart}>
                   Pokračovať
                 </Button>
               </form>
