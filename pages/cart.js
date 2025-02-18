@@ -4,6 +4,7 @@ import Center from "@/components/Center";
 import Header from "@/components/Header";
 import Input from "@/components/Input";
 import Table from "@/components/Table";
+import WhiteBox from "@/components/WhiteBox";
 import axios from "axios";
 import { useContext, useEffect, useState } from "react";
 import styled from "styled-components";
@@ -13,13 +14,6 @@ const ColumnsWrapper = styled.div`
   grid-template-columns: 1.2fr 0.8fr;
   gap: 40px;
   margin-top: 40px;
-`;
-
-const Box = styled.div`
-  background: #fff;
-  border-radius: 10px;
-  color: #000;
-  padding: 30px;
 `;
 
 const ProductInfoCell = styled.td`
@@ -69,7 +63,7 @@ export default function CartPage() {
       <Header />
       <Center>
         <ColumnsWrapper>
-          <Box>
+          <WhiteBox>
             {!cartProducts?.length && <div>Žiadna objednávka</div>}
             <h2>Objednávka</h2>
             {products?.length > 0 && (
@@ -97,9 +91,9 @@ export default function CartPage() {
                 </tbody>
               </Table>
             )}
-          </Box>
+          </WhiteBox>
           {!!cartProducts?.length && (
-            <Box>
+            <WhiteBox>
               <h2>Informácie o objednávke</h2>
               <form method="POST" action="/api/checkout">
                 <Input
@@ -155,7 +149,7 @@ export default function CartPage() {
                   Pokračovať
                 </Button>
               </form>
-            </Box>
+            </WhiteBox>
           )}
         </ColumnsWrapper>
       </Center>

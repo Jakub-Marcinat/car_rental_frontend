@@ -1,21 +1,15 @@
 import Header from "@/components/Header";
 import ProductsGrid from "@/components/ProductsGrid";
+import Title from "@/components/Title";
 import { mongooseConnect } from "@/lib/mongoose";
 import { Product } from "@/models/Product";
-import styled from "styled-components";
-
-const Title = styled.h1`
-  font-size: 1.5em;
-  padding: 20px;
-  width: 100%;
-`;
 
 export default function VozidlaPage({ products }) {
   return (
     <>
       <Header />
       <div className="flex flex-col items-center ">
-        <Title>Products</Title>
+        <Title>Vozidla</Title>
         <ProductsGrid products={products} />
       </div>
     </>

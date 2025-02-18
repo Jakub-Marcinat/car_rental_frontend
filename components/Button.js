@@ -3,7 +3,7 @@ import styled, { css } from "styled-components";
 
 export const ButtonStyle = css`
   border: 0;
-  padding: 5px 15px;
+  padding: 8px 15px;
   cursor: pointer;
   border-radius: 5px;
 
@@ -27,14 +27,12 @@ export const ButtonStyle = css`
     css`
       background-color: ${primary};
       color: #000;
-      width: 100%;
     `}
     ${(props) =>
     props.size === "l" &&
     css`
       font-size: 1.2rem;
       padding: 10px 20px;
-      width: 100%;
     `};
   ${(props) =>
     props.black &&
