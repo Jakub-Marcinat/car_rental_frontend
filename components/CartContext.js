@@ -14,6 +14,8 @@ export function CartContextProvider({ children }) {
 
   function clearCart() {
     setCartProducts([]);
+    // localStorage.clear();
+    localStorage.setItem("objednavka", "");
   }
 
   useEffect(() => {
@@ -27,7 +29,9 @@ export function CartContextProvider({ children }) {
   }
 
   return (
-    <CartContext.Provider value={{ cartProducts, setCartProducts, addProduct, clearCart }}>
+    <CartContext.Provider
+      value={{ cartProducts, setCartProducts, addProduct, clearCart }}
+    >
       {children}
     </CartContext.Provider>
   );

@@ -38,7 +38,7 @@ export default function Header() {
           <Logo href={"/"}>COR KLAS</Logo>
           <StyledNav>
             <NavLink href={"/"}>Domov</NavLink>
-            <NavLink href={"/ponuka"}>Ponuka vozidiel</NavLink>
+            <NavLink href={"/vozidla"}>Ponuka vozidiel</NavLink>
             <NavLink href={"/ucet"}>Môj účet</NavLink>
             <NavLink href={"/cart"}>
               Moja objednávka ({cartProducts.length})

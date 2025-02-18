@@ -12,10 +12,10 @@ export default function Hero() {
           COR KLAS
         </div>
         <nav className="flex space-x-6 max-xl:text-xl max-xl:mr-36">
-          <a href="#home" className="hover:text-yellow-500">
+          <a href="/home" className="hover:text-yellow-500">
             Domov
           </a>
-          <a href="#products" className="hover:text-yellow-500">
+          <a href="/vozidla" className="hover:text-yellow-500">
             Ponuka vozidiel
           </a>
           <a href="#myaccount" className="hover:text-yellow-500">

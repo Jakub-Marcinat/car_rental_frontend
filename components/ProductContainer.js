@@ -86,7 +86,7 @@ export default function ProductContainer({ _id, title, price, images }) {
         <Title href={url}>{title}</Title>
         <PriceRow>
           <Price>{price}€</Price>
-          <Button onClick={() => addProduct(_id)} primary size={"l"}>
+          <Button onClick={() => addProduct(_id)} primary={1} size={"l"}>
             Rezervovať
           </Button>
         </PriceRow>
