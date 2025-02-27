@@ -85,8 +85,8 @@ export default function Hero() {
             </div> */}
           </div>
           <div className="flex justify-end mt-4">
-            <button className="px-8 py-3 bg-yellow-500 rounded-lg text-black max-xl:text-xl font-semibold hover:bg-yellow-600">
-              CTA
+            <button className="px-8 py-3 bg-yellow-500 rounded-lg text-black max-xl:text-xl font- hover:bg-yellow-600">
+              Vyhľadať
             </button>
           </div>
         </div>

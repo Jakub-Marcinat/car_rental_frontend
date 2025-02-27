@@ -1,3 +1,4 @@
+import Filter from "@/components/Filter";
 import Header from "@/components/Header";
 import ProductsGrid from "@/components/ProductsGrid";
 import Title from "@/components/Title";
@@ -10,15 +11,42 @@ export default function VozidlaPage({ products }) {
       <Header />
       <div className="flex flex-col items-center ">
         <Title>Vozidla</Title>
-        <ProductsGrid products={products} />
+        <div className="flex justify-between w-full px-24">
+          <Filter />
+          <ProductsGrid products={products} />
+        </div>
       </div>
     </>
   );
 }
 
-export async function getServerSideProps() {
+export async function getServerSideProps(context) {
   await mongooseConnect();
-  const products = await Product.find({}, null, { sort: { _id: -1 } });
+  const { query } = context;
+  
+  let filter = {};
+  
+  // Apply filters based on query parameters
+  if (query.make) filter.make = query.make;
+  if (query.transmission) filter.transmission = query.transmission;
+  if (query.fuel) filter.fuel = query.fuel;
+  if (query.category) filter.category = query.category;
+
+  // Filtering by reservation dates
+  if (query.pickupDate && query.dropoffDate) {
+    filter.$or = [
+      { reservationSince: { $gt: query.dropoffDate } },
+      { reservationUntil: { $lt: query.pickupDate } }
+    ];
+  }
+
+  // Sorting by price
+  let sortOptions = {};
+  if (query.order === "asc") sortOptions.price = 1;
+  if (query.order === "desc") sortOptions.price = -1;
+
+  // Fetch products with filtering
+  const products = await Product.find(filter, null, { sort: sortOptions });
 
   return {
     props: {
@@ -26,3 +54,4 @@ export async function getServerSideProps() {
     },
   };
 }
+
