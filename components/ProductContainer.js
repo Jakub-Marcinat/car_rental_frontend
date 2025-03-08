@@ -3,6 +3,7 @@ import Button from "./Button";
 import Link from "next/link";
 import { useCallback, useContext } from "react";
 import { CartContext } from "./CartContext";
+import { useRouter } from "next/router";
 
 const ProductWrapper = styled.div`
   background: #2b2b2b;
@@ -76,6 +77,7 @@ const Price = styled.div`
 export default function ProductContainer({ _id, title, price, images }) {
   const { addProduct } = useContext(CartContext);
   const url = "/product/" + _id;
+  const router = useRouter();
 
   return (
     <ProductWrapper>
@@ -86,7 +88,11 @@ export default function ProductContainer({ _id, title, price, images }) {
         <Title href={url}>{title}</Title>
         <PriceRow>
           <Price>{price}€</Price>
-          <Button onClick={() => addProduct(_id)} primary={1} size={"l"}>
+          <Button
+            onClick={() => router.push(`/rezervacia?id=${_id}`)}
+            primary={1}
+            size={"l"}
+          >
             Rezervovať
           </Button>
         </PriceRow>
