@@ -9,8 +9,12 @@ const ProductSchema = new Schema(
     category: { type: mongoose.Types.ObjectId, ref: "Category" },
     properties: { type: Object },
     features: [{ type: String }],
-    reservationSince: { type: Date },
-    reservationUntil: { type: Date },
+    reservations: [
+      {
+        reservationSince: { type: Date },
+        reservationUntil: { type: Date },
+      },
+    ],
     numberOfRentalDays: {
       type: [
         {

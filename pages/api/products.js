@@ -19,31 +19,26 @@ export default async function handler(req, res) {
       } = req.query;
       const filter = {};
 
-      // Filter by Make and Model
       if (make) filter.category = make;
       if (model) filter.category = model;
 
-      // Filter by Vehicle Category
       if (category) filter.vehicleCategory = category;
 
-      // Filter by Properties (Transmission, Fuel, Drive)
       if (transmission) filter["properties.Prevodovka"] = transmission;
       if (fuel) filter["properties.Palivo"] = fuel;
       if (drive) filter["properties.Náhon"] = drive;
 
-      // Filter by Availability
-      if (pickupDate || dropoffDate) {
-        filter.$or = [];
-
-        if (pickupDate) {
-          filter.$or.push({ reservationUntil: { $lt: new Date(pickupDate) } }); // Vehicle must be free before pickup
-        }
-        if (dropoffDate) {
-          filter.$or.push({ reservationSince: { $gt: new Date(dropoffDate) } }); // Vehicle must be free after dropoff
-        }
+      if (pickupDate && dropoffDate) {
+        filter.reservations = {
+          $not: {
+            $elemMatch: {
+              reservationSince: { $lt: new Date(dropoffDate) },
+              reservationUntil: { $gt: new Date(pickupDate) },
+            },
+          },
+        };
       }
 
-      // Sorting by Price
       let sort = {};
       if (order === "asc") sort.price = 1;
       if (order === "desc") sort.price = -1;

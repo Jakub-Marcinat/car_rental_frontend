@@ -29,7 +29,6 @@ export async function getServerSideProps(context) {
   let filter = {};
   let makeId = null;
 
-  // ✅ Get All Categories (Makes & Models)
   const categories = await Category.find();
   const makesMap = {};
   const modelsMap = {};
@@ -42,12 +41,11 @@ export async function getServerSideProps(context) {
     }
   });
 
-  // ✅ Convert Make Name to Make ID for Filtering
   if (query.make) {
     makeId = Object.keys(makesMap).find((id) => makesMap[id] === query.make);
   }
 
-  // ✅ Apply Filtering Based on Query Params
+
   if (query.make) {
     // Find all models belonging to this make
     const modelIds = Object.keys(modelsMap).filter(
@@ -56,10 +54,10 @@ export async function getServerSideProps(context) {
     console.log("Model IDs before filtering:", modelIds);
 
     const modelObjectIds = Object.keys(modelsMap)
-      .filter((modelName) => modelsMap[modelName] === makeId) // ✅ Get models belonging to make
+      .filter((modelName) => modelsMap[modelName] === makeId)
       .map((modelName) =>
         categories.find((c) => c.name === modelName)?._id?.toString()
-      ); // ✅ Get ObjectId
+      );
 
     filter.category = {
       $in: modelObjectIds.filter((id) => mongoose.Types.ObjectId.isValid(id)),
@@ -71,28 +69,31 @@ export async function getServerSideProps(context) {
   if (query.drive) filter["properties.Náhon"] = query.drive;
   if (query.category) filter.vehicleCategory = query.category;
 
-  // ✅ Handle Reservation Dates Properly
   if (query.pickupDate && query.dropoffDate) {
-    filter.$or = [
-      { reservationSince: { $gt: query.dropoffDate } }, // Available after dropoff date
-      { reservationUntil: { $lt: query.pickupDate } }, // Available before pickup date
-    ];
+    filter.reservations = {
+      $not: {
+        $elemMatch: {
+          reservationSince: { $lt: new Date(query.dropoffDate) },
+          reservationUntil: { $gt: new Date(query.pickupDate) },
+        },
+      },
+    };
   }
 
-  // ✅ Sorting by Price
+
   let sortOptions = {};
   if (query.order === "asc") sortOptions.price = 1;
   if (query.order === "desc") sortOptions.price = -1;
 
-  // ✅ Fetch Products with Filters
+
   const products = await Product.find(filter).sort(sortOptions);
 
   return {
     props: {
       products: JSON.parse(JSON.stringify(products)),
-      makes: Object.values(makesMap), // Pass makes to frontend
+      makes: Object.values(makesMap), 
       models: Object.entries(modelsMap).reduce((acc, [model, makeId]) => {
-        const makeName = makesMap[makeId]; // Get make name
+        const makeName = makesMap[makeId];
         if (!acc[makeName]) acc[makeName] = [];
         acc[makeName].push(model);
         return acc;
