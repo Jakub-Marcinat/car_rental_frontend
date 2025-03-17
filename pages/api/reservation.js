@@ -1,3 +1,4 @@
+import { Product } from "@/models/Product";
 import { Reservation } from "@/models/Reservation";
 import nodemailer from "nodemailer";
 
@@ -40,7 +41,8 @@ export default async function handler(req, res) {
     allowedKm,
     overLimitFee,
     paymentMethod,
-    vehicle,
+    vehicle: vehicleTitle,
+    vehicleId,
     selectedMode,
     promoCode,
     discountAmount,
@@ -73,7 +75,7 @@ export default async function handler(req, res) {
     !allowedKm ||
     !overLimitFee ||
     !paymentMethod ||
-    !vehicle ||
+    !vehicleTitle ||
     !selectedMode
   ) {
     console.log("Missing required fields:", req.body);
@@ -85,7 +87,7 @@ export default async function handler(req, res) {
     lastName,
     email,
     phone,
-    vehicle,
+    vehicle: vehicleTitle,
     pickupDate,
     dropoffDate,
     pickupTime,
@@ -117,6 +119,22 @@ export default async function handler(req, res) {
     paid: false,
   });
 
+  const vehicleDoc = await Product.findById(vehicleId);
+  console.log("Vehicle object:", vehicleTitle);
+  console.log("Vehicle ID:", vehicleTitle._id);
+
+  if (vehicleDoc) {
+    vehicleDoc.reservations.push({
+      reservationSince: new Date(pickupDate),
+      reservationUntil: new Date(dropoffDate),
+    });
+
+    await vehicleDoc.save();
+    console.log("Vehicle reservation updated:", vehicleDoc);
+  } else {
+    console.warn("Vehicle not found with ID:", vehicleId);
+  }
+
   const transporter = nodemailer.createTransport({
     service: "Gmail",
     auth: { user: "acido256@gmail.com", pass: "ucge erey xkdb kuiq" },
@@ -131,7 +149,7 @@ export default async function handler(req, res) {
     text: `
       🚗 Vehicle Reservation Details:
       ----------------------------------
-      Vehicle: ${vehicle}
+      Vehicle Title: ${vehicleTitle}
       Category: ${vehicleCategory}
       Features: ${vehicleFeatures?.join(", ")}
 
@@ -192,7 +210,7 @@ export default async function handler(req, res) {
     text: `
       🚗 New Reservation Received:
       ----------------------------------
-      Vehicle: ${vehicle}
+      Vehicle: ${vehicleTitle}
       Image: ${vehicleImage}
       Category: ${vehicleCategory}
       Features: ${vehicleFeatures?.join(", ")}

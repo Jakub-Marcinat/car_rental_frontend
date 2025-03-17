@@ -186,6 +186,7 @@ export default function ReservationPage({ product }) {
       depositFee,
       overLimitFee,
       paymentMethod,
+      vehicleId: product._id,
       vehicle: product.title,
       vehicleImage: product.image,
       vehicleCategory: product.category,
