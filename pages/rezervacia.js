@@ -15,7 +15,7 @@ export default function ReservationPage({ product }) {
   const [paymentMethod, setPaymentMethod] = useState("wire");
   const [isCompany, setIsCompany] = useState(false);
   const [selectedMode, setSelectedMode] = useState("SR");
-  //const [depositFee, setDepositFee] = useState(500);
+  const [depositFee, setDepositFee] = useState(500);
   const [promoCode, setPromoCode] = useState("");
   const [appliedPromoCode, setAppliedPromoCode] = useState(null);
   const [promoDiscount, setPromoDiscount] = useState(0);
@@ -23,7 +23,35 @@ export default function ReservationPage({ product }) {
   const [termsAccepted, setTermsAccepted] = useState(false);
   const [dataProcessingAccepted, setDataProcessingAccepted] = useState(false);
 
+  const {
+    id,
+    pickupDate: queryPickupDate,
+    dropoffDate: queryDropoffDate,
+    pickupTime: queryPickupTime,
+    dropoffTime: queryDropoffTime,
+    selectedMode: querySelectedMode,
+  } = router.query;
+
+  useEffect(() => {
+    if (queryPickupDate) setPickupDate(queryPickupDate);
+    if (queryDropoffDate) setDropoffDate(queryDropoffDate);
+    if (queryPickupTime) setPickupTime(queryPickupTime);
+    if (queryDropoffTime) setDropoffTime(queryDropoffTime);
+    if (querySelectedMode) setSelectedMode(querySelectedMode);
+  }, [
+    queryPickupDate,
+    queryDropoffDate,
+    queryPickupTime,
+    queryDropoffTime,
+    querySelectedMode,
+  ]);
+
   const [formData, setFormData] = useState({
+    pickupDate: pickupDate || "",
+    dropoffDate: dropoffDate || "",
+    pickupTime: pickupTime || "08:00",
+    dropoffTime: dropoffTime || "08:00",
+    selectedMode: selectedMode || "SR",
     firstName: "",
     lastName: "",
     email: "",
@@ -56,36 +84,64 @@ export default function ReservationPage({ product }) {
     licenseBack: null,
   });
 
-  const depositFee = 500;
   const overLimitFee = 0.5;
 
-
   useEffect(() => {
-    let newDeposit = 500; 
-    if (selectedMode === "Susedné krajiny") newDeposit *= 1.3; 
-    if (selectedMode === "EU") newDeposit *= 1.6; 
-    //setDepositFee(newDeposit);
+    let newDeposit = 500;
+    if (selectedMode === "Susedné krajiny") newDeposit *= 1.3;
+    if (selectedMode === "EU") newDeposit *= 1.6;
+    setDepositFee(newDeposit);
   }, [selectedMode]);
 
-
   useEffect(() => {
-    if (pickupDate && dropoffDate) {
-      const start = new Date(pickupDate);
-      const end = new Date(dropoffDate);
+    if (
+      pickupDate &&
+      dropoffDate &&
+      pickupTime &&
+      dropoffTime &&
+      product?.priceListing?.length
+    ) {
+      const start = new Date(`${pickupDate} ${pickupTime}`);
+      const end = new Date(`${dropoffDate} ${dropoffTime}`);
+
       const rentalDays = Math.ceil((end - start) / (1000 * 60 * 60 * 24));
 
-      const matchingPrice = product.numberOfRentalDays.find((p) =>
-        p.DaysOfRental.includes(rentalDays >= 2 ? "2 - 3" : "0 - 1")
-      );
+      console.log("Rental Days:", rentalDays);
 
-      if (matchingPrice) {
-        let calculatedPrice = matchingPrice.dailyRentalPrice * rentalDays;
-        calculatedPrice -= calculatedPrice * promoDiscount;
-        setRentalPrice(matchingPrice.dailyRentalPrice * rentalDays);
-        setAllowedKm(matchingPrice.dailyKM * rentalDays);
+      // Sort price tiers by range (ensures correct tier ordering)
+      const sortedPriceTiers = product.priceListing.sort((a, b) => {
+        const getMinDays = (range) => parseInt(range.split(" - ")[0], 10);
+        return getMinDays(a.DaysOfRental) - getMinDays(b.DaysOfRental);
+      });
+
+      // Find the correct pricing tier
+      let selectedTier = sortedPriceTiers.find((tier) => {
+        const [min, max] = tier.DaysOfRental.match(/\d+/g).map(Number);
+        return rentalDays >= min && (max ? rentalDays <= max : true);
+      });
+
+      if (selectedTier) {
+        let totalPrice = rentalDays * parseFloat(selectedTier.dailyRentalPrice);
+        let totalAllowedKm = rentalDays * parseFloat(selectedTier.dailyKM);
+
+        totalPrice -= totalPrice * promoDiscount;
+
+        setRentalPrice(totalPrice);
+        setAllowedKm(totalAllowedKm);
+
+        console.log("Selected Tier:", selectedTier);
+        console.log("Total Price:", totalPrice);
+        console.log("Total Allowed KM:", totalAllowedKm);
       }
     }
-  }, [pickupDate, dropoffDate, promoDiscount]);
+  }, [
+    pickupDate,
+    dropoffDate,
+    pickupTime,
+    dropoffTime,
+    promoDiscount,
+    product,
+  ]);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -95,19 +151,36 @@ export default function ReservationPage({ product }) {
     setFiles({ ...files, [e.target.name]: e.target.files[0] });
   };
 
+  useEffect(() => {
+    setFormData((prev) => ({
+      ...prev,
+      pickupDate: pickupDate || prev.pickupDate,
+      dropoffDate: dropoffDate || prev.dropoffDate,
+      pickupTime: pickupTime || prev.pickupTime,
+      dropoffTime: dropoffTime || prev.dropoffTime,
+      selectedMode: selectedMode || prev.selectedMode,
+    }));
+  }, [pickupDate, dropoffDate, pickupTime, dropoffTime, selectedMode]);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     if (!termsAccepted || !dataProcessingAccepted) {
       alert("You must accept the Terms of Use and Data Processing.");
       return;
     }
 
-    const reservationDetails = {
+    const updatedFormData = {
       ...formData,
-      pickupDate,
-      dropoffDate,
-      pickupTime,
-      dropoffTime,
+      pickupDate: pickupDate || formData.pickupDate,
+      dropoffDate: dropoffDate || formData.dropoffDate,
+      pickupTime: pickupTime || formData.pickupTime,
+      dropoffTime: dropoffTime || formData.dropoffTime,
+      selectedMode: selectedMode || formData.selectedMode,
+    };
+
+    const reservationDetails = {
+      ...updatedFormData,
       allowedKm,
       rentalPrice,
       depositFee,
@@ -118,19 +191,18 @@ export default function ReservationPage({ product }) {
       vehicleCategory: product.category,
       vehicleFeatures: product.features,
       isCompany,
-      companyName: formData.companyName || null,
-      ico: formData.ico || null,
-      dic: formData.dic || null,
-      icDph: formData.icDph || null,
-      billingStreet: formData.billingStreet || null,
-      billingCity: formData.billingCity || null,
-      billingPsc: formData.billingPsc || null,
-      billingCountry: formData.billingCountry || null,
-      contactStreet: formData.contactStreet || null,
-      contactCity: formData.contactCity || null,
-      contactPsc: formData.contactPsc || null,
-      contactCountry: formData.contactCountry || null,
-      selectedMode,
+      companyName: updatedFormData.companyName || null,
+      ico: updatedFormData.ico || null,
+      dic: updatedFormData.dic || null,
+      icDph: updatedFormData.icDph || null,
+      billingStreet: updatedFormData.billingStreet || null,
+      billingCity: updatedFormData.billingCity || null,
+      billingPsc: updatedFormData.billingPsc || null,
+      billingCountry: updatedFormData.billingCountry || null,
+      contactStreet: updatedFormData.contactStreet || null,
+      contactCity: updatedFormData.contactCity || null,
+      contactPsc: updatedFormData.contactPsc || null,
+      contactCountry: updatedFormData.contactCountry || null,
       promoCode: appliedPromoCode || null,
       discountAmount: promoDiscount || 0,
       termsAccepted,
@@ -138,12 +210,17 @@ export default function ReservationPage({ product }) {
     };
 
     try {
-      await axios.post("/api/reservation", reservationDetails);
-      alert("Reservation sent! Check your email.");
-      router.push("/");
+      const response = await axios.post("/api/reservation", reservationDetails);
+
+      if (response.status === 200) {
+        alert("Reservation sent! Check your email.");
+        //router.push(`/thank-you?reservationId=${response.data.reservationId}`);
+      } else {
+        throw new Error("Reservation failed.");
+      }
     } catch (error) {
-      console.error(error);
-      alert("Error sending reservation.");
+      console.error("Error submitting reservation:", error);
+      alert("Error sending reservation. Please try again.");
     }
   };
 

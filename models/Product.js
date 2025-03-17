@@ -16,7 +16,7 @@ const ProductSchema = new Schema(
         reservationUntil: { type: Date },
       },
     ],
-    numberOfRentalDays: {
+    priceListing: {
       type: [
         {
           DaysOfRental: { type: String, required: true },

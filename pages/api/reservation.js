@@ -1,3 +1,4 @@
+import { Reservation } from "@/models/Reservation";
 import nodemailer from "nodemailer";
 
 export default async function handler(req, res) {
@@ -78,6 +79,43 @@ export default async function handler(req, res) {
     console.log("Missing required fields:", req.body);
     return res.status(400).json({ message: "Missing required fields" });
   }
+
+  const newReservation = await Reservation.create({
+    firstName,
+    lastName,
+    email,
+    phone,
+    vehicle,
+    pickupDate,
+    dropoffDate,
+    pickupTime,
+    dropoffTime,
+    allowedKm,
+    rentalPrice,
+    depositFee,
+    overLimitFee,
+    paymentMethod,
+    isCompany,
+    companyName,
+    ico,
+    dic,
+    icDph,
+    billingStreet,
+    billingCity,
+    billingPsc,
+    billingCountry,
+    contactStreet,
+    contactCity,
+    contactPsc,
+    contactCountry,
+    selectedMode,
+    promoCode,
+    discountAmount,
+    termsAccepted,
+    dataProcessingAccepted,
+    reserved: true,
+    paid: false,
+  });
 
   const transporter = nodemailer.createTransport({
     service: "Gmail",
