@@ -7,7 +7,7 @@ const Bg = styled.div`
   padding: 60px 0;
   display: flex;
   justify-content: center;
-  gap: 20px;
+  gap: 10px;
   flex-wrap: wrap;
 `;
 
@@ -18,7 +18,7 @@ const Card = styled.div`
   border: 1px solid #2b2b2b;
   box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.3);
   text-align: center;
-  max-width: 400px;
+  max-width: 350px;
   display: flex;
   align-items: center;
   flex-direction: column;
