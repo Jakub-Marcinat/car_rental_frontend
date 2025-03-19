@@ -1,19 +1,21 @@
-import { useContext } from "react";
 import styled from "styled-components";
-import { CartContext } from "./CartContext";
+import { useContext } from "react";
 
 const Bg = styled.div`
-  background-color: rgba(0, 0, 0, 0.8);
+  background-color: #0b0a0b;
   color: #fff;
   padding: 60px 0;
   display: flex;
   justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
 `;
 
 const Card = styled.div`
-  background: rgba(255, 255, 255, 0.1);
+  background: #151515;
   padding: 20px;
-  border-radius: 16px;
+  border-radius: 32px;
+  border: 1px solid #2b2b2b;
   box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.3);
   text-align: center;
   max-width: 400px;
@@ -45,78 +47,68 @@ const ImageWrapper = styled.div`
 
 const Title = styled.h2`
   font-size: 1.8rem;
-  margin: 20px 0 10px;
+  margin: 20px 0 4px;
   font-weight: 600;
-`;
-
-const Desc = styled.p`
-  color: #ddd;
-  font-size: 1rem;
+  display: flex;
 `;
 
 export default function Featured({ product }) {
-  const { addProduct } = useContext(CartContext);
   function addFeaturedToCart() {
     addProduct(product._id);
   }
 
+  const { Palivo, Prevodovka, Výkon } = product.properties || {};
+
+  const lowestRentalPrice =
+    product.priceListing?.[product.priceListing.length - 1]?.dailyRentalPrice ||
+    "N/A";
+  {
+    console.log("asd", product.priceListing);
+  }
+
   return (
-    <Bg className="flex gap-8">
+    <Bg>
       <Card>
         <ImageWrapper>
-          <img src="/cars/Arteon 2.0.jpg" alt="Arteon" />
+          <img
+            src={product.images[0] || "/placeholder.jpg"}
+            alt={product.title}
+          />
         </ImageWrapper>
+        <div className="flex flex-col w-full">
+          <Title>{product.title}</Title>
+          <div className="flex gap-3 text-white/60 text-sm mb-4">
+            <p>{Prevodovka || "N/A"}</p>
+            <p>{Palivo || "N/A"}</p>
+            <p>{Výkon ? `${Výkon} kW` : "N/A"}</p>
+          </div>
 
-        <Title>{product.title}</Title>
-        <div className="flex gap-3 text-white/60">
-          <p>Automat</p>
-          <p>Benzín</p>
-          <p>235kW</p>
+          <div className="flex justify-between items-end">
+            <p>
+              <span className="opacity-70">od </span>
+              <span className="text-3xl opacity-100 text-corklasYellow">
+                {lowestRentalPrice}€
+                <span className="opacity-70 text-2xl text-white"> / deň</span>
+              </span>
+            </p>
+            <div className="flex items-center rounded-full border border-[#2b2b2b] px-4 py-4">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                class="size-6"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="m8.25 4.5 7.5 7.5-7.5 7.5"
+                />
+              </svg>
+            </div>
+          </div>
         </div>
-        <button
-          onClick={addFeaturedToCart}
-          className="text-black bg-yellow-500 px-12 py-3 rounded-lg mt-2"
-        >
-          Rezervovať
-        </button>
-      </Card>
-
-      <Card>
-        <ImageWrapper>
-          <img src="/cars/Arteon 2.0.jpg" alt="Arteon" />
-        </ImageWrapper>
-        <Title>{product.title}</Title>
-        <div className="flex gap-3 text-white/60">
-          <p>Automat</p>
-          <p>Benzín</p>
-          <p>235kW</p>
-        </div>
-        <button
-          onClick={addFeaturedToCart}
-          className="text-black bg-yellow-500 px-12 py-3 rounded-lg mt-2"
-          href={"/products/" + product._id}
-        >
-          Rezervovať
-        </button>
-      </Card>
-
-      <Card>
-        <ImageWrapper>
-          <img src="/cars/Arteon 2.0.jpg" alt="Arteon" />
-        </ImageWrapper>
-        <Title>{product.title}</Title>
-        <div className="flex gap-3 text-white/60">
-          <p>Automat</p>
-          <p>Benzín</p>
-          <p>235kW</p>
-        </div>
-        <button
-          onClick={addFeaturedToCart}
-          className="text-black bg-yellow-500 px-12 py-3 rounded-lg mt-2"
-          href={"/products/" + product._id}
-        >
-          Rezervovať
-        </button>
       </Card>
     </Bg>
   );

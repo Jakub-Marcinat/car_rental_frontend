@@ -12,22 +12,22 @@ export default function Hero() {
           COR KLAS
         </div>
         <nav className="flex space-x-6 max-xl:text-xl max-xl:mr-36">
-          <a href="/home" className="hover:text-yellow-500">
+          <a href="/home" className="hover:text-corklasYellow">
             Domov
           </a>
-          <a href="/vozidla" className="hover:text-yellow-500">
+          <a href="/vozidla" className="hover:text-corklasYellow">
             Ponuka vozidiel
           </a>
-          <a href="#myaccount" className="hover:text-yellow-500">
+          <a href="#myaccount" className="hover:text-corklasYellow">
             Môj účet
           </a>
-          <a href="/cart" className="hover:text-yellow-500">
+          <a href="/cart" className="hover:text-corklasYellow">
             Moja objednávka ({cartProducts.length})
           </a>
-          <a href="#contact" className="hover:text-yellow-500">
+          <a href="#contact" className="hover:text-corklasYellow">
             Kontakt
           </a>
-          <a href="#aboutus" className="hover:text-yellow-500">
+          <a href="#aboutus" className="hover:text-corklasYellow">
             O nás
           </a>
         </nav>
@@ -85,7 +85,7 @@ export default function Hero() {
             </div> */}
           </div>
           <div className="flex justify-end mt-4">
-            <button className="px-8 py-3 bg-yellow-500 rounded-lg text-black max-xl:text-xl font- hover:bg-yellow-600">
+            <button className="px-8 py-3 bg-corklasYellow rounded-lg text-black max-xl:text-xl font- hover:bg-yellow-600">
               Vyhľadať
             </button>
           </div>

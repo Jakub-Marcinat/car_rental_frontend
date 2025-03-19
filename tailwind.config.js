@@ -7,7 +7,9 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        corklasRed: "#E63946",
+        corklasRed: "#D70006",
+        corklasYellow: "#FAAC05",
+        corklasBackground: "#0b0a0b",
       },
       backgroundImage: {
         "hero-pattern": "url('/sadsad.png')",
