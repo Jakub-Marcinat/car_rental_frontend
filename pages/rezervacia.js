@@ -59,10 +59,6 @@ export default function ReservationPage({ product }) {
     idNumber: "",
     birthNumber: "",
     licenseNumber: "",
-    street: "",
-    city: "",
-    psc: "",
-    country: "",
     companyName: "",
     ico: "",
     dic: "",
@@ -208,6 +204,8 @@ export default function ReservationPage({ product }) {
       contactCountry: updatedFormData.contactCountry || null,
       promoCode: appliedPromoCode || null,
       discountAmount: promoDiscount || 0,
+      birthNumber: updatedFormData.birthNumber || null,
+      licenseNumber: updatedFormData.licenseNumber || null,
       termsAccepted,
       dataProcessingAccepted,
     };
@@ -243,8 +241,6 @@ export default function ReservationPage({ product }) {
   return (
     <div className="p-6 max-w-3xl mx-auto flex">
       <div>
-        <h2 className="text-2xl font-bold mb-4">Reserve {product.title}</h2>
-
         {/* Display Selected Vehicle Info */}
         <div className="mb-4">
           <img
@@ -253,17 +249,17 @@ export default function ReservationPage({ product }) {
             className="w-full h-40 object-cover rounded"
           />
           <h3 className="text-lg font-semibold mt-2">{product.title}</h3>
-          <p>Category: {product.vehicleCategory.join(", ")}</p>
-          <p>Features: {product.features.join(", ")}</p>
+          <p>Kategória: {product.vehicleCategory.join(", ")}</p>
+          <p>Výbava: {product.features.join(", ")}</p>
         </div>
       </div>
       <div>
-        <h2 className="text-2xl font-bold mb-4">Reserve {product.title}</h2>
+        <h2 className="text-2xl font-bold mb-4">Rezervácia {product.title}</h2>
 
         <form onSubmit={handleSubmit} className="space-y-4">
           {/* Pickup & Drop-off Dates */}
           <div>
-            <label>Pick-up Date:</label>
+            <label>Dátum vyzdvihnutia:</label>
             <input
               type="date"
               value={pickupDate}
@@ -278,7 +274,7 @@ export default function ReservationPage({ product }) {
             />
           </div>
           <div>
-            <label>Drop-off Date:</label>
+            <label>Dátum odovzdania:</label>
             <input
               type="date"
               value={dropoffDate}
@@ -292,19 +288,17 @@ export default function ReservationPage({ product }) {
               required
             />
           </div>
-
-          <label>Mode of Travel:</label>
+          <label>Režim:</label>
           <select
             value={selectedMode}
             onChange={(e) => setSelectedMode(e.target.value)}
           >
-            <option value="SR">Režim SR</option>
+            <option value="SR">Slovenská republika</option>
             <option value="Susedné krajiny">
-              Režim Susedné krajiny (+30% deposit)
+              Susedné krajiny (+30% deposit)
             </option>
-            <option value="EU">Režim EU (+60% deposit)</option>
+            <option value="EU">EU (+60% deposit)</option>
           </select>
-
           {/* Promo Code Section */}
           <label>Zľavový kód:</label>
           {!showPromoInput ? (
@@ -320,42 +314,41 @@ export default function ReservationPage({ product }) {
               onBlur={handleApplyPromoCode}
             />
           )}
-
           {/* Rental Info */}
-          <p>Rental Price: {rentalPrice}€</p>
+          <p>Cena: {rentalPrice}€</p>
           {appliedPromoCode && (
             <>
               <p>
-                Promo Code Applied: {appliedPromoCode} (-{promoDiscount}%)
+                Aplikovaný promo kód: {appliedPromoCode} (-{promoDiscount}%)
               </p>
               {/* <p>Discounted Price: {discountedPrice.toFixed(2)}€</p> */}
             </>
           )}
-          <p>Allowed Distance: {allowedKm} km</p>
-          <p>Over Limit Fee: {overLimitFee}€/km</p>
-          <p>Deposit: {depositFee}€</p>
+          <p>Povolené kilometre: {allowedKm} km</p>
+          <p>Cena za prekročenie km: {overLimitFee}€/km</p>
+          <p>Depozit: {depositFee}€</p>
           {/* Payment Method */}
-          <label>Payment Method:</label>
+          <label>Platba:</label>
           <select
             value={paymentMethod}
             onChange={(e) => setPaymentMethod(e.target.value)}
           >
-            <option value="wire">Wire Transfer</option>
-            <option value="cash">Cash</option>
+            <option value="wire">Bankovým prevodom</option>
+            <option value="cash">Hotovosť</option>
           </select>
           {/* Personal Information */}
-          <h3>User Information</h3>
+          <h3>Osobné údaje</h3>
           <input
             type="text"
             name="firstName"
-            placeholder="First Name"
+            placeholder="Krstné meno"
             onChange={handleChange}
             required
           />
           <input
             type="text"
             name="lastName"
-            placeholder="Last Name"
+            placeholder="Priezvisko"
             onChange={handleChange}
             required
           />
@@ -369,28 +362,57 @@ export default function ReservationPage({ product }) {
           <input
             type="text"
             name="phone"
-            placeholder="Phone"
+            placeholder="Telefón"
             onChange={handleChange}
             required
           />
           <input
             type="text"
             name="idNumber"
-            placeholder="ID Number"
+            placeholder="č. O.P."
             onChange={handleChange}
             required
           />
           <input
             type="text"
             name="birthNumber"
-            placeholder="Birth Number"
+            placeholder="Rodné číslo"
             onChange={handleChange}
             required
           />
           <input
             type="text"
             name="licenseNumber"
-            placeholder="Driver’s License Number"
+            placeholder="č. V.P."
+            onChange={handleChange}
+            required
+          />
+          <label>Kontaktné údaje</label>
+          <input
+            type="text"
+            name="contactStreet"
+            placeholder="Ulica"
+            onChange={handleChange}
+            required
+          />
+          <input
+            type="text"
+            name="contactCity"
+            placeholder="Mesto"
+            onChange={handleChange}
+            required
+          />
+          <input
+            type="text"
+            name="contactPsc"
+            placeholder="PSC"
+            onChange={handleChange}
+            required
+          />
+          <input
+            type="text"
+            name="contactCountry"
+            placeholder="Krajina"
             onChange={handleChange}
             required
           />
@@ -404,31 +426,32 @@ export default function ReservationPage({ product }) {
             Som Firma
           </label>
           {/* Address Fields */}
+          <label> Fakturačné údaje </label>
           <input
             type="text"
-            name="street"
-            placeholder="Street"
+            name="billingStreet"
+            placeholder="Ulica"
             onChange={handleChange}
             required
           />
           <input
             type="text"
-            name="city"
-            placeholder="City"
+            name="billingCity"
+            placeholder="Mesto"
             onChange={handleChange}
             required
           />
           <input
             type="text"
-            name="psc"
+            name="billingPsc"
             placeholder="PSC"
             onChange={handleChange}
             required
           />
           <input
             type="text"
-            name="country"
-            placeholder="Country"
+            name="billingCountry"
+            placeholder="Krajina"
             onChange={handleChange}
             required
           />
@@ -463,8 +486,7 @@ export default function ReservationPage({ product }) {
               />
             </>
           )}
-
-          <h3>Documents Upload</h3>
+          <h3>Dokumenty</h3>
           <input
             type="file"
             name="idFront"
@@ -489,7 +511,6 @@ export default function ReservationPage({ product }) {
             onChange={handleFileChange}
             required
           />
-
           {/* Checkboxes */}
           <label>
             <input
@@ -498,7 +519,7 @@ export default function ReservationPage({ product }) {
               onChange={() => setTermsAccepted(!termsAccepted)}
               required
             />
-            I accept the Terms of Use
+            Prečítal/a som si a súhlasím s obchodnými podmienkami
           </label>
           <label>
             <input
@@ -509,7 +530,7 @@ export default function ReservationPage({ product }) {
               }
               required
             />
-            I accept the Processing of Personal Information
+            Súhlasím so spracovaním osobných údajov
           </label>
           {/* Submit Button */}
           <button
