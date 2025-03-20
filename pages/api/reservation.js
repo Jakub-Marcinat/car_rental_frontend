@@ -137,7 +137,7 @@ export default async function handler(req, res) {
 
   const transporter = nodemailer.createTransport({
     service: "Gmail",
-    auth: { user: "acido256@gmail.com", pass: "ucge erey xkdb kuiq" },
+    auth: { user: process.env.EMAIL_USER, pass: process.env.EMAIL_PASS },
   });
 
   console.log("Nodemailer transporter created");
