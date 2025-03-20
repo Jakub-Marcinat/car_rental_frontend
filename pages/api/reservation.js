@@ -16,10 +16,6 @@ export default async function handler(req, res) {
     idNumber,
     birthNumber,
     licenseNumber,
-    street,
-    city,
-    psc,
-    country,
     companyName,
     ico,
     dic,
@@ -53,6 +49,7 @@ export default async function handler(req, res) {
     termsAccepted,
     dataProcessingAccepted,
     files,
+    status,
   } = req.body;
 
   console.log("Received reservation request:", req.body);
@@ -62,10 +59,10 @@ export default async function handler(req, res) {
     !lastName ||
     !email ||
     !phone ||
-    !street ||
-    !city ||
-    !psc ||
-    !country ||
+    !contactStreet ||
+    !contactCity ||
+    !contactPsc ||
+    !contactCountry ||
     !pickupDate ||
     !dropoffDate ||
     !pickupTime ||
@@ -87,16 +84,23 @@ export default async function handler(req, res) {
     lastName,
     email,
     phone,
-    vehicle: vehicleTitle,
+    idNumber,
+    birthNumber,
+    licenseNumber,
     pickupDate,
     dropoffDate,
     pickupTime,
     dropoffTime,
-    allowedKm,
     rentalPrice,
     depositFee,
+    allowedKm,
     overLimitFee,
     paymentMethod,
+    vehicle: vehicleTitle,
+    vehicleId,
+    selectedMode,
+    promoCode,
+    discountAmount,
     isCompany,
     companyName,
     ico,
@@ -110,18 +114,14 @@ export default async function handler(req, res) {
     contactCity,
     contactPsc,
     contactCountry,
-    selectedMode,
-    promoCode,
-    discountAmount,
     termsAccepted,
     dataProcessingAccepted,
-    reserved: true,
-    paid: false,
+    dataProcessingAccepted,
+    status,
+    files,
   });
 
   const vehicleDoc = await Product.findById(vehicleId);
-  console.log("Vehicle object:", vehicleTitle);
-  console.log("Vehicle ID:", vehicleTitle._id);
 
   if (vehicleDoc) {
     vehicleDoc.reservations.push({
@@ -137,7 +137,7 @@ export default async function handler(req, res) {
 
   const transporter = nodemailer.createTransport({
     service: "Gmail",
-    auth: { user: "acido256@gmail.com", pass: "ucge erey xkdb kuiq" },
+    auth: { user: process.env.EMAIL_USER, pass: process.env.EMAIL_PASS },
   });
 
   console.log("Nodemailer transporter created");
@@ -174,9 +174,9 @@ export default async function handler(req, res) {
           : ""
       }
 
-      🏠 Address Details:
+      📞 Contact Address:
       ----------------------------------
-      Street: ${street}, City: ${city}, PSC: ${psc}, Country: ${country}
+      Street: ${contactStreet}, City: ${contactCity}, PSC: ${contactPsc}, Country: ${contactCountry}
 
       ${
         isCompany
@@ -192,9 +192,7 @@ export default async function handler(req, res) {
       ----------------------------------
       Street: ${billingStreet}, City: ${billingCity}, PSC: ${billingPsc}, Country: ${billingCountry}
 
-      📞 Contact Address:
-      ----------------------------------
-      Street: ${contactStreet}, City: ${contactCity}, PSC: ${contactPsc}, Country: ${contactCountry}
+      
       `
           : ""
       }
@@ -240,7 +238,9 @@ export default async function handler(req, res) {
       ID Number: ${idNumber}
       Birth Number: ${birthNumber}
       Driver’s License: ${licenseNumber}
-      Street: ${street}, City: ${city}, PSC: ${psc}, Country: ${country}
+      📞 Contact Address:
+      ----------------------------------
+      Street: ${contactStreet}, City: ${contactCity}, PSC: ${contactPsc}, Country: ${contactCountry}
 
       ${
         isCompany
@@ -256,9 +256,7 @@ export default async function handler(req, res) {
       ----------------------------------
       Street: ${billingStreet}, City: ${billingCity}, PSC: ${billingPsc}, Country: ${billingCountry}
 
-      📞 Contact Address:
-      ----------------------------------
-      Street: ${contactStreet}, City: ${contactCity}, PSC: ${contactPsc}, Country: ${contactCountry}
+     
       `
           : ""
       }
