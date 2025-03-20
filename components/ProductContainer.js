@@ -5,21 +5,22 @@ import { useCallback, useContext } from "react";
 import { CartContext } from "./CartContext";
 import { useRouter } from "next/router";
 
-const ProductWrapper = styled.div`
-  background: #2b2b2b;
+const Card = styled.div`
+  background: #151515;
   padding: 20px;
-  border-radius: 12px;
+  border-radius: 32px;
+  border: 1px solid #2b2b2b;
+  box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.3);
+  text-align: center;
+  max-width: 350px;
   display: flex;
-  flex-direction: column;
   align-items: center;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  flex-direction: column;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
-  height: 100%;
-  width: 420px;
 
   &:hover {
     transform: translateY(-5px);
-    box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.2);
+    box-shadow: 0px 12px 30px rgba(0, 0, 0, 0.5);
   }
 `;
 
@@ -74,29 +75,68 @@ const Price = styled.div`
   color: #fff;
 `;
 
-export default function ProductContainer({ _id, title, price, images }) {
+export default function ProductContainer({ product }) {
+  console.log("sad", product);
+
   const { addProduct } = useContext(CartContext);
-  const url = "/product/" + _id;
+  const url = "/product/" + product._id;
   const router = useRouter();
 
+  const { Palivo, Prevodovka, Výkon } = product.properties || {};
+
+  const lowestRentalPrice =
+    product.priceListing?.[product.priceListing.length - 1]?.dailyRentalPrice ||
+    "N/A";
+
   return (
-    <ProductWrapper>
-      <ImageWrapper href={url}>
-        <img src={images[0]} alt={title} />
+    <Card>
+      <ImageWrapper>
+        <img
+          src={product.images[0] || "/placeholder.jpg"}
+          alt={product.title}
+        />
       </ImageWrapper>
-      <ProductInfoBox>
-        <Title href={url}>{title}</Title>
-        <PriceRow>
-          <Price>{price}€</Price>
+      <div className="flex flex-col w-full">
+        <Title>{product.title}</Title>
+        <div className="flex gap-3 text-white/60 text-sm mb-4">
+          <p>{Prevodovka || "N/A"}</p>
+          <p>{Palivo || "N/A"}</p>
+          <p>{Výkon ? `${Výkon} kW` : "N/A"}</p>
+        </div>
+
+        <div className="flex justify-between items-end">
+          <p>
+            <span className="opacity-70">od </span>
+            <span className="text-3xl opacity-100 text-corklasYellow">
+              {lowestRentalPrice}€
+              <span className="opacity-70 text-2xl text-white"> / deň</span>
+            </span>
+          </p>
+          <div className="flex items-center rounded-full border border-[#2b2b2b] px-4 py-4">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              class="size-6"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="m8.25 4.5 7.5 7.5-7.5 7.5"
+              />
+            </svg>
+          </div>
           <Button
-            onClick={() => router.push(`/rezervacia?id=${_id}`)}
+            onClick={() => router.push(`/rezervacia?id=${product._id}`)}
             primary={1}
             size={"l"}
           >
             Rezervovať
           </Button>
-        </PriceRow>
-      </ProductInfoBox>
-    </ProductWrapper>
+        </div>
+      </div>
+    </Card>
   );
 }

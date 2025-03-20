@@ -274,12 +274,12 @@ export async function getServerSideProps() {
   const featuredProducts = await Product.find({
     _id: { $in: featuredProductsIds },
   });
-  const newProducts = await Product.find({}, null, { limit: 3 });
+  //const newProducts = await Product.find({}, null, { limit: 3 });
 
   return {
     props: {
       featuredProducts: JSON.parse(JSON.stringify(featuredProducts)),
-      newProducts: JSON.parse(JSON.stringify(newProducts)),
+      // newProducts: JSON.parse(JSON.stringify(newProducts)),
     },
   };
 }

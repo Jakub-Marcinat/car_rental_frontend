@@ -1,24 +1,30 @@
 import { useState } from "react";
 import styled from "styled-components";
 import { useRouter } from "next/router";
+import CustomSelect from "./CustomSelect";
+import CustomDateInput from "./CustomDateInput";
+import CustomMakeSelect from "./CustomMakeSelect";
 
 const Sidebar = styled.div`
-  width: 250px;
-  padding: 20px;
-  background: #ccc;
+  padding: 28px;
+  margin-top: 40px;
+  background: #151515;
   display: flex;
+  height: fit-content;
   flex-direction: column;
+  border-radius: 24px;
   gap: 15px;
+  color: white;
 `;
 
 const VEHICLE_CATEGORIES = [
-  "Lower class",
-  "Middle class",
-  "Upper class",
-  "Luxury",
-  "Sport",
+  "Nižšia trieda",
+  "Stredná trieda",
+  "Vyššia trieda",
+  "Luxusné autá",
+  "Športové autá",
   "SUV",
-  "Vans",
+  "Dodávky",
 ];
 
 export default function Filter({ makes, models }) {
@@ -38,7 +44,15 @@ export default function Filter({ makes, models }) {
   const handleMakeChange = (e) => {
     const selectedMake = e.target.value;
     setMake(selectedMake);
-    setModel(""); // Reset model when make changes
+    setModel("");
+  };
+
+  const handlePickupDateChange = (date) => {
+    setPickupDate(date);
+  };
+
+  const handleDropoffDateChange = (date) => {
+    setDropoffDate(date);
   };
 
   const applyFilters = () => {
@@ -71,102 +85,118 @@ export default function Filter({ makes, models }) {
   };
 
   return (
-    <Sidebar>
-      <h3>Filters</h3>
-      <button onClick={resetFilters}>Reset Filters</button>
+    <Sidebar className="lg:w-[350px]">
+      <div className="flex justify-between items-center">
+        <h3 className="text-3xl font-bold mb-4">Filter</h3>
+        <button onClick={resetFilters} className="flex gap-2">
+          Zmazať filtre{" "}
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            class="size-6"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M6 18 18 6M6 6l12 12"
+            />
+          </svg>
+        </button>
+      </div>
 
-      {/* Make */}
-      <label>Make:</label>
-      <select value={make} onChange={handleMakeChange}>
-        <option value="">Any</option>
-        {makes.map((m) => (
-          <option key={m} value={m}>
-            {m}
-          </option>
-        ))}
-      </select>
+      <CustomMakeSelect
+        options={[
+          { value: "", label: "Značka vozidla" },
+          ...makes.map((m) => ({ value: m, label: m })),
+        ]}
+        value={make}
+        onChange={handleMakeChange}
+      />
 
-      {/* Model (dependent on Make) */}
-      <label>Model:</label>
-      <select
+      <CustomSelect
+        options={[
+          { value: "", label: "Model" },
+          ...(make && models[make]
+            ? [...models[make]].map((m) => ({ value: m, label: m }))
+            : []),
+        ]}
         value={model}
-        onChange={(e) => setModel(e.target.value)}
+        onChange={setModel}
         disabled={!make}
-      >
-        <option value="">Any</option>
-        {make &&
-          models[make] &&
-          [...models[make]].map((m) => (
-            <option key={m} value={m}>
-              {m}
-            </option>
-          ))}
-      </select>
+      />
 
-      {/* Vehicle Category */}
-      <label>Vehicle Category:</label>
-      <select value={category} onChange={(e) => setCategory(e.target.value)}>
-        <option value="">Any</option>
-        {VEHICLE_CATEGORIES.map((cat) => (
-          <option key={cat} value={cat}>
-            {cat}
-          </option>
-        ))}
-      </select>
+      <CustomSelect
+        options={[
+          { value: "", label: "Kategória vozidla" },
+          ...VEHICLE_CATEGORIES.map((cat) => ({ value: cat, label: cat })),
+        ]}
+        value={category}
+        onChange={setCategory}
+      />
 
-      {/* Transmission */}
-      <label>Transmission:</label>
-      <select
+      <CustomSelect
+        options={[
+          { value: "", label: "Typ prevodovky" },
+          { value: "manual", label: "Manuál" },
+          { value: "automat", label: "Automat" },
+        ]}
         value={transmission}
-        onChange={(e) => setTransmission(e.target.value)}
-      >
-        <option value="">Any</option>
-        <option value="manual">Manual</option>
-        <option value="automat">Automatic</option>
-      </select>
+        onChange={setTransmission}
+      />
 
-      {/* Fuel Type */}
-      <label>Fuel:</label>
-      <select value={fuel} onChange={(e) => setFuel(e.target.value)}>
-        <option value="">Any</option>
-        <option value="benzin">Benzin</option>
-        <option value="nafta">Nafta</option>
-        <option value="elektricke">Elektricke</option>
-      </select>
+      <CustomSelect
+        options={[
+          { value: "", label: "Palivo" },
+          { value: "benzin", label: "Benzin" },
+          { value: "nafta", label: "Nafta" },
+          { value: "elektricke", label: "Elektricke" },
+        ]}
+        value={fuel}
+        onChange={setFuel}
+      />
 
-      {/* Drive Type */}
-      <label>Drive:</label>
-      <select value={drive} onChange={(e) => setDrive(e.target.value)}>
-        <option value="">Any</option>
-        <option value="FWD">Front-Wheel Drive</option>
-        <option value="RWD">Rear-Wheel Drive</option>
-        <option value="4x4">All-Wheel Drive (4x4)</option>
-      </select>
+      <CustomSelect
+        options={[
+          { value: "", label: "Náhon" },
+          { value: "FWD", label: "Predný náhon" },
+          { value: "RWD", label: "Zadný náhon" },
+          { value: "4x4", label: "4x4" },
+        ]}
+        value={drive}
+        onChange={setDrive}
+      />
 
-      {/* Availability (Pick-up & Drop-off Date) */}
-      <label>Pick-up Date:</label>
-      <input
-        type="date"
+      <CustomDateInput
         value={pickupDate}
-        onChange={(e) => setPickupDate(e.target.value)}
+        onChange={handlePickupDateChange}
+        placeholder="Dostupné od"
       />
 
-      <label>Drop-off Date:</label>
-      <input
-        type="date"
+      <CustomDateInput
         value={dropoffDate}
-        onChange={(e) => setDropoffDate(e.target.value)}
+        onChange={handleDropoffDateChange}
+        placeholder="Dostupné do"
       />
 
-      {/* Sort by Price */}
-      <label>Sort by Price:</label>
-      <select value={order} onChange={(e) => setOrder(e.target.value)}>
-        <option value="">Default</option>
-        <option value="asc">Lowest Price</option>
-        <option value="desc">Highest Price</option>
-      </select>
-
-      <button onClick={applyFilters}>Apply Filters</button>
+      <CustomSelect
+        label="Zoradiť podľa ceny:"
+        options={[
+          { value: "", label: "Odporúčané" },
+          { value: "desc", label: "Od najdrahšieho" },
+          { value: "asc", label: "Od najlacnejšieho" },
+        ]}
+        value={order}
+        onChange={setOrder}
+      />
+      <button
+        onClick={applyFilters}
+        className="w-fit px-4 py-2 mt-4 bg-corklasYellow text-black rounded-xl"
+      >
+        Apply Filters
+      </button>
     </Sidebar>
   );
 }

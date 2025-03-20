@@ -4,7 +4,7 @@ import { useContext } from "react";
 import { CartContext } from "./CartContext";
 
 const StyledHeader = styled.header`
-  background-color: #222;
+  background-color: #151515;
 `;
 
 const Logo = styled(Link)`
@@ -33,7 +33,7 @@ const NavLink = styled(Link)`
 export default function Header() {
   const { cartProducts } = useContext(CartContext);
   return (
-    <StyledHeader>
+    <StyledHeader className="w-screen">
       <Wrapper>
         <Logo href={"/"}>COR KLAS</Logo>
         <StyledNav>

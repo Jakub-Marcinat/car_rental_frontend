@@ -1,11 +1,9 @@
 import styled from "styled-components";
-import Button from "./Button";
 import { useRouter } from "next/router";
 
 const Bg = styled.div`
   background-color: #0b0a0b;
   color: #fff;
-  padding: 60px 0;
   display: flex;
   justify-content: center;
   gap: 10px;
@@ -19,7 +17,7 @@ const Card = styled.div`
   border: 1px solid #2b2b2b;
   box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.3);
   text-align: center;
-  max-width: 350px;
+  max-width: 300px;
   display: flex;
   align-items: center;
   flex-direction: column;
@@ -53,9 +51,10 @@ const Title = styled.h2`
   display: flex;
 `;
 
-export default function Featured({ product }) {
+export default function ProductCard({ product }) {
   const { Palivo, Prevodovka, Výkon } = product.properties || {};
   const router = useRouter();
+
   const lowestRentalPrice =
     product.priceListing?.[product.priceListing.length - 1]?.dailyRentalPrice ||
     "N/A";
@@ -85,7 +84,6 @@ export default function Featured({ product }) {
                 <span className="opacity-70 text-2xl text-white"> / deň</span>
               </span>
             </p>
-
             <button
               className="flex items-center rounded-full border border-[#2b2b2b] px-4 py-4"
               onClick={() => router.push(`/rezervacia?id=${product._id}`)}

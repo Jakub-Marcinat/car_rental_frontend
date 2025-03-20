@@ -9,16 +9,15 @@ import mongoose from "mongoose";
 
 export default function VozidlaPage({ products, makes, models }) {
   return (
-    <>
+    <div className="w-screen bg-corklasBackground">
       <Header />
-      <div className="flex flex-col items-center ">
-        <Title>Vozidla</Title>
-        <div className="flex justify-between w-full px-24">
+      <div className="flex flex-col items-center mt-20">
+        <div className="flex w-full lg:justify-between px-20">
           <Filter makes={makes} models={models} />
           <ProductsGrid products={products} />
         </div>
       </div>
-    </>
+    </div>
   );
 }
 
@@ -44,7 +43,6 @@ export async function getServerSideProps(context) {
   if (query.make) {
     makeId = Object.keys(makesMap).find((id) => makesMap[id] === query.make);
   }
-
 
   if (query.make) {
     // Find all models belonging to this make
@@ -80,18 +78,16 @@ export async function getServerSideProps(context) {
     };
   }
 
-
   let sortOptions = {};
   if (query.order === "asc") sortOptions.price = 1;
   if (query.order === "desc") sortOptions.price = -1;
-
 
   const products = await Product.find(filter).sort(sortOptions);
 
   return {
     props: {
       products: JSON.parse(JSON.stringify(products)),
-      makes: Object.values(makesMap), 
+      makes: Object.values(makesMap),
       models: Object.entries(modelsMap).reduce((acc, [model, makeId]) => {
         const makeName = makesMap[makeId];
         if (!acc[makeName]) acc[makeName] = [];
