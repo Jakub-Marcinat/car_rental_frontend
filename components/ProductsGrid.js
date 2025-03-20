@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import ProductCard from "./ProductCard";
+import Link from "next/link";
 
 const StyledProductsGrid = styled.div`
   display: grid;
@@ -21,7 +22,7 @@ export default function ProductsGrid({ products }) {
     <StyledProductsGrid>
       {products?.length > 0 &&
         products.map((product) => (
-          <ProductCard key={product._id} product={product} />
+            <ProductCard key={product._id} product={product} />
         ))}
     </StyledProductsGrid>
   );

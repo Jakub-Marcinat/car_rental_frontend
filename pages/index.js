@@ -4,6 +4,7 @@ import { Product } from "@/models/Product";
 import Featured from "@/components/Featured";
 import Hero from "@/components/Hero";
 import NewProducts from "@/components/Newproducts";
+import Link from "next/link";
 
 export default function HomePage({ featuredProducts, newProducts }) {
   return (
@@ -12,7 +13,7 @@ export default function HomePage({ featuredProducts, newProducts }) {
       <Hero />
       <div className="flex w-full justify-center gap-8 bg-corklasBackground px-20 pt-20">
         {featuredProducts.map((product) => (
-          <Featured key={product._id} product={product} />
+            <Featured key={product._id} product={product} />
         ))}
       </div>
 

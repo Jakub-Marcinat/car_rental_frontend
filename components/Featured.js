@@ -24,6 +24,7 @@ const Card = styled.div`
   align-items: center;
   flex-direction: column;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
 
   &:hover {
     transform: translateY(-5px);
@@ -56,13 +57,17 @@ const Title = styled.h2`
 export default function Featured({ product }) {
   const { Palivo, Prevodovka, Výkon } = product.properties || {};
   const router = useRouter();
+
+  const handleClick = () => {
+    router.push(`/product/${product._id}`);
+  };
   const lowestRentalPrice =
     product.priceListing?.[product.priceListing.length - 1]?.dailyRentalPrice ||
     "N/A";
 
   return (
     <Bg>
-      <Card>
+      <Card onClick={handleClick}>
         <ImageWrapper>
           <img
             src={product.images[0] || "/placeholder.jpg"}

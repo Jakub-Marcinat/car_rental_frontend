@@ -1,9 +1,9 @@
 import styled from "styled-components";
 
 const WhiteBox = styled.div`
-  background: #fff;
+  background: #151515;
+  color: #fff;
   border-radius: 10px;
-  color: #000;
   padding: 30px;
 `;
 

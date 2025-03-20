@@ -9,6 +9,9 @@ import Title from "@/components/Title";
 import WhiteBox from "@/components/WhiteBox";
 import { mongooseConnect } from "@/lib/mongoose";
 import { Product } from "@/models/Product";
+import CustomDateInput from "@/components/CustomDateInput";
+import CustomSelect from "@/components/CustomSelect";
+import CustomTable from "@/components/CustomTable";
 
 const ColumnWrapper = styled.div`
   display: grid;
@@ -32,7 +35,7 @@ const Price = styled.span`
 const Table = styled.table`
   width: 100%;
   border-collapse: collapse;
-  margin-top: 20px;
+  margin-top: 10px;
 
   th,
   td {
@@ -48,7 +51,7 @@ const Table = styled.table`
 
 const FeatureTile = styled.div`
   display: inline-block;
-  background-color: #f4f4f4;
+  background-color: #28282d;
   padding: 8px 12px;
   margin: 5px;
   border-radius: 5px;
@@ -89,7 +92,6 @@ export default function ProductPage({ product }) {
       const end = new Date(`${dropoffDate} ${dropoffTime}`);
 
       const rentalDays = Math.ceil((end - start) / (1000 * 60 * 60 * 24));
-
 
       if (rentalDays > 0) {
         // Sort price tiers to ensure correct ordering
@@ -140,6 +142,16 @@ export default function ProductPage({ product }) {
     }
   };
 
+  const handlePickupDateChange = (date) => {
+    setPickupDate(date);
+    handleDateChange();
+  };
+
+  const handleDropoffDateChange = (date) => {
+    setDropoffDate(date);
+    handleDateChange();
+  };
+
   const handleReservation = () => {
     const queryParams = new URLSearchParams({
       id: product._id,
@@ -153,8 +165,18 @@ export default function ProductPage({ product }) {
     router.push(`/rezervacia?${queryParams}`);
   };
 
+  // Prepare the data for CustomTable
+  const tableHeaders = ["Interval", "Povolené km/deň", "Cena/deň"];
+  const tableData = product.priceListing.map(
+    ({ DaysOfRental, dailyKM, dailyRentalPrice }) => [
+      `${DaysOfRental} dní`,
+      `${dailyKM} km`,
+      `€${dailyRentalPrice}`,
+    ]
+  );
+
   return (
-    <>
+    <div className="bg-corklasBackground text-white">
       <Header />
       <Center>
         <ColumnWrapper>
@@ -163,27 +185,8 @@ export default function ProductPage({ product }) {
             <ProductImages images={product.images} />
 
             {/* Pricing Table */}
-            <h3>Cenník</h3>
-            <Table>
-              <thead>
-                <tr>
-                  <th>Interval</th>
-                  <th>Povolené km/deň</th>
-                  <th>Cena/deň</th>
-                </tr>
-              </thead>
-              <tbody>
-                {product.priceListing.map(
-                  ({ DaysOfRental, dailyKM, dailyRentalPrice }, index) => (
-                    <tr key={index}>
-                      <td>{DaysOfRental} dní</td>
-                      <td>{dailyKM} km</td>
-                      <td>€{dailyRentalPrice}</td>
-                    </tr>
-                  )
-                )}
-              </tbody>
-            </Table>
+            <h3 className="text-2xl mt-4">Cenník</h3>
+            <CustomTable headers={tableHeaders} data={tableData} />
 
             {/* Features */}
             <h3>Vlastnosti</h3>
@@ -208,15 +211,15 @@ export default function ProductPage({ product }) {
             <p>{product.description}</p>
 
             {/* Reservation Form */}
-            <h3>Rezervácia vozidla</h3>
-            <label>Dátum vyzdvihnutia:</label>
-            <input
-              type="date"
+            <h3 className="text-xl font-semibold mt-4 py-2">
+              Rezervácia vozidla
+            </h3>
+
+            <CustomDateInput
+              label="Dátum vyzdvihnutia:"
               value={pickupDate}
-              onChange={(e) => {
-                setPickupDate(e.target.value);
-                handleDateChange();
-              }}
+              onChange={handlePickupDateChange}
+              placeholder="Dátum vyzdvihnutia"
             />
 
             <label>Čas vyzdvihnutia:</label>
@@ -224,16 +227,14 @@ export default function ProductPage({ product }) {
               type="time"
               value={pickupTime}
               onChange={(e) => setPickupTime(e.target.value)}
+              className="custom-input text-white py-3 px-2 border-2 rounded-xl border-[#2b2b2b] bg-corklasCard"
             />
 
-            <label>Dátum odovzdania:</label>
-            <input
-              type="date"
+            <CustomDateInput
+              label="Dátum odovzdania:"
               value={dropoffDate}
-              onChange={(e) => {
-                setDropoffDate(e.target.value);
-                handleDateChange();
-              }}
+              onChange={handleDropoffDateChange}
+              placeholder="Dátum odovzdania"
             />
 
             <label>Čas odovzdania:</label>
@@ -241,20 +242,23 @@ export default function ProductPage({ product }) {
               type="time"
               value={dropoffTime}
               onChange={(e) => setDropoffTime(e.target.value)}
+              className="custom-input text-white py-3 px-2 border-2 rounded-xl border-[#2b2b2b] bg-corklasCard"
             />
 
             {/* Mode Selection */}
             <label>Režim:</label>
-            <select
+            <CustomSelect
+              options={[
+                { value: "SR", label: "Režim SR" },
+                {
+                  value: "Susedné krajiny",
+                  label: "Režim Susedné krajiny (+30% záloha)",
+                },
+                { value: "EU", label: "Režim EU (+60% záloha)" },
+              ]}
               value={selectedMode}
-              onChange={(e) => setSelectedMode(e.target.value)}
-            >
-              <option value="SR">Režim SR</option>
-              <option value="Susedné krajiny">
-                Režim Susedné krajiny (+30% záloha)
-              </option>
-              <option value="EU">Režim EU (+60% záloha)</option>
-            </select>
+              onChange={setSelectedMode}
+            />
 
             {/* Pricing Summary */}
             <PriceRow>
@@ -278,7 +282,7 @@ export default function ProductPage({ product }) {
           </div>
         </ColumnWrapper>
       </Center>
-    </>
+    </div>
   );
 }
 

@@ -77,7 +77,7 @@ export default function Filter({ makes, models }) {
     setDrive("");
     setFuel("");
     setCategory("");
-    setOrder("");
+    setOrder(""); 
     setPickupDate("");
     setDropoffDate("");
 
