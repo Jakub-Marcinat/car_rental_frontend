@@ -15,7 +15,7 @@ export default function ReservationPage({ product }) {
   const [paymentMethod, setPaymentMethod] = useState("wire");
   const [isCompany, setIsCompany] = useState(false);
   const [selectedMode, setSelectedMode] = useState("SR");
-  const [depositFee, setDepositFee] = useState(500);
+  const [depositFee, setDepositFee] = useState(product.deposit);
   const [promoCode, setPromoCode] = useState("");
   const [appliedPromoCode, setAppliedPromoCode] = useState(null);
   const [promoDiscount, setPromoDiscount] = useState(0);
@@ -87,7 +87,7 @@ export default function ReservationPage({ product }) {
   const overLimitFee = 0.5;
 
   useEffect(() => {
-    let newDeposit = 500;
+    let newDeposit = product.deposit;
     if (selectedMode === "Susedné krajiny") newDeposit *= 1.3;
     if (selectedMode === "EU") newDeposit *= 1.6;
     setDepositFee(newDeposit);
@@ -106,8 +106,6 @@ export default function ReservationPage({ product }) {
 
       const rentalDays = Math.ceil((end - start) / (1000 * 60 * 60 * 24));
 
-      console.log("Rental Days:", rentalDays);
-
       // Sort price tiers by range (ensures correct tier ordering)
       const sortedPriceTiers = product.priceListing.sort((a, b) => {
         const getMinDays = (range) => parseInt(range.split(" - ")[0], 10);
@@ -124,7 +122,11 @@ export default function ReservationPage({ product }) {
         let totalPrice = rentalDays * parseFloat(selectedTier.dailyRentalPrice);
         let totalAllowedKm = rentalDays * parseFloat(selectedTier.dailyKM);
 
-        totalPrice -= totalPrice * promoDiscount;
+        console.log("promoDiscount", (100 - promoDiscount) / 100);
+        console.log("discount", discount);
+        console.log("price", rentalPrice * 0.9);
+
+        totalPrice = totalPrice * discount;
 
         setRentalPrice(totalPrice);
         setAllowedKm(totalAllowedKm);
@@ -214,7 +216,9 @@ export default function ReservationPage({ product }) {
       const response = await axios.post("/api/reservation", reservationDetails);
 
       if (response.status === 200) {
-        alert("Reservation sent! Check your email.");
+        alert(
+          "Údaje o rezervácií sme poslali na váš email. Tu bude preklik na success page namiesto tohto"
+        );
         //router.push(`/thank-you?reservationId=${response.data.reservationId}`);
       } else {
         throw new Error("Reservation failed.");
@@ -234,7 +238,7 @@ export default function ReservationPage({ product }) {
       alert("Invalid promo code format. Use XXCORKLAS (e.g., 10CORKLAS)");
     }
   };
-  const discountedPrice = rentalPrice * (1 - promoDiscount / 100);
+  const discount = (100 - promoDiscount) / 100;
 
   return (
     <div className="p-6 max-w-3xl mx-auto flex">
@@ -324,7 +328,7 @@ export default function ReservationPage({ product }) {
               <p>
                 Promo Code Applied: {appliedPromoCode} (-{promoDiscount}%)
               </p>
-              <p>Discounted Price: {discountedPrice.toFixed(2)}€</p>
+              {/* <p>Discounted Price: {discountedPrice.toFixed(2)}€</p> */}
             </>
           )}
           <p>Allowed Distance: {allowedKm} km</p>
