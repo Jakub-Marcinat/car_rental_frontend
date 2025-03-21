@@ -1,7 +1,7 @@
 import React, { useRef, useState } from "react";
 import CustomCalendar from "./CustomCalendar";
 
-const CustomDateInput = ({ label, value, onChange, placeholder  }) => {
+const CustomDateInput = ({ label, value, onChange, placeholder, width }) => {
   const [isOpen, setIsOpen] = useState(false);
   const inputRef = useRef(null);
 
@@ -14,18 +14,21 @@ const CustomDateInput = ({ label, value, onChange, placeholder  }) => {
     setIsOpen(!isOpen);
   };
   return (
-    <div className="relative">
+    <div className="relative" style={{ width: width || "auto" }}>
       {label && <label>{label}</label>}
-      <div className="flex items-center">
+      <div className="relative">
         <input
           type="text"
           value={value}
           readOnly
-          className="custom-date-input text-white py-3 px-2 border-2 rounded-xl border-[#2b2b2b] bg-corklasCard"
+          className="custom-date-input text-white py-3 px-2 border-2 rounded-xl border-[#2b2b2b] bg-corklasCard pr-8" // Add padding-right
           ref={inputRef}
           placeholder={placeholder}
         />
-        <button onClick={handleIconClick} className="ml-2">
+        <button
+          onClick={handleIconClick}
+          className="absolute right-2 top-1/2 transform -translate-y-1/2" // Position icon inside input
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 24 24"

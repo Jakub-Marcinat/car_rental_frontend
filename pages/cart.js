@@ -4,7 +4,7 @@ import Center from "@/components/Center";
 import Header from "@/components/Header";
 import Input from "@/components/Input";
 import Table from "@/components/Table";
-import WhiteBox from "@/components/WhiteBox";
+import WhiteBox from "@/components/BlackBox";
 import axios from "axios";
 import { useContext, useEffect, useState } from "react";
 import styled from "styled-components";

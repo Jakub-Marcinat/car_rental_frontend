@@ -8,7 +8,7 @@ const Image = styled.img`
 
 const BigImage = styled.img`
   max-width: 100%;
-  max-height: 400px;
+  max-height: 600px;
 `;
 
 const BigImageWrapper = styled.div`
@@ -19,6 +19,8 @@ const BigImageWrapper = styled.div`
 const ImageButtons = styled.div`
   display: grid;
   margin-top: 10px;
+  max-width: 900px;
+  justify-self: center;
   gap: 10px;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
 `;

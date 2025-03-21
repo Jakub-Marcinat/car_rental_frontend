@@ -1,4 +1,4 @@
-import { useState, useContext, useEffect } from "react";
+import { useState, useContext, useEffect, useRef } from "react";
 import { useRouter } from "next/router";
 import styled from "styled-components";
 import Button from "@/components/Button";
@@ -6,16 +6,17 @@ import Center from "@/components/Center";
 import Header from "@/components/Header";
 import ProductImages from "@/components/ProductImages";
 import Title from "@/components/Title";
-import WhiteBox from "@/components/WhiteBox";
 import { mongooseConnect } from "@/lib/mongoose";
 import { Product } from "@/models/Product";
 import CustomDateInput from "@/components/CustomDateInput";
 import CustomSelect from "@/components/CustomSelect";
 import CustomTable from "@/components/CustomTable";
+import BlackBox from "@/components/BlackBox";
+import CustomTimeInput from "@/components/CustomTimeInput";
 
 const ColumnWrapper = styled.div`
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr 0.8fr;
   width: 100%;
   gap: 40px;
   margin-top: 40px;
@@ -30,23 +31,6 @@ const PriceRow = styled.div`
 
 const Price = styled.span`
   font-size: 1.5rem;
-`;
-
-const Table = styled.table`
-  width: 100%;
-  border-collapse: collapse;
-  margin-top: 10px;
-
-  th,
-  td {
-    border: 1px solid #ddd;
-    padding: 8px;
-    text-align: center;
-  }
-
-  th {
-    background-color: #f4f4f4;
-  }
 `;
 
 const FeatureTile = styled.div`
@@ -181,15 +165,15 @@ export default function ProductPage({ product }) {
       <Center>
         <ColumnWrapper>
           {/* Left Side - Image & Details */}
-          <WhiteBox>
+          <BlackBox>
             <ProductImages images={product.images} />
 
             {/* Pricing Table */}
-            <h3 className="text-2xl mt-4">Cenník</h3>
+            <h3 className="text-2xl font-bold mt-20">Cenník</h3>
             <CustomTable headers={tableHeaders} data={tableData} />
 
             {/* Features */}
-            <h3>Vlastnosti</h3>
+            <h3 className="text-2xl font-bold mt-12 mb-8">Vlastnosti</h3>
             {product.features.map((feature, index) => (
               <FeatureTile key={index}>{feature}</FeatureTile>
             ))}
@@ -203,7 +187,7 @@ export default function ProductPage({ product }) {
                 </li>
               ))}
             </ul>
-          </WhiteBox>
+          </BlackBox>
 
           {/* Right Side - Reservation Form */}
           <div className="px-20px">
@@ -215,35 +199,36 @@ export default function ProductPage({ product }) {
               Rezervácia vozidla
             </h3>
 
-            <CustomDateInput
-              label="Dátum vyzdvihnutia:"
-              value={pickupDate}
-              onChange={handlePickupDateChange}
-              placeholder="Dátum vyzdvihnutia"
-            />
+            <div className="flex justify-between">
+              <CustomDateInput
+                value={pickupDate}
+                onChange={handlePickupDateChange}
+                placeholder="Dátum vyzdvihnutia"
+                className="flex-1 min-w-0" // Add min-w-0 here
+              />
 
-            <label>Čas vyzdvihnutia:</label>
-            <input
-              type="time"
-              value={pickupTime}
-              onChange={(e) => setPickupTime(e.target.value)}
-              className="custom-input text-white py-3 px-2 border-2 rounded-xl border-[#2b2b2b] bg-corklasCard"
-            />
+              <CustomTimeInput
+                value={pickupTime}
+                onChange={(e) => setPickupTime(e.target.value)}
+                placeholder="Čas vyzdvihnutia"
+                className="flex-1 min-w-0" // Add min-w-0 here
+              />
+            </div>
+            <div className="flex justify-between">
+              <CustomDateInput
+                value={dropoffDate}
+                onChange={handleDropoffDateChange}
+                placeholder="Dátum odovzdania"
+                className="flex-1 min-w-0" // Add min-w-0 here
+              />
 
-            <CustomDateInput
-              label="Dátum odovzdania:"
-              value={dropoffDate}
-              onChange={handleDropoffDateChange}
-              placeholder="Dátum odovzdania"
-            />
-
-            <label>Čas odovzdania:</label>
-            <input
-              type="time"
-              value={dropoffTime}
-              onChange={(e) => setDropoffTime(e.target.value)}
-              className="custom-input text-white py-3 px-2 border-2 rounded-xl border-[#2b2b2b] bg-corklasCard"
-            />
+              <CustomTimeInput
+                value={dropoffTime}
+                onChange={(e) => setDropoffTime(e.target.value)}
+                placeholder="Čas odovzdania"
+                className="flex-1 min-w-0" // Add min-w-0 here
+              />
+            </div>
 
             {/* Mode Selection */}
             <label>Režim:</label>

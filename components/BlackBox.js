@@ -1,10 +1,10 @@
 import styled from "styled-components";
 
-const WhiteBox = styled.div`
+const BlackBox = styled.div`
   background: #151515;
   color: #fff;
   border-radius: 10px;
   padding: 30px;
 `;
 
-export default WhiteBox;
+export default BlackBox;
