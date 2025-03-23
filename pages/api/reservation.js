@@ -274,8 +274,21 @@ export default async function handler(req, res) {
   };
 
   try {
-    await transporter.sendMail(userMailOptions);
-    await transporter.sendMail(adminMailOptions);
+    transporter
+      .sendMail(userMailOptions)
+      .then(() => console.log("User email sent successfully"))
+      .catch((err) => console.error("Error sending user email:", err));
+
+    transporter
+      .sendMail(adminMailOptions)
+      .then(() => console.log("Admin email sent successfully"))
+      .catch((err) => console.error("Error sending admin email:", err));
+
+    res
+      .status(200)
+      .json({
+        message: "Reservation created, emails are being sent in the background",
+      });
 
     console.log("Emails sent successfully");
     res.status(200).json({ message: "Reservation emails sent" });
