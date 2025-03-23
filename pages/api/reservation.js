@@ -121,6 +121,7 @@ export default async function handler(req, res) {
     files,
   });
 
+  console.log("new reservaiton", newReservation);
   const vehicleDoc = await Product.findById(vehicleId);
 
   if (vehicleDoc) {

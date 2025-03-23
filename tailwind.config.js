@@ -17,6 +17,7 @@ module.exports = {
       },
       fontFamily: {
         aeonik: ["Aeonik", "sans-serif"],
+        poppins: ["Poppins", "sans-serif"],
       },
     },
   },
