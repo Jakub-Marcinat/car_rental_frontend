@@ -21,7 +21,6 @@ const ReservationSchema = new Schema(
 
     // Payment Details
     paymentMethod: { type: String, required: true },
-    paid: { type: Boolean, default: false },
 
     // Company Details (optional)
     isCompany: { type: Boolean, default: false },
@@ -49,8 +48,11 @@ const ReservationSchema = new Schema(
     termsAccepted: { type: Boolean, required: true },
     dataProcessingAccepted: { type: Boolean, required: true },
 
-    // Reservation Status
-    reserved: { type: Boolean, default: true },
+    status: {
+      type: String,
+      enum: ["pending", "confirmed", "completed", "cancelled"],
+      default: "pending",
+    },
   },
   {
     timestamps: true,

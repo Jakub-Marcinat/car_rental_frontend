@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 import axios from "axios";
 import { Product } from "@/models/Product";
 import { mongooseConnect } from "@/lib/mongoose";
+import emailjs from "@emailjs/browser";
 
 export default function ReservationPage({ product }) {
   const router = useRouter();
@@ -208,19 +209,162 @@ export default function ReservationPage({ product }) {
       licenseNumber: updatedFormData.licenseNumber || null,
       termsAccepted,
       dataProcessingAccepted,
+      status: "pending",
     };
 
     try {
-      const response = await axios.post("/api/reservation", reservationDetails);
+      const response = await fetch("/api/reservation", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(reservationDetails), // Ensure correct reservation data structure
+      });
 
-      if (response.status === 200) {
-        alert(
-          "Údaje o rezervácií sme poslali na váš email. Tu bude preklik na success page namiesto tohto"
-        );
-        //router.push(`/thank-you?reservationId=${response.data.reservationId}`);
-      } else {
-        throw new Error("Reservation failed.");
+      const result = await response.json();
+      console.log("Server response:", result);
+      if (!response.ok) {
+        console.error("Error response from server:", result);
+        throw new Error(result.message || "Reservation failed.");
       }
+      // if (response.status === 200) {
+      //   alert(
+      //     "Údaje o rezervácií sme poslali na váš email. Tu bude preklik na success page namiesto tohto"
+      //   );
+
+      const userEmailParams = {
+        email: updatedFormData.email, // Customer email
+        to_name: `${updatedFormData.firstName} ${updatedFormData.lastName}`,
+        message: `Potvrdenie registrácie 
+        Vehicle Title: ${product.title}
+        Kategória: ${product.category.name}
+        Výbava: ${product.features?.join(", ")}
+        Dátum vyzdvihnutia: ${pickupDate} at ${pickupTime}
+        Dátum odovzdania: ${dropoffDate} at ${dropoffTime}
+        Cena prenájmu: ${rentalPrice}€
+        Depozit: ${depositFee}€
+        Povolené kilometre: ${allowedKm} km
+        Suma za prekročenie limitu: ${overLimitFee}€/km
+        Metóda platby: ${paymentMethod}
+        Režim: ${selectedMode}
+
+         ${
+           promoCode
+             ? `🎟️ Promo kód aplikovaný: ${promoCode} (-${discountAmount}%)`
+             : ""
+         }
+
+         Ulica: ${updatedFormData.contactStreet}, Mesto: ${
+          updatedFormData.contactCity
+        }, PSČ: ${updatedFormData.contactPsc}, Krajina: ${
+          updatedFormData.contactCountry
+        }
+
+        ${
+          isCompany
+            ? `
+               🏢 Firemné údaje:
+               ----------------------------------
+               Obchodný názov: ${updatedFormData.companyName}
+               IČO: ${updatedFormData.ico}
+               DIČ: ${updatedFormData.dic}
+               IČ DPH: ${updatedFormData.icDph}
+          
+               🧾 Fakturačná adresa:
+               ----------------------------------
+               Ulica: ${updatedFormData.billingStreet}, Mesto: ${updatedFormData.billingCity}, PSČ: ${updatedFormData.billingPsc}, Krajina: ${updatedFormData.billingCountry}
+          
+               `
+            : ""
+        }
+        `,
+      };
+
+      const adminEmailParams = {
+        email: updatedFormData.email, 
+        to_name: `${updatedFormData.firstName} ${updatedFormData.lastName}`,
+        message: `Potvrdenie registrácie 
+        Meno a priezvisko: ${updatedFormData.firstName} ${
+          updatedFormData.lastName
+        }
+        Email: ${updatedFormData.email}
+        Telefén: ${updatedFormData.phone}
+        č. OP: ${updatedFormData.idNumber}
+        Rodné číslo: ${updatedFormData.birthNumber} 
+        č. VP: ${updatedFormData.licenseNumber}
+        Vehicle Title: ${product.title}
+        Kategória: ${product.category.name}
+        Výbava: ${product.features?.join(", ")}
+        Dátum vyzdvihnutia: ${pickupDate} at ${pickupTime}
+        Dátum odovzdania: ${dropoffDate} at ${dropoffTime}
+        Cena prenájmu: ${rentalPrice}€
+        Depozit: ${depositFee}€
+        Povolené kilometre: ${allowedKm} km
+        Suma za prekročenie limitu: ${overLimitFee}€/km
+        Metóda platby: ${paymentMethod}
+        Režim: ${selectedMode}
+
+         ${
+           promoCode
+             ? `🎟️ Promo kód aplikovaný: ${promoCode} (-${discountAmount}%)`
+             : ""
+         }
+
+         Ulica: ${updatedFormData.contactStreet}, Mesto: ${
+          updatedFormData.contactCity
+        }, PSČ: ${updatedFormData.contactPsc}, Krajina: ${
+          updatedFormData.contactCountry
+        }
+
+        ${
+          isCompany
+            ? `
+               🏢 Firemné údaje:
+               ----------------------------------
+               Obchodný názov: ${updatedFormData.companyName}
+               IČO: ${updatedFormData.ico}
+               DIČ: ${updatedFormData.dic}
+               IČ DPH: ${updatedFormData.icDph}
+          
+               🧾 Fakturačná adresa:
+               ----------------------------------
+               Ulica: ${updatedFormData.billingStreet}, Mesto: ${updatedFormData.billingCity}, PSČ: ${updatedFormData.billingPsc}, Krajina: ${updatedFormData.billingCountry}
+          
+               `
+            : ""
+        }
+        `,
+      };
+
+      // Sending Admin email
+      emailjs
+        .send(
+          process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID,
+          process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID_ADMIN,
+          adminEmailParams,
+          process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY
+        )
+        .then(() => {
+          console.log("Admin email sent successfully!");
+        })
+        .catch((error) => {
+          console.error("Error sending email:", error);
+        });
+
+      // Sending User Email
+      emailjs
+        .send(
+          process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID,
+          process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID_USER,
+          userEmailParams,
+          process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY
+        )
+        .then(() => {
+          console.log("User email sent successfully!");
+        })
+        .catch((error) => {
+          console.error("Error sending email:", error);
+        });
+
+      //router.push(`/thank-you?reservationId=${response.data.reservationId}`);
     } catch (error) {
       console.error("Error submitting reservation:", error);
       alert("Error sending reservation. Please try again.");
