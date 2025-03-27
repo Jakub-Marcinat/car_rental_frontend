@@ -1,9 +1,43 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
-import axios from "axios";
 import { Product } from "@/models/Product";
 import { mongooseConnect } from "@/lib/mongoose";
 import emailjs from "@emailjs/browser";
+import BlackBox from "@/components/BlackBox";
+import CustomDateInput from "@/components/CustomDateInput";
+import CustomTimeInput from "@/components/CustomTimeInput";
+import CustomSelect from "@/components/CustomSelect";
+import { motion, AnimatePresence } from "framer-motion";
+import Button from "@/components/Button";
+import { Price, PriceRow } from "./product/[id]";
+import Input from "@/components/Input";
+import {
+  FaBolt,
+  FaGasPump,
+  FaRoad,
+  FaCar,
+  FaCogs,
+  FaDoorOpen,
+  FaTachometerAlt,
+  FaTrailer,
+} from "react-icons/fa";
+import { MdSpeed, MdCalendarToday } from "react-icons/md";
+import { Switch } from "@/components/CustomSwitch";
+import CustomCheckbox from "@/components/CustomCheckbox";
+
+const parameterIcons = {
+  Výkon: <FaBolt className="text-yellowText text-lg" />,
+  Palivo: <FaGasPump className="text-yellowText text-lg" />,
+  "Objem valcov": <FaCar className="text-yellowText text-lg" />,
+  Spotreba: <MdSpeed className="text-yellowText text-lg" />,
+  "Typ prevodovky": <FaCogs className="text-yellowText text-lg" />,
+  "Počet prevodových stupňov": <MdSpeed className="text-yellowText text-lg" />,
+  "Počet dverí": <FaDoorOpen className="text-yellowText text-lg" />,
+  "Rok výroby": <MdCalendarToday className="text-yellowText text-lg" />,
+  "Nájazd kilometrov": <FaTachometerAlt className="text-yellowText text-lg" />,
+  "Typ pohonu": <FaRoad className="text-yellowText text-lg" />,
+  "Ťažné zariadenie": <FaTrailer className="text-yellowText text-lg" />,
+};
 
 export default function ReservationPage({ product }) {
   const router = useRouter();
@@ -81,7 +115,14 @@ export default function ReservationPage({ product }) {
     licenseBack: null,
   });
 
+  const modeMultipliers = {
+    SR: 1,
+    "Susedné krajiny": 1.3,
+    EU: 1.6,
+  };
+
   const overLimitFee = 0.5;
+  const finalDeposit = product.deposit * modeMultipliers[selectedMode];
 
   useEffect(() => {
     let newDeposit = product.deposit;
@@ -279,7 +320,7 @@ export default function ReservationPage({ product }) {
       };
 
       const adminEmailParams = {
-        email: updatedFormData.email, 
+        email: updatedFormData.email,
         to_name: `${updatedFormData.firstName} ${updatedFormData.lastName}`,
         message: `Potvrdenie registrácie 
         Meno a priezvisko: ${updatedFormData.firstName} ${
@@ -377,316 +418,432 @@ export default function ReservationPage({ product }) {
       setAppliedPromoCode(promoCode);
       setPromoDiscount(discount);
     } else {
-      alert("Invalid promo code format. Use XXCORKLAS (e.g., 10CORKLAS)");
     }
   };
   const discount = (100 - promoDiscount) / 100;
 
   return (
-    <div className="p-6 max-w-3xl mx-auto flex">
-      <div>
-        {/* Display Selected Vehicle Info */}
-        <div className="mb-4">
+    <main className="bg-corklasBackground text-white">
+      <div className="p-6 max-w-7xl mx-auto flex flex-col lg:flex-row gap-8">
+        <div className="flex-1 lg:w-[70%]">
           <img
             src={product.images[0]}
             alt={product.title}
             className="w-full h-40 object-cover rounded"
           />
-          <h3 className="text-lg font-semibold mt-2">{product.title}</h3>
-          <p>Kategória: {product.vehicleCategory.join(", ")}</p>
-          <p>Výbava: {product.features.join(", ")}</p>
+
+          <BlackBox>
+            <h3 className="text-2xl font-bold mb-4 text-yellowText">
+              Technické parametre
+            </h3>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-2 text-white">
+              {Object.entries(product.properties).map(([key, value]) => (
+                <div key={key} className="flex items-center gap-2">
+                  {parameterIcons[key] || (
+                    <FaCogs className="text-yellowText text-lg" />
+                  )}
+                  <strong>{key}:</strong> {value}
+                </div>
+              ))}
+            </div>
+          </BlackBox>
+        </div>
+
+        <div className="flex-1 lg:w-[30%] p-6 lg:px-10 rounded-lg shadow-lg bg-[#151515] text-white">
+          <h3 className="text-2xl font-semibold my-6 py-2 text-yellowText">
+            Rezervácia vozidla
+          </h3>
+
+          <form onSubmit={handleSubmit} className="space-y-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
+              <CustomDateInput
+                value={pickupDate}
+                onChange={setPickupDate}
+                placeholder="Dátum odovzdania"
+                className="flex-1 min-w-0"
+              />
+              <CustomTimeInput
+                value={pickupTime}
+                onChange={setPickupTime}
+                placeholder="Čas odovzdania"
+                className="flex-1 min-w-0"
+              />
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <CustomDateInput
+                value={dropoffDate}
+                onChange={setDropoffDate}
+                placeholder="Dátum odovzdania"
+                className="flex-1 min-w-0"
+              />
+              <CustomTimeInput
+                value={dropoffTime}
+                onChange={setDropoffTime}
+                placeholder="Čas odovzdania"
+                className="flex-1 min-w-0"
+              />
+            </div>
+            <div>
+              <CustomSelect
+                options={[
+                  { value: "SR", label: "Režim SR" },
+                  {
+                    value: "Susedné krajiny",
+                    label: "Režim Susedné krajiny (+30% záloha)",
+                  },
+                  { value: "EU", label: "Režim EU (+60% záloha)" },
+                ]}
+                value={selectedMode}
+                onChange={setSelectedMode}
+              />
+            </div>
+
+            <div>
+              <div className="flex items-center gap-2">
+                <AnimatePresence>
+                  {showPromoInput && (
+                    <motion.input
+                      initial={{ opacity: 0, x: -20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      exit={{ opacity: 0, x: 20 }}
+                      transition={{ duration: 0.2 }}
+                      type="text"
+                      placeholder=""
+                      value={promoCode}
+                      onChange={(e) => setPromoCode(e.target.value)}
+                      onBlur={handleApplyPromoCode}
+                      className="flex-1 bg-corklasCard border-2 border-[#2b2b2b] rounded-lg py-2 pl-2"
+                    />
+                  )}
+                </AnimatePresence>
+                <button
+                  type="button"
+                  onClick={() => setShowPromoInput(!showPromoInput)}
+                  variant="outline"
+                  className="flex justify-between w-full"
+                >
+                  <div className="flex gap-2 items-center">
+                    {showPromoInput ? (
+                      <>
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          strokeWidth="1.5"
+                          stroke="currentColor"
+                          className="size-6 ml-2"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            d="M5 12h14"
+                          />
+                        </svg>
+                        Skryť kód
+                      </>
+                    ) : (
+                      <>
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          strokeWidth="1.5"
+                          stroke="currentColor"
+                          className="size-6 ml-2"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            d="M12 4.5v15m7.5-7.5h-15"
+                          />
+                        </svg>
+                        Zadať promo kód
+                      </>
+                    )}
+                  </div>
+                </button>
+              </div>
+            </div>
+
+            <div>
+              <PriceRow>
+                <div>
+                  <Price>Celková cena: €{rentalPrice.toFixed(2)}</Price>
+                </div>
+                <div>
+                  <Price>Povolené KM: {allowedKm} km</Price>
+                </div>
+                <div>
+                  <Price>Záloha: €{finalDeposit.toFixed(2)}</Price>
+                </div>
+                <div>
+                  <Price>Poplatok za prekročenie: €{overLimitFee}/km</Price>
+                </div>
+              </PriceRow>
+            </div>
+
+            <div>
+              <CustomSelect
+                options={[
+                  { value: "wire", label: "Bankovým prevodom" },
+                  { value: "cash", label: "Hotovosť" },
+                ]}
+                value={paymentMethod}
+                onChange={(value) => setPaymentMethod(value)}
+              />
+            </div>
+
+            <div>
+              <h3 className="text-xl font-semibold my-2">Osobné údaje</h3>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <Input
+                    type="text"
+                    id="firstName"
+                    name="firstName"
+                    placeholder="Krstné meno*"
+                    onChange={handleChange}
+                    required
+                  />
+                </div>
+                <div>
+                  <Input
+                    type="text"
+                    id="lastName"
+                    name="lastName"
+                    placeholder="Priezvisko*"
+                    onChange={handleChange}
+                    required
+                  />
+                </div>
+                <div>
+                  <Input
+                    type="email"
+                    id="email"
+                    name="email"
+                    placeholder="Email*"
+                    onChange={handleChange}
+                    required
+                  />
+                </div>
+                <div>
+                  <Input
+                    type="text"
+                    id="phone"
+                    name="phone"
+                    placeholder="Telefón*"
+                    onChange={handleChange}
+                    required
+                  />
+                </div>
+                <div>
+                  <Input
+                    type="text"
+                    id="birthNumber"
+                    name="birthNumber"
+                    placeholder="Rodné číslo za lomítkom"
+                    onChange={handleChange}
+                    required
+                  />
+                </div>
+              </div>
+            </div>
+            <div>
+              <h3 className="text-xl font-semibold my-2">Kontaktné údaje</h3>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <Input
+                    type="text"
+                    id="contactStreet"
+                    name="contactStreet"
+                    placeholder="Ulica"
+                    onChange={handleChange}
+                    required
+                  />
+                </div>
+                <div>
+                  <Input
+                    type="text"
+                    id="contactCity"
+                    name="contactCity"
+                    placeholder="Mesto"
+                    onChange={handleChange}
+                    required
+                  />
+                </div>
+                <div>
+                  <Input
+                    type="text"
+                    id="contactPsc"
+                    name="contactPsc"
+                    placeholder="PSC"
+                    onChange={handleChange}
+                    required
+                  />
+                </div>
+                <div>
+                  <Input
+                    type="text"
+                    id="contactCountry"
+                    name="contactCountry"
+                    placeholder="Krajina"
+                    onChange={handleChange}
+                    required
+                  />
+                </div>
+              </div>
+            </div>
+
+            <div className="flex items-center space-x-2">
+              <Switch
+                id="isCompany"
+                checked={isCompany}
+                onCheckedChange={setIsCompany}
+              />
+              <h2>Som firma</h2>
+            </div>
+
+            {/* Company Fields */}
+            <AnimatePresence>
+              {isCompany && (
+                <motion.div
+                  initial={{ opacity: 0, height: 0 }}
+                  animate={{ opacity: 1, height: "auto" }}
+                  exit={{ opacity: 0, height: 0 }}
+                  transition={{ duration: 0.3 }}
+                  className="space-y-4"
+                >
+                  <h3 className="text-xl font-semibold my-2">
+                    Fakturačné údaje
+                  </h3>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                      <Input
+                        type="text"
+                        id="companyName"
+                        name="companyName"
+                        placeholder="Company Name"
+                        onChange={handleChange}
+                        required
+                      />
+                    </div>
+                    <div>
+                      <Input
+                        type="text"
+                        id="ico"
+                        name="ico"
+                        placeholder="IČO"
+                        onChange={handleChange}
+                        required
+                      />
+                    </div>
+                    <div>
+                      <Input
+                        type="text"
+                        id="dic"
+                        name="dic"
+                        placeholder="DIČ"
+                        onChange={handleChange}
+                      />
+                    </div>
+                    <div>
+                      <Input
+                        type="text"
+                        id="icDph"
+                        name="icDph"
+                        placeholder="IČ DPH"
+                        onChange={handleChange}
+                      />
+                    </div>
+                    <div>
+                      <Input
+                        type="text"
+                        id="billingStreet"
+                        name="billingStreet"
+                        placeholder="Ulica"
+                        onChange={handleChange}
+                        required
+                      />
+                    </div>
+                    <div>
+                      <Input
+                        type="text"
+                        id="billingCity"
+                        name="billingCity"
+                        placeholder="Mesto"
+                        onChange={handleChange}
+                        required
+                      />
+                    </div>
+                    <div>
+                      <Input
+                        type="text"
+                        id="billingPsc"
+                        name="billingPsc"
+                        placeholder="PSC"
+                        onChange={handleChange}
+                        required
+                      />
+                    </div>
+                    <div>
+                      <Input
+                        type="text"
+                        id="billingCountry"
+                        name="billingCountry"
+                        placeholder="Krajina"
+                        onChange={handleChange}
+                        required
+                      />
+                    </div>
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
+
+            {/* Checkboxes */}
+            <div>
+              <div className="flex items-center gap-2">
+                <CustomCheckbox
+                  checked={termsAccepted}
+                  onChange={setTermsAccepted}
+                  className="mr-2"
+                />
+                <span>
+                  Prečítal/a som si a súhlasím s{" "}
+                  <a href="#" className="text-blue-500 hover:underline">
+                    obchodnými podmienkami
+                  </a>
+                </span>
+              </div>
+            </div>
+            <div>
+              <div className="flex items-center gap-2">
+                <CustomCheckbox
+                  checked={dataProcessingAccepted}
+                  onChange={setDataProcessingAccepted}
+                  className="mr-2"
+                />
+                <span>
+                  Súhlasím so{" "}
+                  <a href="#" className="text-blue-500 hover:underline">
+                    spracovaním osobných údajov
+                  </a>
+                </span>
+              </div>
+            </div>
+            {/* Submit Button */}
+
+            <Button
+              type="submit"
+              disabled={!termsAccepted || !dataProcessingAccepted}
+              primary={1}
+            >
+              Potvrdiť rezerváciu
+            </Button>
+          </form>
         </div>
       </div>
-      <div>
-        <h2 className="text-2xl font-bold mb-4">Rezervácia {product.title}</h2>
-
-        <form onSubmit={handleSubmit} className="space-y-4">
-          {/* Pickup & Drop-off Dates */}
-          <div>
-            <label>Dátum vyzdvihnutia:</label>
-            <input
-              type="date"
-              value={pickupDate}
-              onChange={(e) => setPickupDate(e.target.value)}
-              required
-            />
-            <input
-              type="time"
-              value={pickupTime}
-              onChange={(e) => setPickupTime(e.target.value)}
-              required
-            />
-          </div>
-          <div>
-            <label>Dátum odovzdania:</label>
-            <input
-              type="date"
-              value={dropoffDate}
-              onChange={(e) => setDropoffDate(e.target.value)}
-              required
-            />
-            <input
-              type="time"
-              value={dropoffTime}
-              onChange={(e) => setDropoffTime(e.target.value)}
-              required
-            />
-          </div>
-          <label>Režim:</label>
-          <select
-            value={selectedMode}
-            onChange={(e) => setSelectedMode(e.target.value)}
-          >
-            <option value="SR">Slovenská republika</option>
-            <option value="Susedné krajiny">
-              Susedné krajiny (+30% deposit)
-            </option>
-            <option value="EU">EU (+60% deposit)</option>
-          </select>
-          {/* Promo Code Section */}
-          <label>Zľavový kód:</label>
-          {!showPromoInput ? (
-            <button type="button" onClick={() => setShowPromoInput(true)}>
-              Zadať promo kód
-            </button>
-          ) : (
-            <input
-              type="text"
-              placeholder="10CORKLAS"
-              value={promoCode}
-              onChange={(e) => setPromoCode(e.target.value)}
-              onBlur={handleApplyPromoCode}
-            />
-          )}
-          {/* Rental Info */}
-          <p>Cena: {rentalPrice}€</p>
-          {appliedPromoCode && (
-            <>
-              <p>
-                Aplikovaný promo kód: {appliedPromoCode} (-{promoDiscount}%)
-              </p>
-              {/* <p>Discounted Price: {discountedPrice.toFixed(2)}€</p> */}
-            </>
-          )}
-          <p>Povolené kilometre: {allowedKm} km</p>
-          <p>Cena za prekročenie km: {overLimitFee}€/km</p>
-          <p>Depozit: {depositFee}€</p>
-          {/* Payment Method */}
-          <label>Platba:</label>
-          <select
-            value={paymentMethod}
-            onChange={(e) => setPaymentMethod(e.target.value)}
-          >
-            <option value="wire">Bankovým prevodom</option>
-            <option value="cash">Hotovosť</option>
-          </select>
-          {/* Personal Information */}
-          <h3>Osobné údaje</h3>
-          <input
-            type="text"
-            name="firstName"
-            placeholder="Krstné meno"
-            onChange={handleChange}
-            required
-          />
-          <input
-            type="text"
-            name="lastName"
-            placeholder="Priezvisko"
-            onChange={handleChange}
-            required
-          />
-          <input
-            type="email"
-            name="email"
-            placeholder="Email"
-            onChange={handleChange}
-            required
-          />
-          <input
-            type="text"
-            name="phone"
-            placeholder="Telefón"
-            onChange={handleChange}
-            required
-          />
-          <input
-            type="text"
-            name="idNumber"
-            placeholder="č. O.P."
-            onChange={handleChange}
-            required
-          />
-          <input
-            type="text"
-            name="birthNumber"
-            placeholder="Rodné číslo"
-            onChange={handleChange}
-            required
-          />
-          <input
-            type="text"
-            name="licenseNumber"
-            placeholder="č. V.P."
-            onChange={handleChange}
-            required
-          />
-          <label>Kontaktné údaje</label>
-          <input
-            type="text"
-            name="contactStreet"
-            placeholder="Ulica"
-            onChange={handleChange}
-            required
-          />
-          <input
-            type="text"
-            name="contactCity"
-            placeholder="Mesto"
-            onChange={handleChange}
-            required
-          />
-          <input
-            type="text"
-            name="contactPsc"
-            placeholder="PSC"
-            onChange={handleChange}
-            required
-          />
-          <input
-            type="text"
-            name="contactCountry"
-            placeholder="Krajina"
-            onChange={handleChange}
-            required
-          />
-          {/* "Som Firma" Toggle */}
-          <label>
-            <input
-              type="checkbox"
-              checked={isCompany}
-              onChange={() => setIsCompany(!isCompany)}
-            />
-            Som Firma
-          </label>
-          {/* Address Fields */}
-          <label> Fakturačné údaje </label>
-          <input
-            type="text"
-            name="billingStreet"
-            placeholder="Ulica"
-            onChange={handleChange}
-            required
-          />
-          <input
-            type="text"
-            name="billingCity"
-            placeholder="Mesto"
-            onChange={handleChange}
-            required
-          />
-          <input
-            type="text"
-            name="billingPsc"
-            placeholder="PSC"
-            onChange={handleChange}
-            required
-          />
-          <input
-            type="text"
-            name="billingCountry"
-            placeholder="Krajina"
-            onChange={handleChange}
-            required
-          />
-          {/* Company Fields */}
-          {isCompany && (
-            <>
-              <input
-                type="text"
-                name="companyName"
-                placeholder="Company Name"
-                onChange={handleChange}
-                required
-              />
-              <input
-                type="text"
-                name="ico"
-                placeholder="IČO"
-                onChange={handleChange}
-                required
-              />
-              <input
-                type="text"
-                name="dic"
-                placeholder="DIČ"
-                onChange={handleChange}
-              />
-              <input
-                type="text"
-                name="icDph"
-                placeholder="IČ DPH"
-                onChange={handleChange}
-              />
-            </>
-          )}
-          <h3>Dokumenty</h3>
-          <input
-            type="file"
-            name="idFront"
-            onChange={handleFileChange}
-            required
-          />
-          <input
-            type="file"
-            name="idBack"
-            onChange={handleFileChange}
-            required
-          />
-          <input
-            type="file"
-            name="licenseFront"
-            onChange={handleFileChange}
-            required
-          />
-          <input
-            type="file"
-            name="licenseBack"
-            onChange={handleFileChange}
-            required
-          />
-          {/* Checkboxes */}
-          <label>
-            <input
-              type="checkbox"
-              checked={termsAccepted}
-              onChange={() => setTermsAccepted(!termsAccepted)}
-              required
-            />
-            Prečítal/a som si a súhlasím s obchodnými podmienkami
-          </label>
-          <label>
-            <input
-              type="checkbox"
-              checked={dataProcessingAccepted}
-              onChange={() =>
-                setDataProcessingAccepted(!dataProcessingAccepted)
-              }
-              required
-            />
-            Súhlasím so spracovaním osobných údajov
-          </label>
-          {/* Submit Button */}
-          <button
-            type="submit"
-            className="bg-blue-500 text-white px-4 py-2"
-            disabled={!termsAccepted || !dataProcessingAccepted}
-          >
-            Submit Reservation
-          </button>
-        </form>
-      </div>
-    </div>
+    </main>
   );
 }
 

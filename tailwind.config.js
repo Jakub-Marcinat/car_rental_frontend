@@ -8,9 +8,10 @@ module.exports = {
     extend: {
       colors: {
         corklasRed: "#D70006",
-        corklasYellow: "#FAAC05",
+        corklasYellow: "#FFFA00",
         corklasBackground: "#0b0a0b",
         corklasCard: "#151515",
+        yellowText: "#fffa60",
       },
       backgroundImage: {
         "hero-pattern": "url('/sadsad.png')",

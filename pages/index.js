@@ -4,7 +4,6 @@ import { Product } from "@/models/Product";
 import Featured from "@/components/Featured";
 import Hero from "@/components/Hero";
 import NewProducts from "@/components/Newproducts";
-import Link from "next/link";
 
 export default function HomePage({ featuredProducts, newProducts }) {
   return (
@@ -13,11 +12,12 @@ export default function HomePage({ featuredProducts, newProducts }) {
       <Hero />
       <div className="flex w-full justify-center gap-8 bg-corklasBackground px-20 pt-20">
         {featuredProducts.map((product) => (
-            <Featured key={product._id} product={product} />
+          <Featured key={product._id} product={product} />
         ))}
       </div>
 
       {/* <NewProducts products={newProducts} /> */}
+
       <section className="relative bg-corklasBackground h-screen flex flex-col items-center justify-center px-4">
         <div className="absolute top-1/3 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-corklasRed opacity-10 rounded-full blur-3xl"></div>
 
@@ -32,7 +32,10 @@ export default function HomePage({ featuredProducts, newProducts }) {
         </div>
 
         <div className="relative z-10 mt-20  flex justify-center px-20 gap-8">
-          <div className="bg-[#151515] w-full rounded-2xl shadow-lg flex flex-col items-center text-center lg: max-w-[350px]">
+          <a
+            href="/vozidla"
+            className="bg-[#151515] w-full rounded-2xl shadow-lg flex flex-col items-center text-center lg:max-w-[350px] cursor-pointer hover:scale-[1.02] transition-all duration-200"
+          >
             <img
               src="/Skoda_superb.avif"
               alt="Affordable Pricing"
@@ -44,9 +47,12 @@ export default function HomePage({ featuredProducts, newProducts }) {
             <p className="text-gray-300 mt-2 pb-8 px-4">
               Naše konkurenčné ceny vám zaručia najvýhodnejšiu ponuku.
             </p>
-          </div>
+          </a>
 
-          <div className="bg-[#151515] rounded-2xl  shadow-lg flex flex-col items-center text-center max-w-[350px]">
+          <a
+            href="#kontakt"
+            className="bg-[#151515] rounded-2xl  shadow-lg flex flex-col items-center text-center max-w-[350px] cursor-pointer hover:scale-[1.02] transition-all duration-200"
+          >
             <img
               src="/Shaking_hands.jpeg"
               alt="24/7 Support"
@@ -58,9 +64,12 @@ export default function HomePage({ featuredProducts, newProducts }) {
             <p className="text-gray-300 mt-2  pb-8 px-4">
               Náš tím vám vždy ochotne pomôže – kedykoľvek to budete potrebovať.
             </p>
-          </div>
+          </a>
 
-          <div className="bg-[#151515] rounded-2xl shadow-lg flex flex-col items-center text-center max-w-[350px]">
+          <a
+            href="/vozidla"
+            className="bg-[#151515] rounded-2xl shadow-lg flex flex-col items-center text-center max-w-[350px] cursor-pointer hover:scale-[1.02] transition-all duration-200"
+          >
             <img
               src="/Parking_lot.jpg"
               alt="Quality Fleet"
@@ -72,7 +81,7 @@ export default function HomePage({ featuredProducts, newProducts }) {
             <p className="text-gray-300 mt-2 pb-8 px-4">
               Prezrite si našu pestrú ponuku a nájdite si ideálne auto pre seba.
             </p>
-          </div>
+          </a>
         </div>
       </section>
 
@@ -96,20 +105,20 @@ export default function HomePage({ featuredProducts, newProducts }) {
             <img
               src="/MercedesGTR.jpg"
               alt="Mercedes GTR"
-              className="rounded-lg shadow-lg w-full"
+              className="rounded-lg shadow-lg w-full fade-out"
             />
-            <div className="relative flex justify-end">
-              <div className="mt-12 z-10 lg:max-w-[800px] bg-white text-black rounded-lg shadow-lg p-6 flex flex-col lg:flex-row  justify-between gap-6">
+            <div className="relative flex justify-end ">
+              <div className="mt-12 z-10 lg:max-w-[900px] bg-[#1a1a1a] text-black rounded-lg shadow-lg p-6 flex flex-col lg:flex-row  justify-between gap-6 fade-out-button px-20">
                 <div>
-                  <h3 className="text-xl z-10 font-semibold">
+                  <h3 className="text-xl z-10 font-semibold text-white">
                     Zažite jazdu bez kompromisov
                   </h3>
-                  <p className="text-gray-600">
+                  <p className="text-white">
                     Objavte špičkové vozidlá a užívajte si bezproblémový
                     prenájom.
                   </p>
                 </div>
-                <button className="bg-corklasYellow text-black px-6 py-3 rounded-full font-semibold hover:opacity-80 transition">
+                <button className="bg-corklasYellow text-black px-6 py-3 rounded-full font-semibold hover:opacity-80 transition opacity-100! ">
                   Rezervovať teraz
                 </button>
               </div>
@@ -118,7 +127,10 @@ export default function HomePage({ featuredProducts, newProducts }) {
         </div>
       </section>
 
-      <section className="bg-corklasBackground py-40 px-4 lg:px-12">
+      <section
+        id="kontakt"
+        className="bg-corklasBackground py-40 px-4 lg:px-12"
+      >
         <div className="flex flex-col items-center mb-10  ">
           <h1 className="text-white text-4xl font-bold">Kontakt</h1>
           <div className="bg-corklasYellow w-20 h-3 mt-4 rounded-xl"></div>
@@ -135,7 +147,7 @@ export default function HomePage({ featuredProducts, newProducts }) {
           <div className="w-full lg:w-1/2 h-96 bg-[#151515] text-white p-8 rounded-lg shadow-lg">
             <h2 className="text-xl font-semibold mb-6">Nájdete nás tu</h2>
 
-            <div className="flex items-center gap-4 mb-4">
+            <div className="flex items-center gap-4 mb-3">
               <svg
                 className="w-6 h-6 text-corklasYellow"
                 fill="currentColor"
@@ -146,7 +158,7 @@ export default function HomePage({ featuredProducts, newProducts }) {
               <p>Slavnica 8, 018 54 Slavnica</p>
             </div>
 
-            <div className="flex items-center gap-4 mb-4">
+            <div className="flex items-center gap-4 mb-3">
               <svg
                 className="w-6 h-6 text-corklasYellow"
                 fill="currentColor"
@@ -168,16 +180,16 @@ export default function HomePage({ featuredProducts, newProducts }) {
               <p>corklassro@gmail.com</p>
             </div>
 
-            <h3 className="text-xl font-semibold mb-2">Otváracie hodiny</h3>
+            <h3 className="text-xl font-semibold mb-6">Otváracie hodiny</h3>
 
-            <p>
+            <p className="mb-2">
               Pondelok - Piatok:{" "}
               <span className="text-gray-300">08:00 - 18:00</span>
             </p>
-            <p>
+            <p className="mb-2">
               Sobota: <span className="text-gray-300">09:00 - 14:00</span>
             </p>
-            <p>
+            <p className="mb-2">
               Nedeľa: <span className="text-gray-300">Zatvorené</span>
             </p>
           </div>

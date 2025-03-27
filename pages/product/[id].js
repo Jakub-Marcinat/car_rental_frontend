@@ -1,8 +1,7 @@
-import { useState, useContext, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import styled from "styled-components";
 import Button from "@/components/Button";
-import Center from "@/components/Center";
 import Header from "@/components/Header";
 import ProductImages from "@/components/ProductImages";
 import Title from "@/components/Title";
@@ -13,24 +12,28 @@ import CustomSelect from "@/components/CustomSelect";
 import CustomTable from "@/components/CustomTable";
 import BlackBox from "@/components/BlackBox";
 import CustomTimeInput from "@/components/CustomTimeInput";
+import {
+  FaBolt,
+  FaGasPump,
+  FaRoad,
+  FaCar,
+  FaCogs,
+  FaDoorOpen,
+  FaTachometerAlt,
+  FaTrailer,
+} from "react-icons/fa";
+import { MdSpeed, MdCalendarToday } from "react-icons/md";
 
-const ColumnWrapper = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 0.8fr;
-  width: 100%;
-  gap: 40px;
-  margin-top: 40px;
-`;
-
-const PriceRow = styled.div`
+export const PriceRow = styled.div`
   display: flex;
-  gap: 20px;
-  align-items: center;
-  margin-top: 20px;
+  flex-direction: column;
+  gap: 10px;
+  padding-left: 2px;
+  margin: 20px 0 20px 0;
 `;
 
-const Price = styled.span`
-  font-size: 1.5rem;
+export const Price = styled.span`
+  font-size: 1.1rem;
 `;
 
 const FeatureTile = styled.div`
@@ -41,6 +44,20 @@ const FeatureTile = styled.div`
   border-radius: 5px;
   font-size: 14px;
 `;
+
+const parameterIcons = {
+  Výkon: <FaBolt className="text-yellowText text-lg" />,
+  Palivo: <FaGasPump className="text-yellowText text-lg" />,
+  "Objem valcov": <FaCar className="text-yellowText text-lg" />,
+  Spotreba: <MdSpeed className="text-yellowText text-lg" />,
+  "Typ prevodovky": <FaCogs className="text-yellowText text-lg" />,
+  "Počet prevodových stupňov": <MdSpeed className="text-yellowText text-lg" />,
+  "Počet dverí": <FaDoorOpen className="text-yellowText text-lg" />,
+  "Rok výroby": <MdCalendarToday className="text-yellowText text-lg" />,
+  "Nájazd kilometrov": <FaTachometerAlt className="text-yellowText text-lg" />,
+  "Typ pohonu": <FaRoad className="text-yellowText text-lg" />,
+  "Ťažné zariadenie": <FaTrailer className="text-yellowText text-lg" />,
+};
 
 export default function ProductPage({ product }) {
   //const { addProduct } = useContext(CartContext);
@@ -160,78 +177,78 @@ export default function ProductPage({ product }) {
   );
 
   return (
-    <div className="bg-corklasBackground text-white">
+    <div className="bg-corklasBackground text-white min-h-screen">
       <Header />
-      <Center>
-        <ColumnWrapper>
-          {/* Left Side - Image & Details */}
-          <BlackBox>
+      <div className="mx-auto px-4 lg:px-12 xl:px-20 max-w-[1410px]">
+        <Title>{product.title}</Title>
+
+        <div className="flex flex-col lg:flex-row gap-8">
+          <div className="flex-[0.6]">
             <ProductImages images={product.images} />
 
-            {/* Pricing Table */}
-            <h3 className="text-2xl font-bold mt-20">Cenník</h3>
-            <CustomTable headers={tableHeaders} data={tableData} />
+            <BlackBox>
+              <h3 className="text-2xl font-bold text-yellowText">Cenník</h3>
+              <CustomTable headers={tableHeaders} data={tableData} />
 
-            {/* Features */}
-            <h3 className="text-2xl font-bold mt-12 mb-8">Vlastnosti</h3>
-            {product.features.map((feature, index) => (
-              <FeatureTile key={index}>{feature}</FeatureTile>
-            ))}
-
-            {/* Technical Parameters */}
-            <h3>Technické parametre</h3>
-            <ul>
-              {Object.entries(product.properties).map(([key, value]) => (
-                <li key={key}>
-                  <strong>{key}:</strong> {value}
-                </li>
+              <h3 className="text-2xl font-bold mt-12 mb-4 text-yellowText">
+                Vlastnosti
+              </h3>
+              {product.features.map((feature, index) => (
+                <FeatureTile key={index}>{feature}</FeatureTile>
               ))}
-            </ul>
-          </BlackBox>
 
-          {/* Right Side - Reservation Form */}
-          <div className="px-20px">
-            <Title>{product.title}</Title>
-            <p>{product.description}</p>
+              <h3 className="text-2xl font-bold mt-12 mb-4 text-yellowText">
+                Technické parametre
+              </h3>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-2 text-white">
+                {Object.entries(product.properties).map(([key, value]) => (
+                  <div key={key} className="flex items-center gap-2">
+                    {parameterIcons[key] || (
+                      <FaCogs className="text-yellowText text-lg" />
+                    )}
+                    <strong>{key}:</strong> {value}
+                  </div>
+                ))}
+              </div>
+            </BlackBox>
+          </div>
 
-            {/* Reservation Form */}
-            <h3 className="text-xl font-semibold mt-4 py-2">
+          <div className="flex-[0.4] p-6 lg:px-10 rounded-2xl shadow-lg lg:w-[30%] bg-[#151515] border border-[#2b2b2b] max-h-fit">
+            <h3 className="text-2xl font-semibold mb-8 text-yellowText">
               Rezervácia vozidla
             </h3>
+            <p className="mb-4">{product.description}</p>
 
-            <div className="flex justify-between">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
               <CustomDateInput
                 value={pickupDate}
                 onChange={handlePickupDateChange}
                 placeholder="Dátum vyzdvihnutia"
-                className="flex-1 min-w-0" // Add min-w-0 here
+                className="flex-1 min-w-0"
               />
 
               <CustomTimeInput
                 value={pickupTime}
-                onChange={(e) => setPickupTime(e.target.value)}
+                onChange={setPickupTime}
                 placeholder="Čas vyzdvihnutia"
-                className="flex-1 min-w-0" // Add min-w-0 here
               />
             </div>
-            <div className="flex justify-between">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
               <CustomDateInput
                 value={dropoffDate}
                 onChange={handleDropoffDateChange}
                 placeholder="Dátum odovzdania"
-                className="flex-1 min-w-0" // Add min-w-0 here
+                className="flex-1 min-w-0"
               />
 
               <CustomTimeInput
                 value={dropoffTime}
-                onChange={(e) => setDropoffTime(e.target.value)}
+                onChange={setDropoffTime}
                 placeholder="Čas odovzdania"
-                className="flex-1 min-w-0" // Add min-w-0 here
+                className="flex-1 min-w-0"
               />
             </div>
 
-            {/* Mode Selection */}
-            <label>Režim:</label>
             <CustomSelect
               options={[
                 { value: "SR", label: "Režim SR" },
@@ -245,28 +262,38 @@ export default function ProductPage({ product }) {
               onChange={setSelectedMode}
             />
 
-            {/* Pricing Summary */}
             <PriceRow>
-              <div>
-                <Price>Celková cena: €{rentalPrice.toFixed(2)}</Price>
+              <div className="flex justify-between">
+                <Price>Cena:</Price>
+                <Price> €{rentalPrice.toFixed(2)}</Price>
               </div>
-              <div>
-                <Price>Povolené KM: {allowedKm} km</Price>
+              <div className="flex justify-between">
+                <Price>Povolené KM: </Price>
+                <Price>{allowedKm} km</Price>
               </div>
-              <div>
-                <Price>Záloha: €{finalDeposit.toFixed(2)}</Price>
+              <div className="flex justify-between">
+                <Price>Záloha: </Price>
+                <Price>€{finalDeposit.toFixed(2)}</Price>
               </div>
-              <div>
-                <Price>Poplatok za prekročenie: €{overLimitFee}/km</Price>
+              <div className="flex justify-between">
+                <Price>Poplatok za prekročenie: </Price>
+                <Price>€{overLimitFee}/km</Price>
               </div>
             </PriceRow>
+            <div className="w-full border border-[#2b2b2b] mb-8"></div>
+            <div className="text-3xl mt-2 mb-6 flex justify-between pr-3">
+              <p>Suma</p>
+              <p>€{rentalPrice.toFixed(2)}</p>
+            </div>
 
-            <Button onClick={handleReservation} primary={1}>
-              Rezervovať
-            </Button>
+            <div className="flex justify-end">
+              <Button onClick={handleReservation} primary={1}>
+                Rezervovať
+              </Button>
+            </div>
           </div>
-        </ColumnWrapper>
-      </Center>
+        </div>
+      </div>
     </div>
   );
 }

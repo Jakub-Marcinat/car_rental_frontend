@@ -6,39 +6,41 @@ const CustomDateInput = ({ label, value, onChange, placeholder, width }) => {
   const inputRef = useRef(null);
 
   const handleDateChange = (date) => {
-    onChange(date.toISOString().split("T")[0]); // Format date as YYYY-MM-DD
+    onChange(date.toISOString().split("T")[0]);
     setIsOpen(false);
   };
 
-  const handleIconClick = () => {
+  const toggleCalendar = () => {
     setIsOpen(!isOpen);
   };
+
   return (
     <div className="relative" style={{ width: width || "auto" }}>
-      {label && <label>{label}</label>}
-      <div className="relative">
+      {label && <label className="block mb-1">{label}</label>}
+
+      <div
+        className="custom-date-input flex items-center text-white py-3 px-2 border-2 rounded-xl border-[#2b2b2b] bg-corklasCard pr-8 cursor-pointer"
+        onClick={toggleCalendar}
+      >
         <input
           type="text"
           value={value}
           readOnly
-          className="custom-date-input text-white py-3 px-2 border-2 rounded-xl border-[#2b2b2b] bg-corklasCard pr-8" // Add padding-right
+          className="bg-transparent w-full focus:outline-none cursor-pointer"
           ref={inputRef}
           placeholder={placeholder}
         />
-        <button
-          onClick={handleIconClick}
-          className="absolute right-2 top-1/2 transform -translate-y-1/2" // Position icon inside input
+
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          fill="white"
+          width="24"
+          height="24"
+          className="ml-2"
         >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 24 24"
-            fill="white"
-            width="24"
-            height="24"
-          >
-            <path d="M19 4h-2V3h-1v1H8V3H7v1H5c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 14H5V8h14v10z" />
-          </svg>
-        </button>
+          <path d="M19 4h-2V3h-1v1H8V3H7v1H5c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 14H5V8h14v10z" />
+        </svg>
       </div>
 
       {isOpen && (

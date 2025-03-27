@@ -8,7 +8,7 @@ const Image = styled.img`
 
 const BigImage = styled.img`
   max-width: 100%;
-  max-height: 600px;
+  border-radius: 12px;
 `;
 
 const BigImageWrapper = styled.div`
@@ -19,10 +19,10 @@ const BigImageWrapper = styled.div`
 const ImageButtons = styled.div`
   display: grid;
   margin-top: 10px;
-  max-width: 900px;
   justify-self: center;
   gap: 10px;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  padding: 10px 0 20px 0;
 `;
 
 const ImageButton = styled.div`
@@ -30,7 +30,7 @@ const ImageButton = styled.div`
   ${(props) =>
     props.active
       ? "border-color: #ccc;"
-      : "border-color: transparent; opacity: .7;"}
+      : "border-color: transparent; opacity: .5;"}
   cursor: pointer;
   border-radius: 5px;
 `;

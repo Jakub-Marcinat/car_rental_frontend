@@ -1,11 +1,11 @@
-import { primary } from "@/lib/color";
+import { corklasYellow } from "@/lib/color";
 import styled, { css } from "styled-components";
 
 export const ButtonStyle = css`
   border: 0;
-  padding: 8px 15px;
+  padding: 12px 40px;
   cursor: pointer;
-  border-radius: 5px;
+  border-radius: 24px;
 
   text-decoration: none;
 
@@ -25,7 +25,7 @@ export const ButtonStyle = css`
   ${(props) =>
     props.primary &&
     css`
-      background-color: ${primary};
+      background-color: ${corklasYellow};
       color: #000;
     `}
     ${(props) =>
