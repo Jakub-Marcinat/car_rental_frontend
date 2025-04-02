@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 import CustomSelect from "./CustomSelect";
 import CustomDateInput from "./CustomDateInput";
 import CustomMakeSelect from "./CustomMakeSelect";
+import CustomMultiSelectDropdown from "./CustomMultiSelectDropdown";
 
 const Sidebar = styled.div`
   padding: 28px;
@@ -27,6 +28,8 @@ const VEHICLE_CATEGORIES = [
   "Dodávky",
 ];
 
+const ACCESSORIES_OPTIONS = ["Ťažné zariadenie", "Strešný nosič"];
+
 export default function Filter({ makes, models }) {
   const router = useRouter();
   const { query } = router;
@@ -40,6 +43,9 @@ export default function Filter({ makes, models }) {
   const [order, setOrder] = useState(query.order || "");
   const [pickupDate, setPickupDate] = useState(query.pickupDate || "");
   const [dropoffDate, setDropoffDate] = useState(query.dropoffDate || "");
+  const [accessories, setAccessories] = useState(
+    query.accessories ? query.accessories.split(",") : []
+  );
 
   const handleMakeChange = (e) => {
     const selectedMake = e.target.value;
@@ -55,6 +61,15 @@ export default function Filter({ makes, models }) {
     setDropoffDate(date);
   };
 
+  const handleAccessoriesChange = (e) => {
+    const selectedValue = e.target.value;
+    setAccessories((prev) =>
+      prev.includes(selectedValue)
+        ? prev.filter((item) => item !== selectedValue)
+        : [...prev, selectedValue]
+    );
+  };
+
   const applyFilters = () => {
     const query = {};
     if (make) query.make = make;
@@ -66,6 +81,7 @@ export default function Filter({ makes, models }) {
     if (order) query.order = order;
     if (pickupDate) query.pickupDate = pickupDate;
     if (dropoffDate) query.dropoffDate = dropoffDate;
+    if (accessories.length > 0) query.accessories = accessories.join(",");
 
     router.push({ pathname: "/vozidla", query });
   };
@@ -77,15 +93,16 @@ export default function Filter({ makes, models }) {
     setDrive("");
     setFuel("");
     setCategory("");
-    setOrder(""); 
+    setOrder("");
     setPickupDate("");
     setDropoffDate("");
+    setAccessories([]);
 
     router.push({ pathname: "/vozidla" });
   };
 
   return (
-    <Sidebar className="lg:w-[350px]">
+    <Sidebar className="lg:w-[350px] mb-20">
       <div className="flex justify-between items-center">
         <h3 className="text-3xl font-bold mb-4">Filter</h3>
         <button onClick={resetFilters} className="flex gap-2">
@@ -107,6 +124,18 @@ export default function Filter({ makes, models }) {
         </button>
       </div>
 
+      <CustomDateInput
+        value={pickupDate}
+        onChange={handlePickupDateChange}
+        placeholder="Dostupné od"
+      />
+      <CustomDateInput
+        value={dropoffDate}
+        onChange={handleDropoffDateChange}
+        placeholder="Dostupné do"
+      />
+      <div className="w-full border border-[#2b2b2b] mb-4 mt-2"></div>
+      <p className="text-xl">Vozidlo</p>
       <CustomMakeSelect
         options={[
           { value: "", label: "Značka vozidla" },
@@ -115,7 +144,6 @@ export default function Filter({ makes, models }) {
         value={make}
         onChange={handleMakeChange}
       />
-
       <CustomSelect
         options={[
           { value: "", label: "Model" },
@@ -127,7 +155,6 @@ export default function Filter({ makes, models }) {
         onChange={setModel}
         disabled={!make}
       />
-
       <CustomSelect
         options={[
           { value: "", label: "Kategória vozidla" },
@@ -136,7 +163,8 @@ export default function Filter({ makes, models }) {
         value={category}
         onChange={setCategory}
       />
-
+      <div className="w-full border border-[#2b2b2b] mb-4 mt-2"></div>
+      <p className="text-xl">Parametre vozidla</p>
       <CustomSelect
         options={[
           { value: "", label: "Typ prevodovky" },
@@ -146,7 +174,6 @@ export default function Filter({ makes, models }) {
         value={transmission}
         onChange={setTransmission}
       />
-
       <CustomSelect
         options={[
           { value: "", label: "Palivo" },
@@ -157,7 +184,6 @@ export default function Filter({ makes, models }) {
         value={fuel}
         onChange={setFuel}
       />
-
       <CustomSelect
         options={[
           { value: "", label: "Náhon" },
@@ -168,21 +194,14 @@ export default function Filter({ makes, models }) {
         value={drive}
         onChange={setDrive}
       />
-
-      <CustomDateInput
-        value={pickupDate}
-        onChange={handlePickupDateChange}
-        placeholder="Dostupné od"
+      <CustomMultiSelectDropdown
+        options={ACCESSORIES_OPTIONS}
+        selectedOptions={accessories}
+        onChange={setAccessories}
       />
-
-      <CustomDateInput
-        value={dropoffDate}
-        onChange={handleDropoffDateChange}
-        placeholder="Dostupné do"
-      />
-
+      <div className="w-full border border-[#2b2b2b] mb-4 mt-2"></div>
+      <p className="text-xl">Zoradiť</p>
       <CustomSelect
-        label="Zoradiť podľa ceny:"
         options={[
           { value: "", label: "Odporúčané" },
           { value: "desc", label: "Od najdrahšieho" },
@@ -193,9 +212,9 @@ export default function Filter({ makes, models }) {
       />
       <button
         onClick={applyFilters}
-        className="w-fit px-4 py-2 mt-4 bg-corklasYellow text-black rounded-xl"
+        className="w-fit px-8 py-3 mt-4 bg-corklasYellow text-black rounded-full"
       >
-        Apply Filters
+        Vyhladať
       </button>
     </Sidebar>
   );

@@ -68,6 +68,11 @@ export async function getServerSideProps(context) {
   if (query.drive) filter["properties.Náhon"] = query.drive;
   if (query.category) filter.vehicleCategory = query.category;
 
+  if (query.accessories) {
+    const selectedAccessories = query.accessories.split(",");
+    filter.features = { $all: selectedAccessories };
+  }
+
   if (query.pickupDate && query.dropoffDate) {
     filter.reservations = {
       $not: {

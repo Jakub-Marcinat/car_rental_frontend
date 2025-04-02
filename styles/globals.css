@@ -77,7 +77,7 @@ h2 {
   border-width: 2px;
   border-radius: 0.75rem; 
   border-color: #2b2b2b;
-  background-color: #121212; 
+  background-color: #2a2a2a; 
   appearance: none; 
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23ffffff'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E"); /* Add dropdown arrow */
   background-repeat: no-repeat;
@@ -98,21 +98,20 @@ h2 {
   border-bottom: 1px solid #2b2b2b;
 }
 
+
 .custom-select-option:last-child {
   border-bottom: none;
 }
 .custom-date-input {
-  background-color: #121212; 
+  background-color: #2a2a2a; 
   color: white;
   padding: 0.75rem 0.5rem; 
   border-width: 2px;
   border-radius: 0.75rem;
   border-color: #2b2b2b;
-
 }
 
 .custom-time-input {
-
   padding-right: 0.5rem;
 }
 
@@ -190,8 +189,9 @@ h2 {
 }
 
 .calendar-day.selected {
-  background-color: #3b82f6; 
+  background-color: #FFFA00; 
   border-radius: 4px;
+  color: #121212;  
 }
 
 .calendar-day.empty {
