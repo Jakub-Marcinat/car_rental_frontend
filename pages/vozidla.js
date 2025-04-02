@@ -1,11 +1,11 @@
 import Filter from "@/components/Filter";
 import Header from "@/components/Header";
 import ProductsGrid from "@/components/ProductsGrid";
-import Title from "@/components/Title";
 import { mongooseConnect } from "@/lib/mongoose";
 import { Product } from "@/models/Product";
 import { Category } from "@/models/Category";
 import mongoose from "mongoose";
+import Footer from "@/components/Footer";
 
 export default function VozidlaPage({ products, makes, models }) {
   return (
@@ -17,6 +17,7 @@ export default function VozidlaPage({ products, makes, models }) {
           <ProductsGrid products={products} />
         </div>
       </div>
+      <Footer />
     </div>
   );
 }

@@ -7,6 +7,7 @@ const StyledProductsGrid = styled.div`
   grid-template-columns: repeat(3, 1fr);
   gap: 30px;
   padding-top: 40px;
+  padding-bottom: 80px;
   align-items: center;
   @media (max-width: 1024px) {
     grid-template-columns: repeat(2, 1fr);
@@ -22,7 +23,7 @@ export default function ProductsGrid({ products }) {
     <StyledProductsGrid>
       {products?.length > 0 &&
         products.map((product) => (
-            <ProductCard key={product._id} product={product} />
+          <ProductCard key={product._id} product={product} />
         ))}
     </StyledProductsGrid>
   );

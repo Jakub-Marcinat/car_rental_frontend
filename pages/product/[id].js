@@ -23,6 +23,7 @@ import {
   FaTrailer,
 } from "react-icons/fa";
 import { MdSpeed, MdCalendarToday } from "react-icons/md";
+import Footer from "@/components/Footer";
 
 export const PriceRow = styled.div`
   display: flex;
@@ -179,7 +180,7 @@ export default function ProductPage({ product }) {
   return (
     <div className="bg-corklasBackground text-white min-h-screen">
       <Header />
-      <div className="mx-auto px-4 lg:px-12 xl:px-20 max-w-[1410px]">
+      <div className="mx-auto px-4 lg:px-12 lg:py-20 xl:px-20 max-w-[1410px]">
         <Title>{product.title}</Title>
 
         <div className="flex flex-col lg:flex-row gap-8">
@@ -294,6 +295,7 @@ export default function ProductPage({ product }) {
           </div>
         </div>
       </div>
+      <Footer />
     </div>
   );
 }
