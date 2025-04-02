@@ -49,7 +49,25 @@ export default async function handler(req, res) {
       return res.status(400).json({ message: validationResult.message });
     }
 
-    const newReservation = await Reservation.create(req.body);
+    const today = new Date();
+    const yy = today.getFullYear().toString().slice(-2);
+    const mm = String(today.getMonth() + 1).padStart(2, "0"); // Month (01-12)
+    const dd = String(today.getDate()).padStart(2, "0"); // Day (01-31)
+
+    const startOfDay = new Date(today.setHours(0, 0, 0, 0));
+    const endOfDay = new Date(today.setHours(23, 59, 59, 999));
+    const existingReservations = await Reservation.countDocuments({
+      createdAt: { $gte: startOfDay, $lt: endOfDay },
+    });
+    const reservationNumber = `TN-${yy}${mm}${dd}-${String(
+      existingReservations + 1
+    ).padStart(3, "0")}`;
+
+    const newReservation = await Reservation.create({
+      ...req.body,
+      reservationNumber,
+    });
+
     console.log("New reservation created:", newReservation);
 
     const vehicleDoc = await Product.findById(req.body.vehicleId);
