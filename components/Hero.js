@@ -1,43 +1,13 @@
 import { useContext } from "react";
 import { CartContext } from "./CartContext";
+import MainHeader from "./MainHeader";
 
 export default function Hero() {
   const { cartProducts } = useContext(CartContext);
 
   return (
     <main className="bg-hero-pattern bg-cover bg-center bg-no-repeat w-full h-screen text-white flex flex-col">
-      {/* Navigation Section */}
-      <header className="flex justify-between items-center px-10 py-5">
-        <div className="max-xl:text-5xl text-3xl font-bold tracking-widest">
-          COR KLAS
-        </div>
-        <nav className="flex space-x-6 max-xl:text-xl max-xl:mr-36">
-          <a href="/home" className="hover:text-corklasYellow">
-            Domov
-          </a>
-          <a href="/vozidla" className="hover:text-corklasYellow">
-            Ponuka vozidiel
-          </a>
-          <a href="#myaccount" className="hover:text-corklasYellow">
-            Môj účet
-          </a>
-          <a href="/cart" className="hover:text-corklasYellow">
-            Moja objednávka ({cartProducts.length})
-          </a>
-          <a href="#contact" className="hover:text-corklasYellow">
-            Kontakt
-          </a>
-          <a href="#aboutus" className="hover:text-corklasYellow">
-            O nás
-          </a>
-        </nav>
-        <div className="flex items-center space-x-4">
-          <button className="px-4 py-2 border rounded hover:bg-gray-800">
-            SK
-          </button>
-          <div className="cursor-pointer">☰</div>
-        </div>
-      </header>
+      <MainHeader />
 
       {/* Hero Content */}
       <div className="flex-grow flex flex-col justify-between items-center p-6">
@@ -47,7 +17,7 @@ export default function Hero() {
 
         {/* Booking Section */}
         <div className="bg-gray-900 bg-opacity-80 px-12 py-8 mb-12 rounded-xl w-11/12 max-w-[1000px]">
-          <div className="grid grid-cols-3 gap-4 ">
+          <div className="grid grid-cols-3 gap-4 max-md:flex max-md:flex-col *:">
             <div className="flex flex-col">
               <label className="max-xl:text-xl font-semibold mb-2 ml-1">
                 Adresa vyzdvihnutia
