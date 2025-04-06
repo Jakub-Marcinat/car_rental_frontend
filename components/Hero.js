@@ -1,25 +1,19 @@
 import { useContext } from "react";
 import { CartContext } from "./CartContext";
 import MainHeader from "./MainHeader";
+import Image from "next/image";
 
 export default function Hero() {
   const { cartProducts } = useContext(CartContext);
-
   return (
-    <main className="bg-hero-pattern bg-cover bg-center bg-no-repeat w-full h-screen text-white flex flex-col">
+    <section className="relative bg-hero-pattern bg-cover bg-center bg-no-repeat flex flex-col md:gap-[364px] items- w-full text-white">
+      <div className="absolute inset-0 bg-black/20 z-0" />
       <MainHeader />
-
-      {/* Hero Content */}
-      <div className="flex-grow flex flex-col justify-between items-center p-6">
-        <div className="flex justify-between text-center w-full">
-          <div className="max-w-xl"></div>
-        </div>
-
-        {/* Booking Section */}
-        <div className="bg-gray-900 bg-opacity-80 px-12 py-8 mb-12 rounded-xl w-11/12 max-w-[1000px]">
+      <div className="flex-grow flex flex-col justify-between items-center p-6 z-10">
+        <div className="bg-gray-900 bg-opacity-90 px-12 py-8 mb-12 rounded-xl  max-w-[1000px]">
           <div className="grid grid-cols-3 gap-4 max-md:flex max-md:flex-col *:">
             <div className="flex flex-col">
-              <label className="max-xl:text-xl font-semibold mb-2 ml-1">
+              <label className="max-xl:text-xl font-semibold mb-2 ml-1  whitespace-nowrap">
                 Adresa vyzdvihnutia
               </label>
               <input
@@ -29,7 +23,7 @@ export default function Hero() {
               />
             </div>
             <div className="flex flex-col">
-              <label className="max-xl:text-xl font-semibold mb-2">
+              <label className="max-xl:text-xl font-semibold mb-2  whitespace-nowrap">
                 Dátum vyzdvihnutia
               </label>
               <input
@@ -61,6 +55,6 @@ export default function Hero() {
           </div>
         </div>
       </div>
-    </main>
+    </section>
   );
 }

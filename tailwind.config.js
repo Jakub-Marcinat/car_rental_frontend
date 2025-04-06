@@ -14,7 +14,7 @@ module.exports = {
         yellowText: "#fffa60",
       },
       backgroundImage: {
-        "hero-pattern": "url('/sadsad.png')",
+        "hero-pattern": "url('/Etron.png')",
       },
       fontFamily: {
         aeonik: ["Aeonik", "sans-serif"],

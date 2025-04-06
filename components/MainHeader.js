@@ -5,10 +5,10 @@ export default function Header({ cartProducts }) {
 
   return (
     <>
-      <header className="flex justify-between items-center px-10 py-5 w-full">
-        <div className="text-3xl font-bold tracking-widest whitespace-nowrap">
+      <header className="flex justify-between items-center px-10 py-5 w-full z-10">
+        <h1 className="text-3xl font-bold tracking-widest whitespace-nowrap">
           COR KLAS
-        </div>
+        </h1>
 
         <div
           className="custom-hidden cursor-pointer text-2xl"
@@ -127,10 +127,10 @@ export default function Header({ cartProducts }) {
             Ponuka vozidiel
           </a>
           <a href="#myaccount" className="hover:text-corklasYellow">
-            Môj účet
+            Prihlásiť sa
           </a>
           <a href="/cart" className="hover:text-corklasYellow">
-            Moja objednávka
+            Služby
           </a>
           <a href="#contact" className="hover:text-corklasYellow">
             Kontakt

@@ -9,91 +9,95 @@ import Footer from "@/components/Footer";
 export default function HomePage({ featuredProducts, newProducts }) {
   return (
     <div>
-      {/* <Header /> */}
       <Hero />
-      <div className="flex w-full justify-center gap-8 bg-corklasBackground px-20 pt-20">
-        {featuredProducts.map((product) => (
-          <Featured key={product._id} product={product} />
-        ))}
+      <div className=" bg-corklasBackground py-20 px-6 sm:px-10 lg:px-20">
+        <div className="container mx-auto flex justify-center gap-8 flex-wrap">
+          {featuredProducts.map((product) => (
+            <Featured key={product._id} product={product} />
+          ))}
+        </div>
       </div>
 
       {/* <NewProducts products={newProducts} /> */}
 
-      <section className="relative bg-corklasBackground h-screen flex flex-col items-center justify-center px-4">
-        <div className="absolute top-1/3 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-corklasRed opacity-10 rounded-full blur-3xl"></div>
-
-        <div className="text-center relative z-10">
-          <h1 className="text-white text-5xl font-semibold mb-6 font-aeonik max-w-[800px]">
-            Objavte naše výnimočné služby prenájmu áut
-          </h1>
-          <p className="text-white lg:max-w-[600px] mx-auto">
-            Zažite slobodu cestovania s našou širokou ponukou vozidiel. Či už
-            hľadáte kompaktné auto alebo priestranné SUV, máme pre vás to pravé.
-          </p>
-        </div>
-
-        <div className="relative z-10 mt-20  flex justify-center px-20 gap-8">
-          <a
-            href="/vozidla"
-            className="bg-[#151515] w-full rounded-2xl shadow-lg flex flex-col items-center text-center lg:max-w-[350px] cursor-pointer hover:scale-[1.02] transition-all duration-200"
-          >
-            <img
-              src="/Skoda_superb.avif"
-              alt="Affordable Pricing"
-              className="w-full max-h-[160px] object-cover rounded-lg mb-6"
-            />
-            <h3 className="text-white text-lg mt-2 font-bold">
-              Dostupné ceny pre každý rozpočet
-            </h3>
-            <p className="text-gray-300 mt-2 pb-8 px-4">
-              Naše konkurenčné ceny vám zaručia najvýhodnejšiu ponuku.
+      <section className="relative bg-corklasBackground flex flex-col items-center justify-center px-4 h-fit">
+        <div className="absolute top-1/3 left-1/2 transform -translate-x-1/2 -translate-y-1/2 aspect-w-1 aspect-h-1 w-64 h-64 md:w-96 lg:w-[600px] bg-corklasRed opacity-20 rounded-full blur-[100px] overflow-hidden"></div>
+        <div className="relative z-10 py-12 px-6 sm:px-10 lg:px-20">
+          <div className="flex flex-col items-center mb-32 z-10">
+            <h1 className="text-white text-center text-3xl md:text-4xl lg:text-5xl font-semibold mb-6 font-aeonik max-w-[800px]">
+              Objavte naše výnimočné služby prenájmu áut
+            </h1>
+            <p className="text-white lg:max-w-[600px] max-w-[500px] text-xs md:text-base mx-auto text-center">
+              Zažite slobodu cestovania s našou širokou ponukou vozidiel. Či už
+              hľadáte kompaktné auto alebo priestranné SUV, máme pre vás to
+              pravé.
             </p>
-          </a>
+          </div>
+          <div className="container mx-auto flex justify-center gap-8 flex-wrap">
+            <a
+              href="/vozidla"
+              className="bg-[#151515] rounded-2xl shadow-lg flex flex-col items-center text-center max-w-[350px] cursor-pointer hover:scale-[1.02] transition-all duration-200"
+            >
+              <img
+                src="/Skoda_superb.avif"
+                alt="Affordable Pricing"
+                className="w-full max-h-[160px] object-cover rounded-lg mb-6"
+              />
+              <h3 className="text-white text-lg mt-2 font-bold">
+                Dostupné ceny pre každý rozpočet
+              </h3>
+              <p className="text-gray-300 mt-2 pb-8 px-4">
+                Naše konkurenčné ceny vám zaručia najvýhodnejšiu ponuku.
+              </p>
+            </a>
 
-          <a
-            href="#kontakt"
-            className="bg-[#151515] rounded-2xl  shadow-lg flex flex-col items-center text-center max-w-[350px] cursor-pointer hover:scale-[1.02] transition-all duration-200"
-          >
-            <img
-              src="/Shaking_hands.jpeg"
-              alt="24/7 Support"
-              className="w-full max-h-[160px] object-cover rounded-lg mb-6"
-            />
-            <h3 className="text-white text-lg mt-2 font-bold">
-              Sme tu pre vás: 24/7 podpora
-            </h3>
-            <p className="text-gray-300 mt-2  pb-8 px-4">
-              Náš tím vám vždy ochotne pomôže – kedykoľvek to budete potrebovať.
-            </p>
-          </a>
+            <a
+              href="#kontakt"
+              className="bg-[#151515] rounded-2xl  shadow-lg flex flex-col items-center text-center max-w-[350px] cursor-pointer hover:scale-[1.02] transition-all duration-200"
+            >
+              <img
+                src="/Shaking_hands.jpeg"
+                alt="24/7 Support"
+                className="w-full max-h-[160px] object-cover rounded-lg mb-6"
+              />
+              <h3 className="text-white text-lg mt-2 font-bold">
+                Sme tu pre vás: 24/7 podpora
+              </h3>
+              <p className="text-gray-300 mt-2  pb-8 px-4">
+                Náš tím vám vždy ochotne pomôže – kedykoľvek to budete
+                potrebovať.
+              </p>
+            </a>
 
-          <a
-            href="/vozidla"
-            className="bg-[#151515] rounded-2xl shadow-lg flex flex-col items-center text-center max-w-[350px] cursor-pointer hover:scale-[1.02] transition-all duration-200"
-          >
-            <img
-              src="/Parking_lot.jpg"
-              alt="Quality Fleet"
-              className="w-full max-h-[160px] object-cover rounded-lg mb-6"
-            />
-            <h3 className="text-white text-lg mt-2 font-bold">
-              Preskúmajte našu flotilu vozidiel
-            </h3>
-            <p className="text-gray-300 mt-2 pb-8 px-4">
-              Prezrite si našu pestrú ponuku a nájdite si ideálne auto pre seba.
-            </p>
-          </a>
+            <a
+              href="/vozidla"
+              className="bg-[#151515] rounded-2xl shadow-lg flex flex-col items-center text-center max-w-[350px] cursor-pointer hover:scale-[1.02] transition-all duration-200"
+            >
+              <img
+                src="/Parking_lot.jpg"
+                alt="Quality Fleet"
+                className="w-full max-h-[160px] object-cover rounded-lg mb-6"
+              />
+              <h3 className="text-white text-lg mt-2 font-bold">
+                Preskúmajte našu flotilu vozidiel
+              </h3>
+              <p className="text-gray-300 mt-2 pb-8 px-4">
+                Prezrite si našu pestrú ponuku a nájdite si ideálne auto pre
+                seba.
+              </p>
+            </a>
+          </div>
         </div>
       </section>
 
-      <section className="relative bg-corklasBackground h-screen flex flex-col items-end text-white pt-20">
+      <section className="relative bg-corklasBackground flex flex-col items-end text-white pt-20">
         <div className="max-w-6xl mx-auto flex flex-col items-center">
-          <div className="absolute lg:-top-6 lg:-left-0 lg:w-[500px] lg:h-[700px] bg-corklasYellow rounded-lg hidden lg:block"></div>
+          <div className="absolute lg:top-[100px] lg:-left-0 lg:w-[500px] lg:h-[700px] bg-corklasYellow rounded-lg hidden lg:block"></div>
 
-          <div className="relative flex-1 flex-col z-10">
-            <div className=" w-full flex flex-col items-end mb-20">
+          <div className="relative flex-1 flex-col z-10 mx-12">
+            <div className="w-full flex flex-col md:items-end items-center mb-20">
               <div>
-                <h2 className="text-4xl  font-semibold mb-4">
+                <h2 className="text-4xl font-semibold mb-4 ">
                   Objavte radosť z jazdy
                 </h2>
                 <p className="text-gray-300 max-w-md leading-relaxed">
@@ -108,13 +112,13 @@ export default function HomePage({ featuredProducts, newProducts }) {
               alt="Mercedes GTR"
               className="rounded-lg shadow-lg w-full fade-out"
             />
-            <div className="relative flex justify-end ">
-              <div className="mt-12 z-10 lg:max-w-[900px] bg-[#1a1a1a] text-black rounded-lg shadow-lg p-6 flex flex-col lg:flex-row  justify-between gap-6 fade-out-button px-20">
+            <div className="relative flex justify-center md:justify-end ">
+              <div className="mt-12 z-10 lg:max-w-[900px] bg-[#1a1a1a] text-black rounded-lg shadow-lg p-6 flex flex-col lg:flex-row  justify-between gap-6 fade-out-button md:px-20">
                 <div>
-                  <h3 className="text-xl z-10 font-semibold text-white">
+                  <h3 className="text-md md:text-2xl z-10 font-bold mb-2 text-white">
                     Zažite jazdu bez kompromisov
                   </h3>
-                  <p className="text-white">
+                  <p className="text-white text-sm md:text-lg">
                     Objavte špičkové vozidlá a užívajte si bezproblémový
                     prenájom.
                   </p>
