@@ -47,7 +47,7 @@ export default function ReservationPage({ product }) {
   const [dropoffTime, setDropoffTime] = useState("");
   const [allowedKm, setAllowedKm] = useState(0);
   const [rentalPrice, setRentalPrice] = useState(0);
-  const [paymentMethod, setPaymentMethod] = useState("wire");
+  const [paymentMethod, setPaymentMethod] = useState("Bankový prevod");
   const [isCompany, setIsCompany] = useState(false);
   const [selectedMode, setSelectedMode] = useState("SR");
   const [depositFee, setDepositFee] = useState(product.deposit);
@@ -271,108 +271,92 @@ export default function ReservationPage({ product }) {
       //     "Údaje o rezervácií sme poslali na váš email. Tu bude preklik na success page namiesto tohto"
       //   );
 
+      const reservationId = result.reservationNumber;
+
       const userEmailParams = {
-        email: updatedFormData.email, // Customer email
+        email: updatedFormData.email,
         to_name: `${updatedFormData.firstName} ${updatedFormData.lastName}`,
-        message: `Potvrdenie registrácie 
-        Vehicle Title: ${product.title}
-        Kategória: ${product.category.name}
-        Výbava: ${product.features?.join(", ")}
-        Dátum vyzdvihnutia: ${pickupDate} at ${pickupTime}
-        Dátum odovzdania: ${dropoffDate} at ${dropoffTime}
-        Cena prenájmu: ${rentalPrice}€
-        Depozit: ${depositFee}€
-        Povolené kilometre: ${allowedKm} km
-        Suma za prekročenie limitu: ${overLimitFee}€/km
-        Metóda platby: ${paymentMethod}
-        Režim: ${selectedMode}
 
-         ${
-           promoCode
-             ? `🎟️ Promo kód aplikovaný: ${promoCode} (-${discountAmount}%)`
-             : ""
-         }
+        productTitle: product.title,
+        productFeatures: product.features?.join(", "),
+        reservationId,
 
-         Ulica: ${updatedFormData.contactStreet}, Mesto: ${
-          updatedFormData.contactCity
-        }, PSČ: ${updatedFormData.contactPsc}, Krajina: ${
-          updatedFormData.contactCountry
-        }
+        pickupDate,
+        pickupTime,
+        dropoffDate,
+        dropoffTime,
 
-        ${
-          isCompany
-            ? `
-               🏢 Firemné údaje:
-               ----------------------------------
-               Obchodný názov: ${updatedFormData.companyName}
-               IČO: ${updatedFormData.ico}
-               DIČ: ${updatedFormData.dic}
-               IČ DPH: ${updatedFormData.icDph}
-          
-               🧾 Fakturačná adresa:
-               ----------------------------------
-               Ulica: ${updatedFormData.billingStreet}, Mesto: ${updatedFormData.billingCity}, PSČ: ${updatedFormData.billingPsc}, Krajina: ${updatedFormData.billingCountry}
-          
-               `
-            : ""
-        }
-        `,
+        rentalPrice,
+        depositFee,
+        allowedKm,
+        overLimitFee,
+        paymentMethod,
+        selectedMode,
+        promoCode,
+
+        contactStreet: updatedFormData.contactStreet,
+        contactCity: updatedFormData.contactCity,
+        contactPsc: updatedFormData.contactPsc,
+        contactCountry: updatedFormData.contactCountry,
+
+        isCompanyInfo: isCompany
+          ? `
+        🏢 Firemné údaje:
+        • Obchodný názov: ${updatedFormData.companyName}
+        • IČO: ${updatedFormData.ico}
+        • DIČ: ${updatedFormData.dic}
+        • IČ DPH: ${updatedFormData.icDph}
+        
+        🧾 Fakturačná adresa:
+        • Ulica: ${updatedFormData.billingStreet}
+        • Mesto: ${updatedFormData.billingCity}
+        • PSČ: ${updatedFormData.billingPsc}
+        • Krajina: ${updatedFormData.billingCountry}
+        `
+          : "—",
       };
 
       const adminEmailParams = {
         email: updatedFormData.email,
         to_name: `${updatedFormData.firstName} ${updatedFormData.lastName}`,
-        message: `Potvrdenie registrácie 
-        Meno a priezvisko: ${updatedFormData.firstName} ${
-          updatedFormData.lastName
-        }
-        Email: ${updatedFormData.email}
-        Telefén: ${updatedFormData.phone}
-        č. OP: ${updatedFormData.idNumber}
-        Rodné číslo: ${updatedFormData.birthNumber} 
-        č. VP: ${updatedFormData.licenseNumber}
-        Vehicle Title: ${product.title}
-        Kategória: ${product.category.name}
-        Výbava: ${product.features?.join(", ")}
-        Dátum vyzdvihnutia: ${pickupDate} at ${pickupTime}
-        Dátum odovzdania: ${dropoffDate} at ${dropoffTime}
-        Cena prenájmu: ${rentalPrice}€
-        Depozit: ${depositFee}€
-        Povolené kilometre: ${allowedKm} km
-        Suma za prekročenie limitu: ${overLimitFee}€/km
-        Metóda platby: ${paymentMethod}
-        Režim: ${selectedMode}
-
-         ${
-           promoCode
-             ? `🎟️ Promo kód aplikovaný: ${promoCode} (-${discountAmount}%)`
-             : ""
-         }
-
-         Ulica: ${updatedFormData.contactStreet}, Mesto: ${
-          updatedFormData.contactCity
-        }, PSČ: ${updatedFormData.contactPsc}, Krajina: ${
-          updatedFormData.contactCountry
-        }
-
-        ${
-          isCompany
-            ? `
-               🏢 Firemné údaje:
-               ----------------------------------
-               Obchodný názov: ${updatedFormData.companyName}
-               IČO: ${updatedFormData.ico}
-               DIČ: ${updatedFormData.dic}
-               IČ DPH: ${updatedFormData.icDph}
-          
-               🧾 Fakturačná adresa:
-               ----------------------------------
-               Ulica: ${updatedFormData.billingStreet}, Mesto: ${updatedFormData.billingCity}, PSČ: ${updatedFormData.billingPsc}, Krajina: ${updatedFormData.billingCountry}
-          
-               `
-            : ""
-        }
-        `,
+        reservationId,
+        customerName: `${updatedFormData.firstName} ${updatedFormData.lastName}`,
+        productTitle: product.title,
+        productCategory: product.category.name,
+        productFeatures: product.features?.join(", "),
+        pickupDate,
+        pickupTime,
+        dropoffDate,
+        dropoffTime,
+        rentalPrice,
+        depositFee,
+        allowedKm,
+        overLimitFee,
+        paymentMethod,
+        selectedMode,
+        promoInfo: promoCode
+          ? `🎟️ Promo kód: ${promoCode} (-${reservationDetails.discountAmount}%)`
+          : "Žiadny promo kód použitý",
+        contactStreet: updatedFormData.contactStreet,
+        contactCity: updatedFormData.contactCity,
+        contactPsc: updatedFormData.contactPsc,
+        contactCountry: updatedFormData.contactCountry,
+        isCompanyInfo: isCompany
+          ? `
+          🏢 Firemné údaje:
+          • Obchodný názov: ${updatedFormData.companyName}
+          • IČO: ${updatedFormData.ico}
+          • DIČ: ${updatedFormData.dic}
+          • IČ DPH: ${updatedFormData.icDph}
+      
+          🧾 Fakturačná adresa:
+          • Ulica: ${updatedFormData.billingStreet}
+          • Mesto: ${updatedFormData.billingCity}
+          • PSČ: ${updatedFormData.billingPsc}
+          • Krajina: ${updatedFormData.billingCountry}
+          `
+          : "—",
+        currentYear: new Date().getFullYear(),
       };
 
       // Sending Admin email
@@ -585,8 +569,8 @@ export default function ReservationPage({ product }) {
             <div>
               <CustomSelect
                 options={[
-                  { value: "wire", label: "Bankovým prevodom" },
-                  { value: "cash", label: "Hotovosť" },
+                  { value: "Bankový prevod", label: "Bankovým prevodom" },
+                  { value: "Hotovosť", label: "Hotovosť" },
                 ]}
                 value={paymentMethod}
                 onChange={(value) => setPaymentMethod(value)}
@@ -860,4 +844,63 @@ export async function getServerSideProps(context) {
   return {
     props: { product: JSON.parse(JSON.stringify(product)) }, // Convert for Next.js
   };
+}
+
+{
+  /* <p class="details-value"><b>Číslo OP:</b> {{idNumber}}</p>
+      <p class="details-value"><b>Rodné číslo:</b> {{birthNumber}}</p>
+      <p class="details-value"><b>Číslo VP:</b> {{licenseNumber}}</p>
+    </div>
+
+    <div class="vehicle-info">
+      <p class="details-title">Informácie o vozidle:</p>
+      <p class="details-value"><b>Názov vozidla:</b> {{vehicleTitle}}</p>
+      <p class="details-value"><b>Kategória:</b> {{categoryName}}</p>
+      {{#if features}}
+      <p class="details-value"><b>Výbava:</b> {{features}}</p>
+      {{/if}}
+    </div>
+
+    <div class="rental-info">
+      <p class="details-title">Detaily prenájmu:</p>
+      <p class="details-value"><b>Dátum vyzdvihnutia:</b> {{pickupDate}} o {{pickupTime}}</p>
+      <p class="details-value"><b>Dátum odovzdania:</b> {{dropoffDate}} o {{dropoffTime}}</p>
+      <p class="details-value"><b>Režim:</b> {{selectedMode}}</p>
+    </div>
+
+    <div class="payment-info">
+      <p class="details-title">Informácie o platbe:</p>
+      <p class="details-value"><b>Cena prenájmu:</b> {{rentalPrice}}€</p>
+      <p class="details-value"><b>Depozit:</b> {{depositFee}}€</p>
+      <p class="details-value"><b>Metóda platby:</b> {{paymentMethod}}</p>
+      <p class="details-value"><b>Povolené kilometre:</b> {{allowedKm}} km</p>
+      <p class="details-value"><b>Suma za prekročenie limitu:</b> {{overLimitFee}}€/km</p>
+      {{#if promoCode}}
+      <p class="details-value promo-info"><b>Použitý promo kód:</b> {{promoCode}} (-{{discountAmount}}%)</p>
+      {{/if}}
+    </div>
+
+    <div class="contact-info">
+      <p class="details-title">Kontaktná adresa zákazníka:</p>
+      <p class="details-value"><b>Ulica:</b> {{contactStreet}}</p>
+      <p class="details-value"><b>Mesto:</b> {{contactCity}}</p>
+      <p class="details-value"><b>PSČ:</b> {{contactPsc}}</p>
+      <p class="details-value"><b>Krajina:</b> {{contactCountry}}</p>
+    </div>
+
+    {{#if isCompany}}
+    <div class="company-info">
+      <p class="details-title">Firemné údaje zákazníka:</p>
+      <p class="details-value"><b>Obchodný názov:</b> {{companyName}}</p>
+      <p class="details-value"><b>IČO:</b> {{ico}}</p>
+      <p class="details-value"><b>DIČ:</b> {{dic}}</p>
+      <p class="details-value"><b>IČ DPH:</b> {{icDph}}</p>
+    </div>
+
+    <div class="billing-info">
+      <p class="details-title">Fakturačná adresa zákazníka:</p>
+      <p class="details-value"><b>Ulica:</b> {{billingStreet}}</p>
+      <p class="details-value"><b>Mesto:</b> {{billingCity}}</p>
+      <p class="details-value"><b>PSČ:</b> {{billingPsc}}</p>
+      <p class="details-value"><b>Krajina:</b> {{billingCountry}}</p> */
 }

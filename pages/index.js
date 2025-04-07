@@ -208,9 +208,9 @@ export default function HomePage({ featuredProducts, newProducts }) {
 
 export async function getServerSideProps() {
   const featuredProductsIds = [
-    "67a3dc3f82c364b5dd39017d",
-    "67a3dc7f82c364b5dd390197",
-    "67a3dc3f82c364b5dd39017d",
+    "67d7fbfb82b0d14f7d95bac3",
+    "67f4577077783ee118204934",
+    "67f458c577783ee118204a15",
     "672b2608187ad6200a382cdb",
     "672b2608187ad6200a382cdb",
     "672b2608187ad6200a382cdb",
