@@ -16,6 +16,7 @@ const Sidebar = styled.div`
   border-radius: 24px;
   gap: 15px;
   color: white;
+  min-width: 350px;
 `;
 
 const VEHICLE_CATEGORIES = [

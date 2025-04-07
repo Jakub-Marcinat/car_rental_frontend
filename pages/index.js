@@ -113,7 +113,7 @@ export default function HomePage({ featuredProducts, newProducts }) {
               className="rounded-lg shadow-lg w-full fade-out"
             />
             <div className="relative flex justify-center md:justify-end ">
-              <div className="mt-12 z-10 lg:max-w-[900px] bg-[#1a1a1a] text-black rounded-lg shadow-lg p-6 flex flex-col lg:flex-row  justify-between gap-6 fade-out-button md:px-20">
+              <div className="mt-12 z-10 lg:max-w-[900px] bg-[#1a1a1a] text-black rounded-lg shadow-lg p-6 flex flex-col lg:flex-row justify-between md:items-center gap-6 fade-out-button md:px-20">
                 <div>
                   <h3 className="text-md md:text-2xl z-10 font-bold mb-2 text-white">
                     Zažite jazdu bez kompromisov
@@ -123,7 +123,7 @@ export default function HomePage({ featuredProducts, newProducts }) {
                     prenájom.
                   </p>
                 </div>
-                <button className="bg-corklasYellow text-black px-6 py-3 rounded-full font-semibold hover:opacity-80 transition opacity-100! ">
+                <button className="bg-corklasYellow text-black px-4 py-4 rounded-full font-semibold hover:opacity-80 transition whitespace-nowrap h-fit">
                   Rezervovať teraz
                 </button>
               </div>

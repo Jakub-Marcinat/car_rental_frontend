@@ -1,6 +1,6 @@
 export default function Footer() {
   return (
-    <footer className="bg-corklasCard flex flex-col px-6 sm:px-10 lg:px-16 py-12 sm:py-16 overflow-auto">
+    <footer className="bg-corklasCard flex flex-col px-6 sm:px-10 lg:px-16 py-12 lg:pb-0 sm:py-16 overflow-auto">
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
         <div>
           <img
@@ -65,7 +65,7 @@ export default function Footer() {
               type="text"
               name="email_id"
               required=""
-              autocomplete="off"
+              autoComplete="off"
             />
             <button
               class="py-3 px-6 bg-corklasYellow sm:rounded-tr-lg sm:rounded-br-lg max-sm:rounded whitespace-nowrap"
@@ -76,7 +76,7 @@ export default function Footer() {
           </div>
         </div>
       </div>
-      <div className="flex justify-center text-white py-8 mt-8 border-t border-corklasCardLight">
+      <div className="flex justify-center text-white py-8 mt-8 lg:mt-20 border-t border-corklasCardLight">
         <p className="text-sm sm:text-md">
           Copyright ©2024. Všetky práva vyhradené.
         </p>

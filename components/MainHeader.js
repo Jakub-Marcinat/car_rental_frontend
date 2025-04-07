@@ -100,7 +100,7 @@ export default function Header({ cartProducts }) {
             </a>
           </nav>
 
-          <button className="flex gap-4 mt-6 px-6 py-3 border rounded-full bg-corklasYellow text-black">
+          <button className="flex gap-4 mt-6 px-6 py-3 border-none rounded-full bg-corklasYellow text-black">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"

@@ -6,15 +6,119 @@ import { Product } from "@/models/Product";
 import { Category } from "@/models/Category";
 import mongoose from "mongoose";
 import Footer from "@/components/Footer";
+import { useState } from "react";
 
 export default function VozidlaPage({ products, makes, models }) {
+  const [showFilterMobile, setShowFilterMobile] = useState(false);
+  const toggleFilterMobile = () => {
+    setShowFilterMobile(!showFilterMobile);
+  };
   return (
     <div className="w-screen bg-corklasBackground">
       <Header />
-      <div className="flex flex-col items-center mt-20">
-        <div className="flex w-full lg:justify-between px-20">
-          <Filter makes={makes} models={models} />
-          <ProductsGrid products={products} />
+      <div className="py-28 bg-corklasBackground text-white text-center">
+        <div className="absolute flex left-0 -top-[200px] w-[80%] h-[80%] bg-[#141419] blur-[250px] opacity-50 z-0"></div>
+        <h1 className="text-3xl lg:text-5xl font-medium mb-4 text-yellowText z-10 relative">
+          Autopožičovňa Corklas
+        </h1>
+        <p className="text-sm lg:text-lg mb-2 opacity-70 z-10 relative ">
+          Autá na prenájom
+        </p>
+        <div className="flex justify-center items-center mb-4 z-10 relative">
+          {/* Replace with your actual star rating component or SVG */}
+          <span className="text-yellowText  text-xl mr-1">★★★★★</span>
+          <span className="text-sm">4,85 hodnotení na Google</span>
+        </div>
+        <div className="flex max-md:hidden md:flex-row justify-around max-w-4xl mx-auto mt-6 px-4 opacity-70">
+          <div className="mb-4 md:mb-0">
+            <p className="font-semibold text-lg">Bezplatné zrušenie</p>
+            <p className="text-sm">rezervácie</p>
+          </div>
+          <div className="mb-4 md:mb-0">
+            <p className="font-semibold text-lg">Široká ponuka typov</p>
+            <p className="text-sm">vozidiel</p>
+          </div>
+          <div className="mb-4 md:mb-0">
+            <p className="font-semibold text-lg">7 odberných miest</p>
+            <p className="text-sm">na Slovensku</p>
+          </div>
+          <div>
+            <p className="font-semibold text-lg">500+ spokojných</p>
+            <p className="text-sm">zákazníkov ročne</p>
+          </div>
+        </div>
+      </div>
+
+      {/* Main Content Area */}
+      <div className="flex flex-col items-center px-20">
+        {/* Mobile Filter Button */}
+        <button
+          onClick={toggleFilterMobile}
+          className="w-full text-left bg-corklasCard text-white p-3 rounded-2xl shadow-sm mb-4 lg:hidden"
+        >
+          <div className="flex items-center justify-between">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              class="size-6"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M10.5 6h9.75M10.5 6a1.5 1.5 0 1 1-3 0m3 0a1.5 1.5 0 1 0-3 0M3.75 6H7.5m3 12h9.75m-9.75 0a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m-3.75 0H7.5m9-6h3.75m-3.75 0a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m-9.75 0h9.75"
+              />
+            </svg>
+
+            <span>Filter vozidiel</span>
+            {showFilterMobile ? (
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth={1.5}
+                stroke="currentColor"
+                className="size-5"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M19.5 8.25l-7.5 7.5-7.5-7.5"
+                />
+              </svg>
+            ) : (
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth={1.5}
+                stroke="currentColor"
+                className="size-5"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M4.5 15.75l7.5-7.5 7.5 7.5"
+                />
+              </svg>
+            )}
+          </div>
+        </button>
+
+        <div className="w-full flex flex-col lg:max-w-[1600px] lg:flex-row lg:justify-between">
+          <div
+            className={`w-full lg:w-1/4 mb-8 lg:mb-0 lg:mr-8 ${
+              showFilterMobile ? "block" : "hidden lg:block"
+            }`}
+          >
+            <Filter makes={makes} models={models} />
+          </div>
+          {/* Products Grid (always visible) */}
+          <div className="w-full lg:w-3/4">
+            <ProductsGrid products={products} />
+          </div>
         </div>
       </div>
       <Footer />

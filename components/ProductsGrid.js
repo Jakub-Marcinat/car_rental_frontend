@@ -1,13 +1,14 @@
 import styled from "styled-components";
 import ProductCard from "./ProductCard";
-import Link from "next/link";
 
 const StyledProductsGrid = styled.div`
-  display: grid;
+  display: flex;
+  flex-wrap: wrap;
   grid-template-columns: repeat(3, 1fr);
-  gap: 30px;
+  gap: 40px;
   padding-top: 40px;
   padding-bottom: 80px;
+  justify-content: center;
   align-items: center;
   @media (max-width: 1024px) {
     grid-template-columns: repeat(2, 1fr);
