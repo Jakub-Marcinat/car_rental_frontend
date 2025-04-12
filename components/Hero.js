@@ -35,7 +35,7 @@ export default function Hero() {
       <div className="absolute inset-0 bg-black/20 z-0" />
       <MainHeader />
       <div className="flex-grow flex flex-col justify-between items-center p-6 ">
-        <div className="bg-gray-900 bg-opacity-90 px-12 py-8 mb-12 rounded-xl max-w-[1000px]">
+        <div className="bg-gray-900 bg-opacity-90 px-12 py-8 mb-12 rounded-xl max-w-[1000px] z-10">
           <div className="grid grid-cols-4 gap-4 max-md:flex max-md:flex-col">
             <div className="flex flex-col">
               <label className="max-xl:text-xl font-semibold mb-2 ml-1 whitespace-nowrap">

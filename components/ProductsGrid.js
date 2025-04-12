@@ -8,8 +8,7 @@ const StyledProductsGrid = styled.div`
   gap: 40px;
   padding-top: 40px;
   padding-bottom: 80px;
-  justify-content: center;
-  align-items: center;
+  
   @media (max-width: 1024px) {
     grid-template-columns: repeat(2, 1fr);
   }

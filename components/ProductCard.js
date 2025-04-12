@@ -15,7 +15,6 @@ const Card = styled.div`
   border-radius: 32px;
   border: 1px solid #2b2b2b;
   box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.3);
-  text-align: center;
   max-width: 300px;
   display: flex;
   align-items: center;
@@ -45,8 +44,7 @@ const ImageWrapper = styled.div`
 `;
 
 const Title = styled.h2`
-  font-size: 1.8rem;
-  margin: 20px 0 4px;
+  font-size: 1.6rem;
   font-weight: 600;
   display: flex;
 `;
@@ -65,22 +63,30 @@ export default function ProductCard({ product }) {
 
   return (
     <Bg>
-      <Card onClick={handleClick}>
-        <ImageWrapper>
+      <Card
+        onClick={handleClick}
+        className="h-[400px] flex flex-col overflow-hidden"
+      >
+        <ImageWrapper className="h-48 w-full flex-shrink-0">
           <img
             src={product.images[0] || "/placeholder.jpg"}
             alt={product.title}
+            className="object-cover w-full h-full"
           />
         </ImageWrapper>
-        <div className="flex flex-col w-full">
-          <Title>{product.title}</Title>
-          <div className="flex gap-3 text-white/60 text-sm mb-4">
+
+        <div className="flex flex-col justify-between flex-1 mt-4">
+          <Title className="text-pretty min-h-[2.5rem] line-clamp-2">
+            {product.title}
+          </Title>
+
+          <div className="flex gap-3 text-white/60 text-sm ">
             <p>{Prevodovka || "N/A"}</p>
             <p>{Palivo || "N/A"}</p>
             <p>{Výkon ? `${Výkon} kW` : "N/A"}</p>
           </div>
 
-          <div className="flex justify-between items-end">
+          <div className="flex justify-between items-end mt-auto">
             <p>
               <span className="opacity-70">od </span>
               <span className="text-3xl opacity-100 text-corklasYellow">
@@ -88,6 +94,7 @@ export default function ProductCard({ product }) {
                 <span className="opacity-70 text-2xl text-white"> / deň</span>
               </span>
             </p>
+
             <button
               className="flex items-center rounded-full border border-[#2b2b2b] px-4 py-4"
               onClick={() => router.push(`/rezervacia?id=${product._id}`)}
@@ -96,13 +103,13 @@ export default function ProductCard({ product }) {
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
                 viewBox="0 0 24 24"
-                stroke-width="1.5"
+                strokeWidth="1.5"
                 stroke="currentColor"
-                class="size-6"
+                className="size-6"
               >
                 <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
                   d="m8.25 4.5 7.5 7.5-7.5 7.5"
                 />
               </svg>
