@@ -133,7 +133,7 @@ export default function HomePage({ featuredProducts, newProducts }) {
       </section>
 
       <section
-        id="kontakt"
+        id="contact"
         className="bg-corklasBackground py-40 px-4 lg:px-12"
       >
         <div className="flex flex-col items-center mb-10  ">

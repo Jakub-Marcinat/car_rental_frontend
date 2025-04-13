@@ -206,7 +206,7 @@ export default function ReservationPage({ product }) {
     e.preventDefault();
 
     if (!termsAccepted || !dataProcessingAccepted) {
-      alert("You must accept the Terms of Use and Data Processing.");
+      alert("Musíte súhlasiť s obchodnými podmienkami a spracovaním údajov.");
       return;
     }
 
@@ -470,10 +470,10 @@ export default function ReservationPage({ product }) {
             <div>
               <CustomSelect
                 options={[
-                  { value: "SR", label: "Režim SR" },
+                  { value: "SR", label: "Režim Slovensko" },
                   {
                     value: "Susedné krajiny",
-                    label: "Režim Susedné krajiny (+30% záloha)",
+                    label: "Režim Česká republika (+30% záloha)",
                   },
                   { value: "EU", label: "Režim EU (+60% záloha)" },
                 ]}
@@ -620,7 +620,7 @@ export default function ReservationPage({ product }) {
                     required
                   />
                 </div>
-                <div>
+                {/* <div>
                   <Input
                     type="text"
                     id="birthNumber"
@@ -629,7 +629,7 @@ export default function ReservationPage({ product }) {
                     onChange={handleChange}
                     required
                   />
-                </div>
+                </div> */}
               </div>
             </div>
             <div>
@@ -844,63 +844,4 @@ export async function getServerSideProps(context) {
   return {
     props: { product: JSON.parse(JSON.stringify(product)) }, // Convert for Next.js
   };
-}
-
-{
-  /* <p class="details-value"><b>Číslo OP:</b> {{idNumber}}</p>
-      <p class="details-value"><b>Rodné číslo:</b> {{birthNumber}}</p>
-      <p class="details-value"><b>Číslo VP:</b> {{licenseNumber}}</p>
-    </div>
-
-    <div class="vehicle-info">
-      <p class="details-title">Informácie o vozidle:</p>
-      <p class="details-value"><b>Názov vozidla:</b> {{vehicleTitle}}</p>
-      <p class="details-value"><b>Kategória:</b> {{categoryName}}</p>
-      {{#if features}}
-      <p class="details-value"><b>Výbava:</b> {{features}}</p>
-      {{/if}}
-    </div>
-
-    <div class="rental-info">
-      <p class="details-title">Detaily prenájmu:</p>
-      <p class="details-value"><b>Dátum vyzdvihnutia:</b> {{pickupDate}} o {{pickupTime}}</p>
-      <p class="details-value"><b>Dátum odovzdania:</b> {{dropoffDate}} o {{dropoffTime}}</p>
-      <p class="details-value"><b>Režim:</b> {{selectedMode}}</p>
-    </div>
-
-    <div class="payment-info">
-      <p class="details-title">Informácie o platbe:</p>
-      <p class="details-value"><b>Cena prenájmu:</b> {{rentalPrice}}€</p>
-      <p class="details-value"><b>Depozit:</b> {{depositFee}}€</p>
-      <p class="details-value"><b>Metóda platby:</b> {{paymentMethod}}</p>
-      <p class="details-value"><b>Povolené kilometre:</b> {{allowedKm}} km</p>
-      <p class="details-value"><b>Suma za prekročenie limitu:</b> {{overLimitFee}}€/km</p>
-      {{#if promoCode}}
-      <p class="details-value promo-info"><b>Použitý promo kód:</b> {{promoCode}} (-{{discountAmount}}%)</p>
-      {{/if}}
-    </div>
-
-    <div class="contact-info">
-      <p class="details-title">Kontaktná adresa zákazníka:</p>
-      <p class="details-value"><b>Ulica:</b> {{contactStreet}}</p>
-      <p class="details-value"><b>Mesto:</b> {{contactCity}}</p>
-      <p class="details-value"><b>PSČ:</b> {{contactPsc}}</p>
-      <p class="details-value"><b>Krajina:</b> {{contactCountry}}</p>
-    </div>
-
-    {{#if isCompany}}
-    <div class="company-info">
-      <p class="details-title">Firemné údaje zákazníka:</p>
-      <p class="details-value"><b>Obchodný názov:</b> {{companyName}}</p>
-      <p class="details-value"><b>IČO:</b> {{ico}}</p>
-      <p class="details-value"><b>DIČ:</b> {{dic}}</p>
-      <p class="details-value"><b>IČ DPH:</b> {{icDph}}</p>
-    </div>
-
-    <div class="billing-info">
-      <p class="details-title">Fakturačná adresa zákazníka:</p>
-      <p class="details-value"><b>Ulica:</b> {{billingStreet}}</p>
-      <p class="details-value"><b>Mesto:</b> {{billingCity}}</p>
-      <p class="details-value"><b>PSČ:</b> {{billingPsc}}</p>
-      <p class="details-value"><b>Krajina:</b> {{billingCountry}}</p> */
 }
