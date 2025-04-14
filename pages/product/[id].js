@@ -225,13 +225,28 @@ export default function ProductPage({ product }) {
                 value={pickupDate}
                 onChange={handlePickupDateChange}
                 placeholder="Dátum vyzdvihnutia"
+                bgColor="#1f1f1f"
+                borderColor="#1f1f1f"
+                calendarBgColor="#121212"
+                calendarTextColor="#f3f4f6"
+                calendarBorderColor="#2b2b2b"
+                calendarSelectedBgColor="#FFFA00"
+                calendarSelectedTextColor="black"
+                calendarDayHoverBgColor="#FFFA00"
                 className="flex-1 min-w-0"
               />
 
               <CustomTimeInput
                 value={pickupTime}
                 onChange={setPickupTime}
-                placeholder="Čas vyzdvihnutia"
+                placeholder="Čas odovzdania"
+                bgColor="#1F1F1F"
+                borderColor="#1F1F1F"
+                timePickerBgColor="#121212"
+                timePickerTextColor="white"
+                timePickerBorderColor="#2b2b2b"
+                hoverBgColorProp="#2a2a2a"
+                className="flex-1 min-w-0"
               />
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
@@ -239,6 +254,14 @@ export default function ProductPage({ product }) {
                 value={dropoffDate}
                 onChange={handleDropoffDateChange}
                 placeholder="Dátum odovzdania"
+                bgColor="#1f1f1f"
+                borderColor="#1f1f1f"
+                calendarBgColor="#121212"
+                calendarTextColor="#f3f4f6"
+                calendarBorderColor="#2b2b2b"
+                calendarSelectedBgColor="#FFFA00"
+                calendarSelectedTextColor="black"
+                calendarDayHoverBgColor="#FFFA00"
                 className="flex-1 min-w-0"
               />
 
@@ -246,6 +269,12 @@ export default function ProductPage({ product }) {
                 value={dropoffTime}
                 onChange={setDropoffTime}
                 placeholder="Čas odovzdania"
+                bgColor="#1F1F1F"
+                borderColor="#1F1F1F"
+                timePickerBgColor="#121212"
+                timePickerTextColor="white"
+                timePickerBorderColor="#2b2b2b"
+                hoverBgColorProp="#2a2a2a"
                 className="flex-1 min-w-0"
               />
             </div>

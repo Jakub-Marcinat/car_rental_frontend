@@ -123,9 +123,12 @@ export default function HomePage({ featuredProducts, newProducts }) {
                     prenájom.
                   </p>
                 </div>
-                <button className="bg-corklasYellow text-black px-4 py-4 rounded-full font-semibold hover:opacity-80 transition whitespace-nowrap h-fit">
+                <a
+                  href="/vozidla"
+                  className="bg-corklasYellow text-black px-4 py-4 rounded-full font-semibold hover:opacity-80 transition whitespace-nowrap h-fit"
+                >
                   Rezervovať teraz
-                </button>
+                </a>
               </div>
             </div>
           </div>
@@ -149,7 +152,7 @@ export default function HomePage({ featuredProducts, newProducts }) {
             ></iframe>
           </div>
 
-          <div className="w-full lg:w-1/2 h-96 bg-[#151515] text-white p-8 rounded-lg shadow-lg">
+          <div className="w-full lg:w-1/2 h-[400px] bg-[#151515] text-white p-8 rounded-lg shadow-lg">
             <h2 className="text-xl font-semibold mb-6">Nájdete nás tu</h2>
 
             <div className="flex items-center gap-4 mb-3">
@@ -182,7 +185,7 @@ export default function HomePage({ featuredProducts, newProducts }) {
               >
                 <path d="M4 4h16v16H4V4zm16-2H4c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM6.5 11.5l5.5 3.5 5.5-3.5V7l-5.5 3.5L6.5 7v4.5z" />
               </svg>
-              <p>corklassro@gmail.com</p>
+              <p>infopozicovnaaut@gmail.com</p>
             </div>
 
             <h3 className="text-xl font-semibold mb-6">Otváracie hodiny</h3>
@@ -196,6 +199,9 @@ export default function HomePage({ featuredProducts, newProducts }) {
             </p>
             <p className="mb-2">
               Nedeľa: <span className="text-gray-300">Zatvorené</span>
+            </p>
+            <p className="my-4">
+              <span className="text-gray-400">Možnosť dohody po telefóne</span>
             </p>
           </div>
         </div>

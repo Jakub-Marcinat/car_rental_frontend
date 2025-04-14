@@ -1,6 +1,15 @@
 import React from "react";
 
-const TimePicker = ({ value, onChange, onClose }) => {
+const TimePicker = ({
+  value,
+  onChange,
+  onClose,
+  bgColor = "#121212",
+  textColor = "white",
+  borderColor = "#2b2b2b",
+  hoverBgColorProp, 
+  selectedBgColor = "#1e1e1e",
+}) => {
   const times = [];
   for (let hour = 0; hour < 24; hour++) {
     for (let minute = 0; minute < 60; minute += 30) {
@@ -11,16 +20,17 @@ const TimePicker = ({ value, onChange, onClose }) => {
     }
   }
 
+  const hoverBg = hoverBgColorProp !== undefined ? hoverBgColorProp : "#1e1e1e";
+
   return (
-    <div className="time-picker absolute bg-corklasCard border-2 border-[#2b2b2b] rounded-xl p-2 z-10 w-full">
-      {" "}
-      {/* Make it full width */}
+    <div
+      className="time-picker absolute z-10 w-full rounded-xl p-2"
+      style={{ backgroundColor: bgColor, border: `2px solid ${borderColor}` }}
+    >
       <div
         className="time-list"
         style={{ maxHeight: "150px", overflowY: "auto" }}
       >
-        {" "}
-        {/* Limit height and add scrollbar */}
         {times.map((time) => (
           <button
             key={time}
@@ -28,9 +38,10 @@ const TimePicker = ({ value, onChange, onClose }) => {
               onChange(time);
               onClose();
             }}
-            className={`block w-full text-left py-2 px-4 rounded-md hover:bg-[#1e1e1e] ${
-              value === time ? "bg-[#1e1e1e]" : ""
+            className={`block w-full text-left py-2 px-4 rounded-md hover:bg-[${hoverBg}] ${
+              value === time ? `bg-[${selectedBgColor}]` : ""
             }`}
+            style={{ color: textColor }}
           >
             {time}
           </button>

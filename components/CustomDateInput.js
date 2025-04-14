@@ -1,7 +1,21 @@
 import React, { useRef, useState } from "react";
 import CustomCalendar from "./CustomCalendar";
 
-const CustomDateInput = ({ label, value, onChange, placeholder, width }) => {
+const CustomDateInput = ({
+  label,
+  value,
+  onChange,
+  placeholder,
+  width,
+  bgColor = "#1f1f1f",
+  borderColor = "#1f1f1f",
+  calendarBgColor = "#121212",
+  calendarTextColor = "white",
+  calendarBorderColor = "#2b2b2b",
+  calendarSelectedBgColor = "#FFFA00",
+  calendarSelectedTextColor = "#121212",
+  calendarDayHoverBgColor,
+}) => {
   const [isOpen, setIsOpen] = useState(false);
   const inputRef = useRef(null);
 
@@ -19,8 +33,9 @@ const CustomDateInput = ({ label, value, onChange, placeholder, width }) => {
       {label && <label className="block mb-1">{label}</label>}
 
       <div
-        className="custom-date-input flex items-center text-white py-3 px-2 border-2 rounded-xl border-[#2b2b2b] bg-corklasCard pr-8 cursor-pointer"
+        className="custom-date-input flex items-center text-white py-3 px-2 border-2 rounded-xl pr-8 cursor-pointer"
         onClick={toggleCalendar}
+        style={{ backgroundColor: bgColor, borderColor: borderColor }}
       >
         <input
           type="text"
@@ -48,6 +63,12 @@ const CustomDateInput = ({ label, value, onChange, placeholder, width }) => {
           selectedDate={value ? new Date(value) : null}
           onChange={handleDateChange}
           onClose={() => setIsOpen(false)}
+          bgColor={calendarBgColor}
+          textColor={calendarTextColor}
+          borderColor={calendarBorderColor}
+          selectedBgColor={calendarSelectedBgColor}
+          selectedTextColor={calendarSelectedTextColor}
+          dayHoverBgColorProp={calendarDayHoverBgColor}
         />
       )}
     </div>

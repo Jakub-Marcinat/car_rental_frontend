@@ -444,12 +444,26 @@ export default function ReservationPage({ product }) {
                 value={pickupDate}
                 onChange={setPickupDate}
                 placeholder="Dátum odovzdania"
+                bgColor="#1f1f1f"
+                borderColor="#1f1f1f"
+                calendarBgColor="#121212"
+                calendarTextColor="#f3f4f6"
+                calendarBorderColor="#2b2b2b"
+                calendarSelectedBgColor="#FFFA00"
+                calendarSelectedTextColor="black"
+                calendarDayHoverBgColor="#FFFA00"
                 className="flex-1 min-w-0"
               />
               <CustomTimeInput
                 value={pickupTime}
                 onChange={setPickupTime}
                 placeholder="Čas odovzdania"
+                bgColor="#1F1F1F"
+                borderColor="#1F1F1F"
+                timePickerBgColor="#121212"
+                timePickerTextColor="white"
+                timePickerBorderColor="#2b2b2b"
+                hoverBgColorProp="#2a2a2a"
                 className="flex-1 min-w-0"
               />
             </div>
@@ -458,12 +472,27 @@ export default function ReservationPage({ product }) {
                 value={dropoffDate}
                 onChange={setDropoffDate}
                 placeholder="Dátum odovzdania"
+                bgColor="#1f1f1f"
+                borderColor="#1f1f1f"
+                calendarBgColor="#121212"
+                calendarTextColor="#f3f4f6"
+                calendarBorderColor="#2b2b2b"
+                calendarSelectedBgColor="#FFFA00"
+                calendarSelectedTextColor="black"
+                calendarDayHoverBgColor="#FFFA00"
                 className="flex-1 min-w-0"
               />
+
               <CustomTimeInput
                 value={dropoffTime}
                 onChange={setDropoffTime}
                 placeholder="Čas odovzdania"
+                bgColor="#1F1F1F"
+                borderColor="#1F1F1F"
+                timePickerBgColor="#121212"
+                timePickerTextColor="white"
+                timePickerBorderColor="#2b2b2b"
+                hoverBgColorProp="#2a2a2a"
                 className="flex-1 min-w-0"
               />
             </div>

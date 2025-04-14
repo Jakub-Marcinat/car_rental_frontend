@@ -129,11 +129,27 @@ export default function Filter({ makes, models }) {
         value={pickupDate}
         onChange={handlePickupDateChange}
         placeholder="Dostupné od"
+        bgColor="#1f1f1f"
+        borderColor="#1f1f1f"
+        calendarBgColor="#121212"
+        calendarTextColor="#f3f4f6"
+        calendarBorderColor="#2b2b2b"
+        calendarSelectedBgColor="#FFFA00"
+        calendarSelectedTextColor="black"
+        calendarDayHoverBgColor="#FFFA00"
       />
       <CustomDateInput
         value={dropoffDate}
         onChange={handleDropoffDateChange}
         placeholder="Dostupné do"
+        bgColor="#1f1f1f"
+        borderColor="#1f1f1f"
+        calendarBgColor="#121212"
+        calendarTextColor="#f3f4f6"
+        calendarBorderColor="#2b2b2b"
+        calendarSelectedBgColor="#FFFA00"
+        calendarSelectedTextColor="black"
+        calendarDayHoverBgColor="#FFFA00"
       />
       <div className="w-full border border-[#2b2b2b] mb-4 mt-2"></div>
       <p className="text-xl">Vozidlo</p>

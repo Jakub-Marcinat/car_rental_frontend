@@ -1,7 +1,21 @@
 import React, { useState, useRef } from "react";
-import TimePicker from "./TimePicker"; // Import the TimePicker component
+import TimePicker from "./TimePicker";
 
-const CustomTimeInput = ({ label, value, onChange, placeholder, width }) => {
+const CustomTimeInput = ({
+  label,
+  value,
+  onChange,
+  placeholder,
+  width,
+  bgColor = "#1f1f1f",
+  borderColor = "#1f1f1f",
+  timePickerBgColor,
+  timePickerTextColor,
+  timePickerBorderColor,
+  timePickerHoverBgColor,
+  hoverBgColorProp,
+  timePickerSelectedBgColor,
+}) => {
   const [isOpen, setIsOpen] = useState(false);
   const inputRef = useRef(null);
 
@@ -14,8 +28,9 @@ const CustomTimeInput = ({ label, value, onChange, placeholder, width }) => {
       {label && <label className="block mb-1">{label}</label>}
 
       <div
-        className="custom-time-input flex items-center text-white py-3 px-2 border-2 rounded-xl border-[#2b2b2b] bg-corklasCard pr-2 cursor-pointer"
+        className="custom-time-input flex items-center text-white py-3 px-2 border-2 rounded-xl  pr-2 cursor-pointer"
         onClick={toggleTimePicker}
+        style={{ backgroundColor: bgColor, borderColor: borderColor }}
       >
         <input
           type="text"
@@ -46,6 +61,11 @@ const CustomTimeInput = ({ label, value, onChange, placeholder, width }) => {
             setIsOpen(false);
           }}
           onClose={() => setIsOpen(false)}
+          bgColor={timePickerBgColor}
+          textColor={timePickerTextColor}
+          borderColor={timePickerBorderColor}
+          hoverBgColorProp={hoverBgColorProp}
+          selectedBgColor={timePickerSelectedBgColor}
         />
       )}
     </div>

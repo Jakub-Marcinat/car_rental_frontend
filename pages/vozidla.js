@@ -19,7 +19,7 @@ export default function VozidlaPage({ products, makes, models }) {
       <div className="py-28 bg-corklasBackground text-white text-center">
         <div className="absolute flex left-0 -top-[200px] w-[80%] h-[80%] bg-[#141419] blur-[250px] opacity-50 z-0"></div>
         <h1 className="text-3xl lg:text-5xl font-medium mb-4 text-yellowText z-10 relative">
-          Autopožičovňa Corklas
+          Požičovňa aút SK
         </h1>
         <p className="text-sm lg:text-lg mb-2 opacity-70 z-10 relative ">
           Autá na prenájom
@@ -31,7 +31,7 @@ export default function VozidlaPage({ products, makes, models }) {
         </div>
         <div className="flex max-md:hidden md:flex-row justify-around max-w-4xl mx-auto mt-6 px-4 opacity-70">
           <div className="mb-4 md:mb-0">
-            <p className="font-semibold text-lg">Bezplatné zrušenie</p>
+            <p className="font-semibold text-lg">Bezplatné zrušenie do 24H</p>
             <p className="text-sm">rezervácie</p>
           </div>
           <div className="mb-4 md:mb-0">

@@ -28,15 +28,31 @@ export default function Footer() {
               Slávnica 8, 01854 Slávnica
             </p>
           </div>
-          <div className="flex items-center gap-4 mb-3">
-            <svg
-              className="w-6 h-6 text-corklasYellow"
-              fill="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path d="M6.62 10.79a15.91 15.91 0 006.59 6.59l2.2-2.2a1 1 0 011.11-.22 11.72 11.72 0 003.78.6 1 1 0 011 1v3.77a1 1 0 01-1 1A19.92 19.92 0 012 4.92a1 1 0 011-1h3.77a1 1 0 011 1 11.72 11.72 0 00.6 3.78 1 1 0 01-.22 1.11z" />
-            </svg>
-            <p className="text-white text-sm sm:text-md">(+421) 940 884 615s</p>
+          <div className="flex flex-col mb-3 gap-4">
+            <div className="flex gap-4 items-center">
+              <svg
+                className="w-6 h-6 text-corklasYellow"
+                fill="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path d="M6.62 10.79a15.91 15.91 0 006.59 6.59l2.2-2.2a1 1 0 011.11-.22 11.72 11.72 0 003.78.6 1 1 0 011 1v3.77a1 1 0 01-1 1A19.92 19.92 0 012 4.92a1 1 0 011-1h3.77a1 1 0 011 1 11.72 11.72 0 00.6 3.78 1 1 0 01-.22 1.11z" />
+              </svg>
+              <p className="text-white text-sm sm:text-md">
+                (+421) 940 884 615
+              </p>
+            </div>
+            <div className="flex gap-4 items-center">
+              <svg
+                className="w-6 h-6 text-corklasYellow"
+                fill="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path d="M6.62 10.79a15.91 15.91 0 006.59 6.59l2.2-2.2a1 1 0 011.11-.22 11.72 11.72 0 003.78.6 1 1 0 011 1v3.77a1 1 0 01-1 1A19.92 19.92 0 012 4.92a1 1 0 011-1h3.77a1 1 0 011 1 11.72 11.72 0 00.6 3.78 1 1 0 01-.22 1.11z" />
+              </svg>
+              <p className="text-white text-sm sm:text-md">
+                (+421) 910 333 400
+              </p>
+            </div>
           </div>
           <div className="flex items-center gap-4 mb-3">
             <svg
@@ -47,7 +63,7 @@ export default function Footer() {
               <path d="M4 4h16v16H4V4zm16-2H4c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM6.5 11.5l5.5 3.5 5.5-3.5V7l-5.5 3.5L6.5 7v4.5z" />
             </svg>
             <p className="text-white text-sm sm:text-md">
-              corklassro@gmail.com
+              infopozicovnaaut@gmail.com
             </p>
           </div>
         </div>
