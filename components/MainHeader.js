@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export default function Header({ cartProducts }) {
+export default function mainHeader({ cartProducts }) {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -135,7 +135,7 @@ export default function Header({ cartProducts }) {
           <a href="#contact" className="hover:text-corklasYellow">
             Kontakt
           </a>
-          <a href="#aboutus" className="hover:text-corklasYellow">
+          <a href="/o-nas" className="hover:text-corklasYellow">
             O nás
           </a>
         </nav>
