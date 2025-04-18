@@ -44,7 +44,7 @@ export default function AboutUs() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 mb-24">
-          <div className="bg-gradient-card rounded-2xl p-8 md:p-10 border border-zinc-800/50 hover-lift group hover:-translate-y-1 transition-all duration-300">
+          <div className="bg-gradient-card rounded-2xl p-8 md:p-10 border border-zinc-800/50 group hover:-translate-y-1 transition-all duration-300">
             <Car className="w-14 h-14 text-corklasYellow mb-6 group-hover:scale-110 transition-transform" />
             <h2 className="text-2xl md:text-3xl font-display font-bold text-white mb-6 group-hover:text-corklasYellow transition-colors">
               Ponuka vozidiel na mieru
@@ -57,7 +57,7 @@ export default function AboutUs() {
             </p>
           </div>
 
-          <div className="bg-gradient-card rounded-2xl p-8 md:p-10 border border-zinc-800/50 hover-lift group hover:-translate-y-1 transition-all duration-300">
+          <div className="bg-gradient-card rounded-2xl p-8 md:p-10 border border-zinc-800/50 group hover:-translate-y-1 transition-all duration-300">
             <Calendar className="w-14 h-14 text-corklasYellow mb-6 group-hover:scale-110 transition-transform" />
             <h2 className="text-2xl md:text-3xl font-display font-bold text-white mb-6 group-hover:text-corklasYellow transition-colors">
               Prenájom na krátku aj dlhú dobu
@@ -70,7 +70,7 @@ export default function AboutUs() {
             </p>
           </div>
 
-          <div className="relative rounded-2xl overflow-hidden h-full min-h-[400px] hover-lift hover:-translate-y-1 transition-all duration-300">
+          <div className="relative rounded-2xl overflow-hidden h-full min-h-[400px] hover:-translate-y-1 transition-all duration-300">
             <Image
               src="/cars/victor-furtuna-0mchrVHAYzg-unsplash.jpg"
               alt="Prenájom áut"
@@ -88,7 +88,7 @@ export default function AboutUs() {
             </div>
           </div>
 
-          <div className="bg-gradient-card rounded-2xl p-8 md:p-10 border border-zinc-800/50 hover-lift group hover:-translate-y-1 transition-all duration-300">
+          <div className="bg-gradient-card rounded-2xl p-8 md:p-10 border border-zinc-800/50 group hover:-translate-y-1 transition-all duration-300">
             <Clock className="w-14 h-14 text-corklasYellow mb-6 group-hover:scale-110 transition-transform" />
             <h2 className="text-2xl md:text-3xl font-display font-bold text-white mb-6 group-hover:text-corklasYellow transition-colors">
               Nonstop k dispozícii – 24/7
@@ -197,7 +197,6 @@ export default function AboutUs() {
           </div>
         </div>
 
-        {/* Conclusion */}
         <div className="text-center max-w-3xl mx-auto">
           <p className="text-2xl md:text-3xl font-display font-medium mb-10 text-white leading-relaxed">
             Vaša spokojnosť je pre nás prioritou. Sme tu, aby sme vám pomohli

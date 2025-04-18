@@ -124,7 +124,7 @@ export default function HomePage({ featuredProducts, newProducts }) {
                   </p>
                 </div>
                 <a
-                  href="/vozidla"
+                  href="/ponuka-vozidiel"
                   className="bg-corklasYellow text-black px-4 py-4 rounded-full font-semibold hover:opacity-80 transition whitespace-nowrap h-fit"
                 >
                   Rezervovať teraz
@@ -136,7 +136,7 @@ export default function HomePage({ featuredProducts, newProducts }) {
       </section>
 
       <section
-        id="contact"
+        id="kontakt"
         className="bg-corklasBackground py-40 px-4 lg:px-12"
       >
         <div className="flex flex-col items-center mb-10  ">

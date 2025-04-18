@@ -100,10 +100,10 @@ export default function Header() {
         <NavContainer>
           <Nav open={menuOpen}>
             <NavLink href="/">Domov</NavLink>
-            <NavLink href="/vozidla">Ponuka vozidiel</NavLink>
+            <NavLink href="/ponuka-vozidiel">Ponuka vozidiel</NavLink>
             <NavLink href="/ucet">Prihlásiť sa</NavLink>
-            <NavLink href="/cart">Služby</NavLink>
-            <NavLink href="/kontakt">Kontakt</NavLink>
+            <NavLink href="/FAQ">FAQ</NavLink>
+            <NavLink href="/#kontakt">Kontakt</NavLink>
             <NavLink href="/o-nas">O nás</NavLink>
           </Nav>
         </NavContainer>

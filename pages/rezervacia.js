@@ -389,7 +389,7 @@ export default function ReservationPage({ product }) {
           console.error("Error sending email:", error);
         });
 
-      //router.push(`/thank-you?reservationId=${response.data.reservationId}`);
+      router.push(`/thank-you?reservationId=${reservationId}`);
     } catch (error) {
       console.error("Error submitting reservation:", error);
       alert("Error sending reservation. Please try again.");

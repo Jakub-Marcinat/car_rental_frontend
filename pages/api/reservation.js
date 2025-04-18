@@ -84,6 +84,7 @@ export default async function handler(req, res) {
 
     res.status(201).json({
       message: "Reservation created successfully!",
+      reservationNumber: reservationNumber,
       reservation: newReservation,
     });
   } catch (error) {

@@ -64,7 +64,7 @@ export default function mainHeader({ cartProducts }) {
               Domov
             </a>
             <a
-              href="/vozidla"
+              href="/ponuka-vozidiel"
               className="hover:text-corklasYellow"
               onClick={() => setIsOpen(false)}
             >
@@ -85,7 +85,7 @@ export default function mainHeader({ cartProducts }) {
               Moja objednávka
             </a>
             <a
-              href="#contact"
+              href="#kontakt"
               className="hover:text-corklasYellow"
               onClick={() => setIsOpen(false)}
             >
@@ -123,7 +123,7 @@ export default function mainHeader({ cartProducts }) {
           <a href="/home" className="hover:text-corklasYellow">
             Domov
           </a>
-          <a href="/vozidla" className="hover:text-corklasYellow">
+          <a href="/ponuka-vozidiel" className="hover:text-corklasYellow">
             Ponuka vozidiel
           </a>
           <a href="#myaccount" className="hover:text-corklasYellow">
@@ -132,7 +132,7 @@ export default function mainHeader({ cartProducts }) {
           <a href="/cart" className="hover:text-corklasYellow">
             Služby
           </a>
-          <a href="#contact" className="hover:text-corklasYellow">
+          <a href="#kontakt" className="hover:text-corklasYellow">
             Kontakt
           </a>
           <a href="/o-nas" className="hover:text-corklasYellow">
