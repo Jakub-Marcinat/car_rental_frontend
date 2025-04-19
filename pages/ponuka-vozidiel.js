@@ -25,7 +25,6 @@ export default function VozidlaPage({ products, makes, models }) {
           Autá na prenájom
         </p>
         <div className="flex justify-center items-center mb-4 z-10 relative">
-          {/* Replace with your actual star rating component or SVG */}
           <span className="text-yellowText  text-xl mr-1">★★★★★</span>
           <span className="text-sm">4,85 hodnotení na Google</span>
         </div>
@@ -49,9 +48,7 @@ export default function VozidlaPage({ products, makes, models }) {
         </div>
       </div>
 
-      {/* Main Content Area */}
       <div className="flex flex-col items-center px-20">
-        {/* Mobile Filter Button */}
         <button
           onClick={toggleFilterMobile}
           className="w-full text-left bg-corklasCard text-white p-3 rounded-2xl shadow-sm mb-4 lg:hidden"
@@ -61,13 +58,13 @@ export default function VozidlaPage({ products, makes, models }) {
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
               viewBox="0 0 24 24"
-              stroke-width="1.5"
+              strokeWidth="1.5"
               stroke="currentColor"
-              class="size-6"
+              className="size-6"
             >
               <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
+                strokeLinecap="round"
+                strokeLinejoin="round"
                 d="M10.5 6h9.75M10.5 6a1.5 1.5 0 1 1-3 0m3 0a1.5 1.5 0 1 0-3 0M3.75 6H7.5m3 12h9.75m-9.75 0a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m-3.75 0H7.5m9-6h3.75m-3.75 0a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m-9.75 0h9.75"
               />
             </svg>
@@ -115,7 +112,6 @@ export default function VozidlaPage({ products, makes, models }) {
           >
             <Filter makes={makes} models={models} />
           </div>
-          {/* Products Grid (always visible) */}
           <div className="w-full lg:w-3/4">
             <ProductsGrid products={products} />
           </div>

@@ -76,7 +76,7 @@ export default function Footer() {
           </p>
           <div className="flex flex-col sm:flex-row w-fit max-sm:gap-2">
             <input
-              class="pl-4 py-3 md:rounded-tl-md md:rounded-bl-md max-sm:rounded"
+              className="pl-4 py-3 md:rounded-tl-md md:rounded-bl-md max-sm:rounded"
               placeholder="Zadajte email"
               type="text"
               name="email_id"
@@ -84,7 +84,7 @@ export default function Footer() {
               autoComplete="off"
             />
             <button
-              class="py-3 px-6 bg-corklasYellow sm:rounded-tr-lg sm:rounded-br-lg max-sm:rounded whitespace-nowrap"
+              className="py-3 px-6 bg-corklasYellow sm:rounded-tr-lg sm:rounded-br-lg max-sm:rounded whitespace-nowrap"
               type="submit"
             >
               Prihlásiť sa

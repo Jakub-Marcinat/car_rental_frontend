@@ -1,7 +1,9 @@
 import { useState } from "react";
+import { useSession, signOut } from "next-auth/react";
 
 export default function mainHeader({ cartProducts }) {
   const [isOpen, setIsOpen] = useState(false);
+  const { data: session } = useSession();
 
   return (
     <>
@@ -71,18 +73,18 @@ export default function mainHeader({ cartProducts }) {
               Ponuka vozidiel
             </a>
             <a
-              href="#myaccount"
+              href="/registracia"
               className="hover:text-corklasYellow"
               onClick={() => setIsOpen(false)}
             >
-              Môj účet
+              Prihlásiť sa
             </a>
             <a
-              href="/cart"
+              href="/FAQ"
               className="hover:text-corklasYellow"
               onClick={() => setIsOpen(false)}
             >
-              Moja objednávka
+              Služby
             </a>
             <a
               href="#kontakt"
@@ -92,7 +94,7 @@ export default function mainHeader({ cartProducts }) {
               Kontakt
             </a>
             <a
-              href="#aboutus"
+              href="/o-nas"
               className="hover:text-corklasYellow"
               onClick={() => setIsOpen(false)}
             >
@@ -126,10 +128,24 @@ export default function mainHeader({ cartProducts }) {
           <a href="/ponuka-vozidiel" className="hover:text-corklasYellow">
             Ponuka vozidiel
           </a>
-          <a href="#myaccount" className="hover:text-corklasYellow">
-            Prihlásiť sa
-          </a>
-          <a href="/cart" className="hover:text-corklasYellow">
+          {session?.user ? (
+            <>
+              <a href="/dashboard" className="hover:text-corklasYellow">
+                Môj účet
+              </a>
+              <button
+                onClick={() => signOut({ callbackUrl: "/" })}
+                className="hover:text-corklasYellow"
+              >
+                Odhlásiť sa
+              </button>
+            </>
+          ) : (
+            <a href="/prihlasenie" className="hover:text-corklasYellow">
+              Prihlásiť sa
+            </a>
+          )}
+          <a href="/FAQ" className="hover:text-corklasYellow">
             Služby
           </a>
           <a href="#kontakt" className="hover:text-corklasYellow">
