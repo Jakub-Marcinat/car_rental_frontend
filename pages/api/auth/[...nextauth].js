@@ -26,7 +26,7 @@ export const authOptions = {
         const user = await User.findOne({ email: credentials.email });
 
         if (!user || !user.password) {
-          throw new Error("No user found or password not set");
+          throw new Error("Užívateľ s týmito prihlasovacími údajmi neexistuje");
         }
 
         const isValid = await compare(credentials.password, user.password);
@@ -71,7 +71,7 @@ export const authOptions = {
   },
   pages: {
     signIn: "/prihlasenie",
-    error: "/prihlasenie", 
+    error: "/prihlasenie",
   },
 };
 

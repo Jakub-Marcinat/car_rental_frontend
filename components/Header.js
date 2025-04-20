@@ -3,8 +3,8 @@ import styled from "styled-components";
 import { useState } from "react";
 
 const StyledHeader = styled.header`
-  background-color: #151515;
-  position: sticky;
+  background-color: #030303;
+  position: relative;
   top: 0;
   z-index: 20;
   width: 100%;

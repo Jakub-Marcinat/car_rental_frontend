@@ -12,6 +12,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { signIn } from "next-auth/react";
+import Header from "@/components/Header";
 
 export default function SignUpPage() {
   const [form, setForm] = useState({
@@ -308,7 +309,9 @@ export default function SignUpPage() {
                 <div className="grid grid-cols-2 gap-4">
                   <button
                     type="button"
-                    onClick={() => signIn("google", { callbackUrl: "/" })}
+                    onClick={() =>
+                      signIn("google", { callbackUrl: "/dashboard" })
+                    }
                     className="flex items-center justify-center gap-2 bg-zinc-800/80 hover:bg-zinc-700/80 text-white font-medium py-3 px-4 rounded-xl transition-colors"
                   >
                     <svg
@@ -337,7 +340,9 @@ export default function SignUpPage() {
                   </button>
                   <button
                     type="button"
-                    onClick={() => signIn("facebook", { callbackUrl: "/" })}
+                    onClick={() =>
+                      signIn("facebook", { callbackUrl: "/dashboard" })
+                    }
                     className="flex items-center justify-center gap-2 bg-zinc-800/80 hover:bg-zinc-700/80 text-white font-medium py-3 px-4 rounded-xl transition-colors"
                   >
                     <svg
