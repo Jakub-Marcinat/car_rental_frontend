@@ -55,7 +55,6 @@ export default function Reservations() {
   const [reservations, setReservations] = useState([]);
   const { data: session } = useSession();
   const userId = session?.user?.id;
-  const user = session.user;
 
   useEffect(() => {
     const fetchReservations = async () => {
@@ -75,7 +74,7 @@ export default function Reservations() {
   return (
     <div>
       <Header />
-      <DashboardLayout title="Moje rezervácie" user={user}>
+      <DashboardLayout title="Moje rezervácie">
         <div className="max-w-6xl mx-auto">
           <div className="mb-8">
             <h2 className="text-3xl font-display font-bold text-white mb-2">
