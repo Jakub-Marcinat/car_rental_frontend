@@ -14,12 +14,16 @@ import {
   Car,
   Bell,
 } from "lucide-react";
+import { usePathname } from "next/navigation";
 
 export default function DashboardLayout({
   children,
   title = "Používateľský profil",
+  user,
 }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const pathname = usePathname();
+  const isActive = (path) => pathname === path;
 
   return (
     <div className="min-h-screen bg-black">
@@ -32,12 +36,6 @@ export default function DashboardLayout({
             COR KLAS
           </Link>
           <div className="flex items-center gap-3">
-            <button className="relative">
-              <Bell className="w-5 h-5 text-zinc-400 hover:text-white transition-colors" />
-              <span className="absolute -top-1 -right-1 w-4 h-4 bg-yellow-400 rounded-full text-xs text-black flex items-center justify-center font-bold">
-                2
-              </span>
-            </button>
             <button
               className="lg:hidden text-zinc-400 hover:text-white transition-colors"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
@@ -64,19 +62,24 @@ export default function DashboardLayout({
           </div>
 
           <div className="p-6 border-b border-zinc-800/50 flex items-center gap-4">
-            <div className="relative w-12 h-12 rounded-full overflow-hidden bg-zinc-800">
+            <div className="relative rounded-full overflow-hidden bg-zinc-800">
               <Image
-                src="/placeholder.svg?height=100&width=100"
+                src={user?.image || "/placeholder.png?height=100&width=100"}
                 alt="User avatar"
                 width={48}
                 height={48}
-                className="object-cover"
+                className="object-"
               />
               <div className="absolute bottom-0 right-0 w-3 h-3 bg-green-500 rounded-full border-2 border-zinc-900"></div>
             </div>
             <div>
-              <h3 className="font-medium text-white">Ján Novák</h3>
-              <p className="text-sm text-zinc-400">jan.novak@email.sk</p>
+              <h3 className="font-medium text-white">
+                {console.log(user)}
+                {user?.name || "Neznámy používateľ"}
+              </h3>
+              <p className="text-sm text-zinc-400">
+                {user?.email || "Bez emailu"}
+              </p>
             </div>
           </div>
 
@@ -84,54 +87,54 @@ export default function DashboardLayout({
             <div className="space-y-1">
               <Link
                 href="/dashboard"
-                className="flex items-center gap-3 px-4 py-3 text-white bg-zinc-800/50 rounded-xl hover:bg-zinc-800 transition-colors"
+                className={`flex items-center gap-3 px-4 py-3 rounded-xl transition-colors ${
+                  isActive("/dashboard")
+                    ? "text-white bg-zinc-800/50"
+                    : "text-zinc-400 hover:text-white hover:bg-zinc-800/50"
+                }`}
               >
-                <User className="w-5 h-5 text-yellow-300" />
+                <User className="w-5 h-5 text-corklasYellow" />
                 <span>Profil</span>
               </Link>
               <Link
                 href="/dashboard/dokumenty"
-                className="flex items-center gap-3 px-4 py-3 text-zinc-400 hover:text-white hover:bg-zinc-800/50 rounded-xl transition-colors"
+                className={`flex items-center gap-3 px-4 py-3 rounded-xl transition-colors ${
+                  isActive("/dashboard/dokumenty")
+                    ? "text-white bg-zinc-800/50"
+                    : "text-zinc-400 hover:text-white hover:bg-zinc-800/50"
+                }`}
               >
-                <FileText className="w-5 h-5 text-yellow-300" />
+                <FileText className="w-5 h-5 text-corklasYellow" />
                 <span>Dokumenty</span>
               </Link>
               <Link
                 href="/dashboard/rezervacie"
-                className="flex items-center gap-3 px-4 py-3 text-zinc-400 hover:text-white hover:bg-zinc-800/50 rounded-xl transition-colors"
+                className={`flex items-center gap-3 px-4 py-3 rounded-xl transition-colors ${
+                  isActive("/dashboard/rezervacie")
+                    ? "text-white bg-zinc-800/50"
+                    : "text-zinc-400 hover:text-white hover:bg-zinc-800/50"
+                }`}
               >
-                <Calendar className="w-5 h-5 text-yellow-300" />
+                <Calendar className="w-5 h-5 text-corklasYellow" />
                 <span>Rezervácie</span>
-                <span className="ml-auto bg-yellow-400 text-black text-xs font-bold px-2 py-1 rounded-full">
-                  2
-                </span>
+                {user?.reservations?.length > 0 && (
+                  <span className="ml-auto bg-yellow-400 text-black text-xs font-bold px-2 py-1 rounded-full">
+                    {user.reservations.length}
+                  </span>
+                )}
               </Link>
-              <Link
-                href="/dashboard/vozidla"
+              <button
+                onClick={() => signOut({ callbackUrl: "/" })}
                 className="flex items-center gap-3 px-4 py-3 text-zinc-400 hover:text-white hover:bg-zinc-800/50 rounded-xl transition-colors"
               >
-                <Car className="w-5 h-5 text-yellow-300" />
-                <span>Obľúbené vozidlá</span>
-              </Link>
-              <Link
-                href="/dashboard/nastavenia"
-                className="flex items-center gap-3 px-4 py-3 text-zinc-400 hover:text-white hover:bg-zinc-800/50 rounded-xl transition-colors"
-              >
-                <Settings className="w-5 h-5 text-yellow-300" />
-                <span>Nastavenia</span>
-              </Link>
+                <LogOut className="w-5 h-5 text-zinc-400" />
+                <span>Odhlásiť sa</span>
+              </button>
             </div>
           </nav>
 
-          <div className="p-4 mt-auto">
-            <button
-              onClick={() => signOut({ callbackUrl: "/" })}
-              className="flex items-center gap-3 px-4 py-3 text-zinc-400 hover:text-white hover:bg-zinc-800/50 rounded-xl transition-colors"
-            >
-              <LogOut className="w-5 h-5 text-zinc-400" />
-              <span>Odhlásiť sa</span>
-            </button>
-          </div>
+          {/* <div className="p-4 mt-auto">
+          </div> */}
         </aside>
 
         <main className="flex-1 min-h-screen">
@@ -139,14 +142,6 @@ export default function DashboardLayout({
             <h1 className="text-2xl font-display font-bold text-white">
               {title}
             </h1>
-            <div className="flex items-center gap-4">
-              <button className="relative">
-                <Bell className="w-5 h-5 text-zinc-400 hover:text-white transition-colors" />
-                <span className="absolute -top-1 -right-1 w-4 h-4 bg-yellow-400 rounded-full text-xs text-black flex items-center justify-center font-bold">
-                  2
-                </span>
-              </button>
-            </div>
           </header>
 
           <div className="p-4 md:p-8">{children}</div>
@@ -156,7 +151,7 @@ export default function DashboardLayout({
       <div className="lg:hidden fixed bottom-0 left-0 right-0 bg-zinc-900/90 backdrop-blur-md border-t border-zinc-800/50 z-50">
         <div className="flex items-center justify-around p-3">
           <Link href="/dashboard" className="flex flex-col items-center p-2">
-            <User className="w-5 h-5 text-yellow-300" />
+            <User className="w-5 h-5 text-corklasYellow" />
             <span className="text-xs text-zinc-400 mt-1">Profil</span>
           </Link>
           <Link
@@ -172,9 +167,11 @@ export default function DashboardLayout({
           >
             <Calendar className="w-5 h-5 text-zinc-400" />
             <span className="text-xs text-zinc-400 mt-1">Rezervácie</span>
-            <span className="absolute -top-1 -right-1 w-4 h-4 bg-yellow-400 rounded-full text-xs text-black flex items-center justify-center font-bold">
-              2
-            </span>
+            {user?.reservations?.length > 0 && (
+              <span className="ml-auto bg-yellow-400 text-black text-xs font-bold px-2 py-1 rounded-full">
+                {user.reservations.length}
+              </span>
+            )}
           </Link>
           <Link
             href="/dashboard/nastavenia"

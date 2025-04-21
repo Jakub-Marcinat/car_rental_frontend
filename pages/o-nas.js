@@ -111,8 +111,8 @@ export default function AboutUs() {
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-y-8 gap-x-12">
               <div className="flex items-start gap-4 group">
-                <div className="bg-zinc-800/50 rounded-full p-2 mt-1 group-hover:bg-yellow-300/20 transition-colors">
-                  <CheckCircle className="w-6 h-6 text-yellow-300 flex-shrink-0" />
+                <div className="bg-zinc-800/50 rounded-full p-2 mt-1 group-hover:bg-corklasYellow/20 transition-colors">
+                  <CheckCircle className="w-6 h-6 text-corklasYellow flex-shrink-0" />
                 </div>
                 <div>
                   <h3 className="text-xl font-display font-medium text-white mb-2">
@@ -125,8 +125,8 @@ export default function AboutUs() {
               </div>
 
               <div className="flex items-start gap-4 group">
-                <div className="bg-zinc-800/50 rounded-full p-2 mt-1 group-hover:bg-yellow-300/20 transition-colors">
-                  <CheckCircle className="w-6 h-6 text-yellow-300 flex-shrink-0" />
+                <div className="bg-zinc-800/50 rounded-full p-2 mt-1 group-hover:bg-corklasYellow/20 transition-colors">
+                  <CheckCircle className="w-6 h-6 text-corklasYellow flex-shrink-0" />
                 </div>
                 <div>
                   <h3 className="text-xl font-display font-medium text-white mb-2">
@@ -139,8 +139,8 @@ export default function AboutUs() {
               </div>
 
               <div className="flex items-start gap-4 group">
-                <div className="bg-zinc-800/50 rounded-full p-2 mt-1 group-hover:bg-yellow-300/20 transition-colors">
-                  <CheckCircle className="w-6 h-6 text-yellow-300 flex-shrink-0" />
+                <div className="bg-zinc-800/50 rounded-full p-2 mt-1 group-hover:bg-corklasYellow/20 transition-colors">
+                  <CheckCircle className="w-6 h-6 text-corklasYellow flex-shrink-0" />
                 </div>
                 <div>
                   <h3 className="text-xl font-display font-medium text-white mb-2">
@@ -153,8 +153,8 @@ export default function AboutUs() {
               </div>
 
               <div className="flex items-start gap-4 group">
-                <div className="bg-zinc-800/50 rounded-full p-2 mt-1 group-hover:bg-yellow-300/20 transition-colors">
-                  <CheckCircle className="w-6 h-6 text-yellow-300 flex-shrink-0" />
+                <div className="bg-zinc-800/50 rounded-full p-2 mt-1 group-hover:bg-corklasYellow/20 transition-colors">
+                  <CheckCircle className="w-6 h-6 text-corklasYellow flex-shrink-0" />
                 </div>
                 <div>
                   <h3 className="text-xl font-display font-medium text-white mb-2">
@@ -167,8 +167,8 @@ export default function AboutUs() {
               </div>
 
               <div className="flex items-start gap-4 group">
-                <div className="bg-zinc-800/50 rounded-full p-2 mt-1 group-hover:bg-yellow-300/20 transition-colors">
-                  <CheckCircle className="w-6 h-6 text-yellow-300 flex-shrink-0" />
+                <div className="bg-zinc-800/50 rounded-full p-2 mt-1 group-hover:bg-corklasYellow/20 transition-colors">
+                  <CheckCircle className="w-6 h-6 text-corklasYellow flex-shrink-0" />
                 </div>
                 <div>
                   <h3 className="text-xl font-display font-medium text-white mb-2">
@@ -181,8 +181,8 @@ export default function AboutUs() {
               </div>
 
               <div className="flex items-start gap-4 group">
-                <div className="bg-zinc-800/50 rounded-full p-2 mt-1 group-hover:bg-yellow-300/20 transition-colors">
-                  <CheckCircle className="w-6 h-6 text-yellow-300 flex-shrink-0" />
+                <div className="bg-zinc-800/50 rounded-full p-2 mt-1 group-hover:bg-corklasYellow/20 transition-colors">
+                  <CheckCircle className="w-6 h-6 text-corklasYellow flex-shrink-0" />
                 </div>
                 <div>
                   <h3 className="text-xl font-display font-medium text-white mb-2">

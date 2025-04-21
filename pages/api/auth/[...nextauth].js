@@ -70,7 +70,7 @@ export const authOptions = {
     },
   },
   pages: {
-    signIn: "/prihlasenie",
+    signIn: "/",
     error: "/prihlasenie",
   },
 };

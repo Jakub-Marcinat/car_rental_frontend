@@ -186,7 +186,7 @@ export default function Documents() {
           <div className="bg-zinc-900/70 backdrop-blur-md rounded-3xl border border-zinc-800/50 overflow-hidden mb-8">
             <div className="p-6 md:p-8 border-b border-zinc-800/50">
               <div className="flex items-center gap-3">
-                <Info className="w-5 h-5 text-yellow-300" />
+                <Info className="w-5 h-5 text-corklasYellow" />
                 <h3 className="text-lg font-medium text-white">
                   Prečo potrebujeme vaše doklady?
                 </h3>

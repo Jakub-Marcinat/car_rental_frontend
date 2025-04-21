@@ -73,11 +73,34 @@ export default function Dashboard({ user }) {
     }
   };
 
+  const getStatusBadge = (status1, status2) => {
+    if (status1 === "Overené" && status2 === "Overené") {
+      return (
+        <span className="text-xs bg-green-500/20 text-green-500 px-2 py-1 rounded-full">
+          Overené
+        </span>
+      );
+    }
+
+    if (status1?.includes("zamietnuté") || status2?.includes("zamietnuté")) {
+      return (
+        <span className="text-xs bg-red-500/20 text-red-500 px-2 py-1 rounded-full">
+          Zamietnuté
+        </span>
+      );
+    }
+
+    return (
+      <span className="text-xs bg-yellow-400/20 text-yellow-400 px-2 py-1 rounded-full">
+        Čaká na overenie
+      </span>
+    );
+  };
   return (
     <div>
       <Header />
 
-      <DashboardLayout title={`Vitajte, ${user.name}`}>
+      <DashboardLayout title={`Vitajte, ${user.name}`} user={user}>
         <div className="max-w-6xl mx-auto">
           <div className="mb-8">
             <h2 className="text-3xl font-display font-bold text-white mb-2">
@@ -97,7 +120,7 @@ export default function Dashboard({ user }) {
                       Osobné údaje
                     </h3>
                     <button
-                      className="flex items-center gap-2 text-sm text-yellow-300 hover:text-yellow-400 transition-colors"
+                      className="flex items-center gap-2 text-sm text-corklasYellow hover:text-yellow-400 transition-colors"
                       onClick={() => setIsEditing((prev) => !prev)}
                     >
                       {isEditing ? (
@@ -131,7 +154,7 @@ export default function Dashboard({ user }) {
                       />
                       <label
                         htmlFor="avatar-upload"
-                        className="text-sm text-yellow-300 cursor-pointer hover:text-yellow-400"
+                        className="text-sm text-corklasYellow cursor-pointer hover:text-yellow-400"
                       >
                         Zmeniť fotku
                       </label>
@@ -140,7 +163,7 @@ export default function Dashboard({ user }) {
                     <div className="flex-1 grid grid-cols-1 md:grid-cols-2 gap-6">
                       <div className="space-y-1">
                         <p className="text-sm text-zinc-500 flex items-center gap-2">
-                          <UserIcon className="w-4 h-4 text-yellow-300" />
+                          <UserIcon className="w-4 h-4 text-corklasYellow" />
                           Meno a priezvisko
                         </p>
                         {isEditing ? (
@@ -163,7 +186,7 @@ export default function Dashboard({ user }) {
 
                       <div className="space-y-1">
                         <p className="text-sm text-zinc-500 flex items-center gap-2">
-                          <Mail className="w-4 h-4 text-yellow-300" />
+                          <Mail className="w-4 h-4 text-corklasYellow" />
                           E-mail
                         </p>
                         {isEditing ? (
@@ -186,7 +209,7 @@ export default function Dashboard({ user }) {
 
                       <div className="space-y-1">
                         <p className="text-sm text-zinc-500 flex items-center gap-2">
-                          <Phone className="w-4 h-4 text-yellow-300" />
+                          <Phone className="w-4 h-4 text-corklasYellow" />
                           Telefón
                         </p>
                         {isEditing ? (
@@ -209,7 +232,7 @@ export default function Dashboard({ user }) {
 
                       <div className="space-y-1">
                         <p className="text-sm text-zinc-500 flex items-center gap-2">
-                          <MapPin className="w-4 h-4 text-yellow-300" />
+                          <MapPin className="w-4 h-4 text-corklasYellow" />
                           Adresa
                         </p>
                         {isEditing ? (
@@ -232,7 +255,7 @@ export default function Dashboard({ user }) {
 
                       <div className="space-y-1">
                         <p className="text-sm text-zinc-500 flex items-center gap-2">
-                          <Calendar className="w-4 h-4 text-yellow-300" />
+                          <Calendar className="w-4 h-4 text-corklasYellow" />
                           Dátum narodenia
                         </p>
                         {isEditing ? (
@@ -254,7 +277,7 @@ export default function Dashboard({ user }) {
 
                       <div className="space-y-1">
                         <p className="text-sm text-zinc-500 flex items-center gap-2">
-                          <UserIcon className="w-4 h-4 text-yellow-300" />
+                          <UserIcon className="w-4 h-4 text-corklasYellow" />
                           Pohlavie
                         </p>
                         {isEditing ? (
@@ -284,8 +307,6 @@ export default function Dashboard({ user }) {
                   </div>
                 </div>
               </div>
-
-              {/* Additional Information Form */}
               <div className="bg-zinc-900/70 backdrop-blur-md rounded-3xl border border-zinc-800/50 overflow-hidden">
                 <div className="p-6 md:p-8 border-b border-zinc-800/50">
                   <h3 className="text-xl font-display font-bold text-white">
@@ -460,47 +481,57 @@ export default function Dashboard({ user }) {
 
                 <div className="p-6">
                   <div className="space-y-4">
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center gap-3">
-                        <div className="w-10 h-10 rounded-full bg-green-500/20 flex items-center justify-center">
-                          <CheckCircle className="w-5 h-5 text-green-500" />
+                    {user.documents.idFront && user.documents.idBack && (
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center gap-3">
+                          <div className="w-10 h-10 rounded-full bg-green-500/20 flex items-center justify-center">
+                            <CheckCircle className="w-5 h-5 text-green-500" />
+                          </div>
+                          <div>
+                            <p className="text-white font-medium">
+                              Občiansky preukaz
+                            </p>
+                            <p className="text-xs text-zinc-500">
+                              Nahraté{" "}
+                              {new Date(user.updatedAt).toLocaleDateString(
+                                "sk-SK"
+                              )}
+                            </p>
+                          </div>
                         </div>
-                        <div>
-                          <p className="text-white font-medium">
-                            Občiansky preukaz
-                          </p>
-                          <p className="text-xs text-zinc-500">
-                            Nahraté 12.03.2023
-                          </p>
-                        </div>
+                        <span className="text-xs bg-green-500/20 text-green-500 px-2 py-1 rounded-full">
+                          Overené
+                        </span>
                       </div>
-                      <span className="text-xs bg-green-500/20 text-green-500 px-2 py-1 rounded-full">
-                        Overené
-                      </span>
-                    </div>
-
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center gap-3">
-                        <div className="w-10 h-10 rounded-full bg-green-500/20 flex items-center justify-center">
-                          <CheckCircle className="w-5 h-5 text-green-500" />
+                    )}
+                    {user.documents.licenseFront &&
+                      user.documents.licenseBack && (
+                        <div className="flex items-center justify-between">
+                          <div className="flex items-center gap-3">
+                            <div className="w-10 h-10 rounded-full bg-green-500/20 flex items-center justify-center">
+                              <CheckCircle className="w-5 h-5 text-green-500" />
+                            </div>
+                            <div>
+                              <p className="text-white font-medium">
+                                Vodičský preukaz
+                              </p>
+                              <p className="text-xs text-zinc-500">
+                                Nahraté{" "}
+                                {new Date(user.updatedAt).toLocaleDateString(
+                                  "sk-SK"
+                                )}
+                              </p>
+                            </div>
+                          </div>
+                          <span className="text-xs bg-green-500/20 text-green-500 px-2 py-1 rounded-full">
+                            Overené
+                          </span>
                         </div>
-                        <div>
-                          <p className="text-white font-medium">
-                            Vodičský preukaz
-                          </p>
-                          <p className="text-xs text-zinc-500">
-                            Nahraté 12.03.2023
-                          </p>
-                        </div>
-                      </div>
-                      <span className="text-xs bg-green-500/20 text-green-500 px-2 py-1 rounded-full">
-                        Overené
-                      </span>
-                    </div>
+                      )}
 
                     <Link
                       href="/dashboard/dokumenty"
-                      className="flex items-center justify-center gap-2 text-yellow-300 hover:text-yellow-400 transition-colors text-sm mt-4"
+                      className="flex items-center justify-center gap-2 text-corklasYellow hover:text-yellow-400 transition-colors text-sm mt-4"
                     >
                       <span>Spravovať dokumenty</span>
                       <ArrowRight className="w-4 h-4" />
@@ -509,88 +540,80 @@ export default function Dashboard({ user }) {
                 </div>
               </div>
 
-              <div className="bg-zinc-900/70 backdrop-blur-md rounded-3xl border border-zinc-800/50 overflow-hidden">
+              {/* <div className="bg-zinc-900/70 backdrop-blur-md rounded-3xl border border-zinc-800/50 overflow-hidden">
                 <div className="p-6 border-b border-zinc-800/50">
                   <div className="flex items-center justify-between">
                     <h3 className="text-xl font-display font-bold text-white">
                       Nadchádzajúce rezervácie
                     </h3>
-                    <span className="text-xs bg-yellow-400 text-black px-2 py-1 rounded-full font-bold">
-                      2 aktívne
-                    </span>
                   </div>
                 </div>
 
                 <div className="p-6">
                   <div className="space-y-6">
-                    <div className="bg-zinc-800/50 rounded-xl p-4 hover:bg-zinc-800 transition-colors">
-                      <div className="flex items-center gap-4 mb-3">
-                        <div className="w-12 h-12 rounded-lg bg-yellow-400/20 flex items-center justify-center flex-shrink-0">
-                          <Calendar className="w-6 h-6 text-yellow-400" />
-                        </div>
-                        <div>
-                          <h4 className="text-white font-medium">
-                            Audi A6 Quattro
-                          </h4>
-                          <div className="flex items-center gap-2 text-xs text-zinc-400">
-                            <Calendar className="w-3 h-3" />
-                            <span>20.04.2023 - 25.04.2023</span>
+                    {upcomingReservations.map((res) => {
+                      const pickupDate = new Date(res.pickupDate);
+                      const dropoffDate = new Date(res.dropoffDate);
+                      const today = new Date();
+                      console.log("asd", res);
+                      const startsInDays = Math.ceil(
+                        (pickupDate - today) / (1000 * 60 * 60 * 24)
+                      );
+                      const vehicle = products.find(
+                        (p) => p._id === res.vehicle
+                      );
+
+                      return (
+                        <div
+                          key={res._id}
+                          className="bg-zinc-800/50 rounded-xl p-4 hover:bg-zinc-800 transition-colors"
+                        >
+                          <div className="flex items-center gap-4 mb-3">
+                            <div className="w-12 h-12 rounded-lg bg-yellow-400/20 flex items-center justify-center flex-shrink-0">
+                              <Calendar className="w-6 h-6 text-yellow-400" />
+                            </div>
+                            <div>
+                              <h4 className="text-white font-medium">
+                                {vehicle?.title || "Neznáme vozidlo"}
+                              </h4>
+                              <div className="flex items-center gap-2 text-xs text-zinc-400">
+                                <Calendar className="w-3 h-3" />
+                                <span>
+                                  {pickupDate.toLocaleDateString("sk-SK")} -{" "}
+                                  {dropoffDate.toLocaleDateString("sk-SK")}
+                                </span>
+                              </div>
+                            </div>
+                          </div>
+
+                          <div className="flex items-center justify-between text-sm">
+                            <div className="flex items-center gap-1 text-zinc-400">
+                              <Clock className="w-4 h-4" />
+                              <span>
+                                {startsInDays > 0
+                                  ? `Začína o ${startsInDays} dni`
+                                  : startsInDays === 0
+                                  ? "Začína dnes"
+                                  : "Ukončená"}
+                              </span>
+                            </div>
                           </div>
                         </div>
-                      </div>
-
-                      <div className="flex items-center justify-between text-sm">
-                        <div className="flex items-center gap-1 text-zinc-400">
-                          <Clock className="w-4 h-4" />
-                          <span>Začína o 3 dni</span>
-                        </div>
-                        <Link
-                          href="/dashboard/rezervacie/123"
-                          className="text-yellow-300 hover:text-yellow-400 transition-colors"
-                        >
-                          Zobraziť detail
-                        </Link>
-                      </div>
-                    </div>
-
-                    <div className="bg-zinc-800/50 rounded-xl p-4 hover:bg-zinc-800 transition-colors">
-                      <div className="flex items-center gap-4 mb-3">
-                        <div className="w-12 h-12 rounded-lg bg-yellow-400/20 flex items-center justify-center flex-shrink-0">
-                          <Calendar className="w-6 h-6 text-yellow-400" />
-                        </div>
-                        <div>
-                          <h4 className="text-white font-medium">BMW X5</h4>
-                          <div className="flex items-center gap-2 text-xs text-zinc-400">
-                            <Calendar className="w-3 h-3" />
-                            <span>15.05.2023 - 20.05.2023</span>
-                          </div>
-                        </div>
-                      </div>
-
-                      <div className="flex items-center justify-between text-sm">
-                        <div className="flex items-center gap-1 text-zinc-400">
-                          <Clock className="w-4 h-4" />
-                          <span>Začína o 28 dní</span>
-                        </div>
-                        <Link
-                          href="/dashboard/rezervacie/124"
-                          className="text-yellow-300 hover:text-yellow-400 transition-colors"
-                        >
-                          Zobraziť detail
-                        </Link>
-                      </div>
-                    </div>
+                      );
+                    })}
 
                     <Link
                       href="/dashboard/rezervacie"
-                      className="flex items-center justify-center gap-2 text-yellow-300 hover:text-yellow-400 transition-colors text-sm"
+                      className="flex items-center justify-center gap-2 text-corklasYellow hover:text-yellow-400 transition-colors text-sm"
                     >
-                      <span>Zobraziť všetky rezervácie</span>
+                      <span>
+                        Zobraziť všetky rezervácie ({user.reservations.length})
+                      </span>
                       <ArrowRight className="w-4 h-4" />
                     </Link>
                   </div>
                 </div>
-              </div>
+              </div> */}
             </div>
           </div>
         </div>

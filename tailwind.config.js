@@ -8,7 +8,7 @@ module.exports = {
     extend: {
       colors: {
         corklasRed: "#D70006",
-        corklasYellow: "#FFFA00",
+        corklasYellow: "#F8CD02",
         corklasBackground: "#0b0a0b",
         corklasCard: "#151515",
         yellowText: "#fffa60",

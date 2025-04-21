@@ -84,7 +84,7 @@ export default function SignUpPage() {
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 items-center">
           <div className="lg:col-span-2 text-white">
             <h2 className="text-4xl md:text-5xl font-display font-bold mb-6 text-white">
-              Vytvorte si <span className="text-yellow-300">účet</span> a
+              Vytvorte si <span className="text-corklasYellow">účet</span> a
               získajte výhody
             </h2>
             <p className="text-xl text-zinc-300 mb-8">
@@ -93,8 +93,8 @@ export default function SignUpPage() {
             </p>
             <div className="hidden lg:block space-y-6">
               <div className="flex items-start gap-4">
-                <div className="w-12 h-12 rounded-full bg-yellow-300/20 flex items-center justify-center flex-shrink-0">
-                  <CheckCircle className="h-6 w-6 text-yellow-300" />
+                <div className="w-12 h-12 rounded-full bg-corklasYellow/20 flex items-center justify-center flex-shrink-0">
+                  <CheckCircle className="h-6 w-6 text-corklasYellow" />
                 </div>
                 <div>
                   <h3 className="font-display font-medium text-lg text-white">
@@ -106,8 +106,8 @@ export default function SignUpPage() {
                 </div>
               </div>
               <div className="flex items-start gap-4">
-                <div className="w-12 h-12 rounded-full bg-yellow-300/20 flex items-center justify-center flex-shrink-0">
-                  <CheckCircle className="h-6 w-6 text-yellow-300" />
+                <div className="w-12 h-12 rounded-full bg-corklasYellow/20 flex items-center justify-center flex-shrink-0">
+                  <CheckCircle className="h-6 w-6 text-corklasYellow" />
                 </div>
                 <div>
                   <h3 className="font-display font-medium text-lg text-white">
@@ -119,8 +119,8 @@ export default function SignUpPage() {
                 </div>
               </div>
               <div className="flex items-start gap-4">
-                <div className="w-12 h-12 rounded-full bg-yellow-300/20 flex items-center justify-center flex-shrink-0">
-                  <CheckCircle className="h-6 w-6 text-yellow-300" />
+                <div className="w-12 h-12 rounded-full bg-corklasYellow/20 flex items-center justify-center flex-shrink-0">
+                  <CheckCircle className="h-6 w-6 text-corklasYellow" />
                 </div>
                 <div>
                   <h3 className="font-display font-medium text-lg text-white">
@@ -155,7 +155,7 @@ export default function SignUpPage() {
                       htmlFor="firstName"
                       className="text-sm font-medium text-zinc-300 flex items-center gap-2"
                     >
-                      <User className="w-4 h-4 text-yellow-300" />
+                      <User className="w-4 h-4 text-corklasYellow" />
                       Meno
                     </label>
                     <input
@@ -172,7 +172,7 @@ export default function SignUpPage() {
                       htmlFor="lastName"
                       className="text-sm font-medium text-zinc-300 flex items-center gap-2"
                     >
-                      <User className="w-4 h-4 text-yellow-300" />
+                      <User className="w-4 h-4 text-corklasYellow" />
                       Priezvisko
                     </label>
                     <input
@@ -180,7 +180,7 @@ export default function SignUpPage() {
                       id="lastName"
                       value={form.lastName}
                       onChange={handleChange}
-                      className="w-full px-4 py-3 bg-zinc-800/80 border border-zinc-700/80 rounded-xl focus:outline-none focus:ring-2 focus:ring-yellow-300/50 focus:border-yellow-300 transition-all text-white"
+                      className="w-full px-4 py-3 bg-zinc-800/80 border border-zinc-700/80 rounded-xl focus:outline-none focus:ring-2 focus:ring-corklasYellow/50 focus:border-corklasYellow transition-all text-white"
                       placeholder="Novák"
                     />
                   </div>
@@ -191,7 +191,7 @@ export default function SignUpPage() {
                     htmlFor="email"
                     className="text-sm font-medium text-zinc-300 flex items-center gap-2"
                   >
-                    <Mail className="w-4 h-4 text-yellow-300" />
+                    <Mail className="w-4 h-4 text-corklasYellow" />
                     E-mail
                   </label>
                   <input
@@ -199,7 +199,7 @@ export default function SignUpPage() {
                     id="email"
                     value={form.email}
                     onChange={handleChange}
-                    className="w-full px-4 py-3 bg-zinc-800/80 border border-zinc-700/80 rounded-xl focus:outline-none focus:ring-2 focus:ring-yellow-300/50 focus:border-yellow-300 transition-all text-white"
+                    className="w-full px-4 py-3 bg-zinc-800/80 border border-zinc-700/80 rounded-xl focus:outline-none focus:ring-2 focus:ring-corklasYellow/50 focus:border-corklasYellow transition-all text-white"
                     placeholder="vas@email.sk"
                   />
                 </div>
@@ -209,7 +209,7 @@ export default function SignUpPage() {
                     htmlFor="phone"
                     className="text-sm font-medium text-zinc-300 flex items-center gap-2"
                   >
-                    <Phone className="w-4 h-4 text-yellow-300" />
+                    <Phone className="w-4 h-4 text-corklasYellow" />
                     Telefón
                   </label>
                   <input
@@ -217,7 +217,7 @@ export default function SignUpPage() {
                     id="phone"
                     value={form.phone}
                     onChange={handleChange}
-                    className="w-full px-4 py-3 bg-zinc-800/80 border border-zinc-700/80 rounded-xl focus:outline-none focus:ring-2 focus:ring-yellow-300/50 focus:border-yellow-300 transition-all text-white"
+                    className="w-full px-4 py-3 bg-zinc-800/80 border border-zinc-700/80 rounded-xl focus:outline-none focus:ring-2 focus:ring-corklasYellow/50 focus:border-corklasYellow transition-all text-white"
                     placeholder="+421 9XX XXX XXX"
                   />
                 </div>
@@ -227,7 +227,7 @@ export default function SignUpPage() {
                     htmlFor="password"
                     className="text-sm font-medium text-zinc-300 flex items-center gap-2"
                   >
-                    <Lock className="w-4 h-4 text-yellow-300" />
+                    <Lock className="w-4 h-4 text-corklasYellow" />
                     Heslo
                   </label>
                   <input
@@ -235,7 +235,7 @@ export default function SignUpPage() {
                     id="password"
                     value={form.password}
                     onChange={handleChange}
-                    className="w-full px-4 py-3 bg-zinc-800/80 border border-zinc-700/80 rounded-xl focus:outline-none focus:ring-2 focus:ring-yellow-300/50 focus:border-yellow-300 transition-all text-white"
+                    className="w-full px-4 py-3 bg-zinc-800/80 border border-zinc-700/80 rounded-xl focus:outline-none focus:ring-2 focus:ring-corklasYellow/50 focus:border-corklasYellow transition-all text-white"
                     placeholder="••••••••"
                   />
                   <p className="text-xs text-zinc-500 flex items-start gap-1 mt-1">
@@ -250,7 +250,7 @@ export default function SignUpPage() {
                     htmlFor="confirmPassword"
                     className="text-sm font-medium text-zinc-300 flex items-center gap-2"
                   >
-                    <Lock className="w-4 h-4 text-yellow-300" />
+                    <Lock className="w-4 h-4 text-corklasYellow" />
                     Potvrďte heslo
                   </label>
                   <input
@@ -258,7 +258,7 @@ export default function SignUpPage() {
                     id="confirmPassword"
                     value={form.confirmPassword}
                     onChange={handleChange}
-                    className="w-full px-4 py-3 bg-zinc-800/80 border border-zinc-700/80 rounded-xl focus:outline-none focus:ring-2 focus:ring-yellow-300/50 focus:border-yellow-300 transition-all text-white"
+                    className="w-full px-4 py-3 bg-zinc-800/80 border border-zinc-700/80 rounded-xl focus:outline-none focus:ring-2 focus:ring-corklasYellow/50 focus:border-corklasYellow transition-all text-white"
                     placeholder="••••••••"
                   />
                 </div>
@@ -269,20 +269,20 @@ export default function SignUpPage() {
                     id="terms"
                     value={form.termsAgreed}
                     onChange={handleChange}
-                    className="w-4 h-4 rounded border-zinc-600 text-yellow-400 focus:ring-yellow-300/50 bg-zinc-800 mt-1"
+                    className="w-4 h-4 rounded border-zinc-600 text-yellow-400 focus:ring-corklasYellow/50 bg-zinc-800 mt-1"
                   />
                   <label htmlFor="terms" className="ml-2 text-sm text-zinc-300">
                     Súhlasím s{" "}
                     <Link
                       href="/podmienky"
-                      className="text-yellow-300 hover:text-yellow-400 transition-colors"
+                      className="text-corklasYellow hover:text-yellow-400 transition-colors"
                     >
                       podmienkami používania
                     </Link>{" "}
                     a{" "}
                     <Link
                       href="/ochrana-osobnych-udajov"
-                      className="text-yellow-300 hover:text-yellow-400 transition-colors"
+                      className="text-corklasYellow hover:text-yellow-400 transition-colors"
                     >
                       zásadami ochrany osobných údajov
                     </Link>
@@ -360,7 +360,7 @@ export default function SignUpPage() {
                   Už máte účet?{" "}
                   <Link
                     href="/prihlasit-sa"
-                    className="text-yellow-300 hover:text-yellow-400 transition-colors font-medium"
+                    className="text-corklasYellow hover:text-yellow-400 transition-colors font-medium"
                   >
                     Prihláste sa
                   </Link>
@@ -372,8 +372,8 @@ export default function SignUpPage() {
       </div>
 
       <div className="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-black to-transparent z-0"></div>
-      <div className="absolute top-20 right-20 w-80 h-80 bg-yellow-300/10 rounded-full filter blur-3xl z-0"></div>
-      <div className="absolute bottom-20 left-20 w-64 h-64 bg-yellow-300/5 rounded-full filter blur-3xl z-0"></div>
+      <div className="absolute top-20 right-20 w-80 h-80 bg-corklasYellow/10 rounded-full filter blur-3xl z-0"></div>
+      <div className="absolute bottom-20 left-20 w-64 h-64 bg-corklasYellow/5 rounded-full filter blur-3xl z-0"></div>
     </div>
   );
 }

@@ -24,6 +24,7 @@ import {
 import { MdSpeed, MdCalendarToday } from "react-icons/md";
 import { Switch } from "@/components/CustomSwitch";
 import CustomCheckbox from "@/components/CustomCheckbox";
+import { useSession } from "next-auth/react";
 
 const parameterIcons = {
   Výkon: <FaBolt className="text-yellowText text-lg" />,
@@ -57,6 +58,11 @@ export default function ReservationPage({ product }) {
   const [showPromoInput, setShowPromoInput] = useState(false);
   const [termsAccepted, setTermsAccepted] = useState(false);
   const [dataProcessingAccepted, setDataProcessingAccepted] = useState(false);
+
+  const { data: session } = useSession();
+
+  const token = session?.accessToken;
+  const userId = session?.user?.id;
 
   const {
     id,
@@ -227,10 +233,6 @@ export default function ReservationPage({ product }) {
       overLimitFee,
       paymentMethod,
       vehicleId: product._id,
-      vehicle: product.title,
-      vehicleImage: product.image,
-      vehicleCategory: product.category,
-      vehicleFeatures: product.features,
       isCompany,
       companyName: updatedFormData.companyName || null,
       ico: updatedFormData.ico || null,
@@ -251,26 +253,25 @@ export default function ReservationPage({ product }) {
       termsAccepted,
       dataProcessingAccepted,
       status: "pending",
+      userId: userId,
     };
 
     try {
       const response = await fetch("/api/reservation", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(reservationDetails), // Ensure correct reservation data structure
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify(reservationDetails),
       });
-
+      console.log("reservationDetails", reservationDetails);
       const result = await response.json();
       console.log("Server response:", result);
       if (!response.ok) {
         console.error("Error response from server:", result);
         throw new Error(result.message || "Reservation failed.");
       }
-      // if (response.status === 200) {
-      //   alert(
-      //     "Údaje o rezervácií sme poslali na váš email. Tu bude preklik na success page namiesto tohto"
-      //   );
-
       const reservationId = result.reservationNumber;
 
       const userEmailParams = {

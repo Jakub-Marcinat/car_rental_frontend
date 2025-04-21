@@ -4,12 +4,21 @@ const { Schema, models, model } = mongoose;
 const ReservationSchema = new Schema(
   {
     reservationNumber: { type: String, unique: true, required: true },
+    user: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+      required: false,
+    },
     firstName: { type: String, required: true },
     lastName: { type: String, required: true },
     email: { type: String, required: true },
     phone: { type: String, required: true },
 
-    vehicle: { type: String, required: true },
+    vehicle: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Product",
+      required: true,
+    },
     pickupDate: { type: Date, required: true },
     dropoffDate: { type: Date, required: true },
     pickupTime: { type: String, required: true },

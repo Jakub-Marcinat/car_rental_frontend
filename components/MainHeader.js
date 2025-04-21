@@ -84,7 +84,7 @@ export default function mainHeader({ cartProducts }) {
               className="hover:text-corklasYellow"
               onClick={() => setIsOpen(false)}
             >
-              Služby
+              FAQ
             </a>
             <a
               href="#kontakt"
@@ -146,7 +146,7 @@ export default function mainHeader({ cartProducts }) {
             </a>
           )}
           <a href="/FAQ" className="hover:text-corklasYellow">
-            Služby
+            FAQ
           </a>
           <a href="#kontakt" className="hover:text-corklasYellow">
             Kontakt

@@ -52,8 +52,8 @@ export default function SignInPage() {
           <div className="lg:col-span-2 text-white">
             <h2 className="text-4xl md:text-5xl font-display font-bold mb-6 text-white">
               Prístup k vašim{" "}
-              <span className="text-yellow-300">rezerváciám</span> a obľúbeným
-              vozidlám
+              <span className="text-corklasYellow">rezerváciám</span> a
+              obľúbeným vozidlám
             </h2>
             <p className="text-xl text-zinc-300 mb-8">
               Prihláste sa do svojho účtu pre správu rezervácií, históriu
@@ -61,10 +61,10 @@ export default function SignInPage() {
             </p>
             <div className="hidden lg:block">
               <div className="flex items-center gap-4 mb-6">
-                <div className="w-12 h-12 rounded-full bg-yellow-300/20 flex items-center justify-center">
+                <div className="w-12 h-12 rounded-full bg-corklasYellow/20 flex items-center justify-center">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    className="h-6 w-6 text-yellow-300"
+                    className="h-6 w-6 text-corklasYellow"
                     fill="none"
                     viewBox="0 0 24 24"
                     stroke="currentColor"
@@ -87,10 +87,10 @@ export default function SignInPage() {
                 </div>
               </div>
               <div className="flex items-center gap-4">
-                <div className="w-12 h-12 rounded-full bg-yellow-300/20 flex items-center justify-center">
+                <div className="w-12 h-12 rounded-full bg-corklasYellow/20 flex items-center justify-center">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    className="h-6 w-6 text-yellow-300"
+                    className="h-6 w-6 text-corklasYellow"
                     fill="none"
                     viewBox="0 0 24 24"
                     stroke="currentColor"
@@ -135,14 +135,14 @@ export default function SignInPage() {
                     htmlFor="email"
                     className="text-sm font-medium text-zinc-300 flex items-center gap-2"
                   >
-                    <Mail className="w-4 h-4 text-yellow-300" />
+                    <Mail className="w-4 h-4 text-corklasYellow" />
                     E-mail
                   </label>
                   <div className="relative">
                     <input
                       type="email"
                       id="email"
-                      className="w-full px-4 py-3 bg-zinc-800/80 border border-zinc-700/80 rounded-xl focus:outline-none focus:ring-2 focus:ring-yellow-300/50 focus:border-yellow-300 transition-all text-white"
+                      className="w-full px-4 py-3 bg-zinc-800/80 border border-zinc-700/80 rounded-xl focus:outline-none focus:ring-2 focus:ring-corklasYellow/50 focus:border-corklasYellow transition-all text-white"
                       placeholder="vas@email.sk"
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
@@ -156,12 +156,12 @@ export default function SignInPage() {
                       htmlFor="password"
                       className="text-sm font-medium text-zinc-300 flex items-center gap-2"
                     >
-                      <Lock className="w-4 h-4 text-yellow-300" />
+                      <Lock className="w-4 h-4 text-corklasYellow" />
                       Heslo
                     </label>
                     <Link
                       href="/zabudnute-heslo"
-                      className="text-sm text-yellow-300 hover:text-yellow-400 transition-colors"
+                      className="text-sm text-corklasYellow hover:text-yellow-400 transition-colors"
                     >
                       Zabudnuté heslo?
                     </Link>
@@ -170,7 +170,7 @@ export default function SignInPage() {
                     <input
                       type="password"
                       id="password"
-                      className="w-full px-4 py-3 bg-zinc-800/80 border border-zinc-700/80 rounded-xl focus:outline-none focus:ring-2 focus:ring-yellow-300/50 focus:border-yellow-300 transition-all text-white"
+                      className="w-full px-4 py-3 bg-zinc-800/80 border border-zinc-700/80 rounded-xl focus:outline-none focus:ring-2 focus:ring-corklasYellow/50 focus:border-corklasYellow transition-all text-white"
                       placeholder="••••••••"
                       value={password}
                       onChange={(e) => setPassword(e.target.value)}
@@ -182,7 +182,7 @@ export default function SignInPage() {
                   <input
                     type="checkbox"
                     id="remember"
-                    className="w-4 h-4 rounded border-zinc-600 text-yellow-400 focus:ring-yellow-300/50 bg-zinc-800"
+                    className="w-4 h-4 rounded border-zinc-600 text-yellow-400 focus:ring-corklasYellow/50 bg-zinc-800"
                   />
                   <label
                     htmlFor="remember"
@@ -274,7 +274,7 @@ export default function SignInPage() {
                   Nemáte účet?{" "}
                   <Link
                     href="/registracia"
-                    className="text-yellow-300 hover:text-yellow-400 transition-colors font-medium"
+                    className="text-corklasYellow hover:text-yellow-400 transition-colors font-medium"
                   >
                     Zaregistrujte sa
                   </Link>
@@ -286,8 +286,8 @@ export default function SignInPage() {
       </div>
 
       <div className="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-black to-transparent z-0"></div>
-      <div className="absolute top-0 right-0 w-72 h-72 bg-yellow-300/10 rounded-full filter blur-3xl z-0"></div>
-      <div className="absolute bottom-20 left-20 w-56 h-56 bg-yellow-300/5 rounded-full filter blur-3xl z-0"></div>
+      <div className="absolute top-0 right-0 w-72 h-72 bg-corklasYellow/10 rounded-full filter blur-3xl z-0"></div>
+      <div className="absolute bottom-20 left-20 w-56 h-56 bg-corklasYellow/5 rounded-full filter blur-3xl z-0"></div>
     </div>
   );
 }

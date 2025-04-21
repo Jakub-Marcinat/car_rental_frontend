@@ -18,7 +18,7 @@ export default function ThankYouPage() {
         />
         <div className="absolute inset-0 bg-gradient-to-b from-black/40 to-black/30"></div>
         <div className="absolute inset-0 flex flex-col items-center justify-center px-4">
-          <div className="bg-yellow-300/20 rounded-full p-4 mb-6 animate-fade-in">
+          <div className="bg-corklasYellow/20 rounded-full p-4 mb-6 animate-fade-in">
             <CheckCircle className="w-12 h-12 text-corklasYellow" />
           </div>
           <h1 className="text-5xl md:text-7xl font-display font-bold text-white mb-4 tracking-tightest text-center animate-fade-in animate-delay-100">
@@ -48,7 +48,7 @@ export default function ThankYouPage() {
           {/* Information Boxes */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
             <div className="bg-zinc-800/30 rounded-xl p-6 text-center hover:-translate-y-1 transition-all duration-300 group">
-              <div className="bg-zinc-800/80 rounded-full p-3 inline-flex mb-4 group-hover:bg-yellow-300/20 transition-colors">
+              <div className="bg-zinc-800/80 rounded-full p-3 inline-flex mb-4 group-hover:bg-corklasYellow/20 transition-colors">
                 <Mail className="w-8 h-8 text-corklasYellow" />
               </div>
               <h3 className="text-xl font-display font-medium text-white mb-3">
@@ -60,7 +60,7 @@ export default function ThankYouPage() {
             </div>
 
             <div className="bg-zinc-800/30 rounded-xl p-6 text-center hover:-translate-y-1 transition-all duration-300 group">
-              <div className="bg-zinc-800/80 rounded-full p-3 inline-flex mb-4 group-hover:bg-yellow-300/20 transition-colors">
+              <div className="bg-zinc-800/80 rounded-full p-3 inline-flex mb-4 group-hover:bg-corklasYellow/20 transition-colors">
                 <Phone className="w-8 h-8 text-corklasYellow" />
               </div>
               <h3 className="text-xl font-display font-medium text-white mb-3">
@@ -73,8 +73,8 @@ export default function ThankYouPage() {
             </div>
 
             <div className="bg-zinc-800/30 rounded-xl p-6 text-center hover:-translate-y-1 transition-all duration-300 group">
-              <div className="bg-zinc-800/80 rounded-full p-3 inline-flex mb-4 group-hover:bg-yellow-300/20 transition-colors">
-                <Home className="w-8 h-8 text-yellow-300" />
+              <div className="bg-zinc-800/80 rounded-full p-3 inline-flex mb-4 group-hover:bg-corklasYellow/20 transition-colors">
+                <Home className="w-8 h-8 text-corklasYellow" />
               </div>
               <h3 className="text-xl font-display font-medium text-white mb-3">
                 Vyzdvihnutie vozidla
@@ -93,7 +93,7 @@ export default function ThankYouPage() {
             <ul className="space-y-4">
               <li className="flex items-start gap-3">
                 <div className="bg-zinc-800/80 rounded-full p-1 mt-1">
-                  <CheckCircle className="w-4 h-4 text-yellow-300" />
+                  <CheckCircle className="w-4 h-4 text-corklasYellow" />
                 </div>
                 <span className="text-zinc-200">
                   Skontrolujte si e-mail s potvrdením rezervácie
@@ -101,7 +101,7 @@ export default function ThankYouPage() {
               </li>
               <li className="flex items-start gap-3">
                 <div className="bg-zinc-800/80 rounded-full p-1 mt-1">
-                  <CheckCircle className="w-4 h-4 text-yellow-300" />
+                  <CheckCircle className="w-4 h-4 text-corklasYellow" />
                 </div>
                 <span className="text-zinc-200">
                   Pripravte si potrebné doklady (vodičský preukaz, občiansky
@@ -110,7 +110,7 @@ export default function ThankYouPage() {
               </li>
               <li className="flex items-start gap-3">
                 <div className="bg-zinc-800/80 rounded-full p-1 mt-1">
-                  <CheckCircle className="w-4 h-4 text-yellow-300" />
+                  <CheckCircle className="w-4 h-4 text-corklasYellow" />
                 </div>
                 <span className="text-zinc-200">
                   Očakávajte telefonát od nášho tímu pre potvrdenie detailov
@@ -118,7 +118,7 @@ export default function ThankYouPage() {
               </li>
               <li className="flex items-start gap-3">
                 <div className="bg-zinc-800/80 rounded-full p-1 mt-1">
-                  <CheckCircle className="w-4 h-4 text-yellow-300" />
+                  <CheckCircle className="w-4 h-4 text-corklasYellow" />
                 </div>
                 <span className="text-zinc-200">
                   Dostavte sa na dohodnuté miesto vyzdvihnutia vozidla v

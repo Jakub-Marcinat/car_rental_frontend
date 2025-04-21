@@ -101,7 +101,7 @@ export default function Header() {
           <Nav open={menuOpen}>
             <NavLink href="/">Domov</NavLink>
             <NavLink href="/ponuka-vozidiel">Ponuka vozidiel</NavLink>
-            <NavLink href="/ucet">Prihlásiť sa</NavLink>
+            <NavLink href="/prihlasenie">Prihlásiť sa</NavLink>
             <NavLink href="/FAQ">FAQ</NavLink>
             <NavLink href="/#kontakt">Kontakt</NavLink>
             <NavLink href="/o-nas">O nás</NavLink>

@@ -41,7 +41,9 @@ const UserSchema = new Schema(
       default: "user",
     },
     provider: { type: String, default: "credentials" },
-    reservations: [{ type: Schema.Types.ObjectId, ref: "Reservation" }],
+    reservations: [
+      { type: mongoose.Schema.Types.ObjectId, ref: "Reservation" },
+    ],
     documents: { type: DocumentSchema, default: {} },
     invitedBy: { type: Schema.Types.ObjectId, ref: "User" },
 
