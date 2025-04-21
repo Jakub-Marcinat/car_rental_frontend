@@ -1,3 +1,5 @@
+"use client";
+
 import Image from "next/image";
 import { Calendar, Clock, MapPin, CreditCard, CheckCircle } from "lucide-react";
 import DashboardLayout from "../../components/dashboard/DashboardLayout";
