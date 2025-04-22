@@ -65,7 +65,6 @@ export default function Dashboard({ user }) {
 
     if (res.ok) {
       const updatedUser = await res.json();
-      console.log(updatedUser);
       setFormData(updatedUser);
       setIsEditing(false);
     } else {
@@ -481,7 +480,7 @@ export default function Dashboard({ user }) {
 
                 <div className="p-6">
                   <div className="space-y-4">
-                    {user.documents.idFront && user.documents.idBack && (
+                    {user?.documents?.idFront && user?.documents?.idBack && (
                       <div className="flex items-center justify-between">
                         <div className="flex items-center gap-3">
                           <div className="w-10 h-10 rounded-full bg-green-500/20 flex items-center justify-center">
@@ -504,8 +503,8 @@ export default function Dashboard({ user }) {
                         </span>
                       </div>
                     )}
-                    {user.documents.licenseFront &&
-                      user.documents.licenseBack && (
+                    {user?.documents?.licenseFront &&
+                      user?.documents?.licenseBack && (
                         <div className="flex items-center justify-between">
                           <div className="flex items-center gap-3">
                             <div className="w-10 h-10 rounded-full bg-green-500/20 flex items-center justify-center">
