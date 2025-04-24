@@ -84,7 +84,7 @@ export default function Filter({ makes, models }) {
     if (dropoffDate) query.dropoffDate = dropoffDate;
     if (accessories.length > 0) query.accessories = accessories.join(",");
 
-    router.push({ pathname: "/vozidla", query });
+    router.push({ pathname: "/ponuka-vozidiel", query });
   };
 
   const resetFilters = () => {
@@ -99,7 +99,7 @@ export default function Filter({ makes, models }) {
     setDropoffDate("");
     setAccessories([]);
 
-    router.push({ pathname: "/vozidla" });
+    router.push({ pathname: "/ponuka-vozidiel" });
   };
 
   return (

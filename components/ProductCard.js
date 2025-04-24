@@ -15,7 +15,7 @@ const Card = styled.div`
   border-radius: 32px;
   border: 1px solid #2b2b2b;
   box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.3);
-  max-width: 300px;
+  max-width: 320px;
   display: flex;
   align-items: center;
   flex-direction: column;
@@ -65,7 +65,7 @@ export default function ProductCard({ product }) {
     <Bg>
       <Card
         onClick={handleClick}
-        className="h-[400px] flex flex-col overflow-hidden"
+        className="h-[430px] flex flex-col overflow-hidden"
       >
         <ImageWrapper className="h-48 w-full flex-shrink-0">
           <img
@@ -75,12 +75,12 @@ export default function ProductCard({ product }) {
           />
         </ImageWrapper>
 
-        <div className="flex flex-col justify-between flex-1 mt-4">
+        <div className="flex flex-col justify-between flex-1 mt-4 w-full">
           <Title className="text-pretty min-h-[2.5rem] line-clamp-2">
             {product.title}
           </Title>
 
-          <div className="flex gap-3 text-white/60 text-sm ">
+          <div className="flex gap-3 text-white/60 text-sm pt-2 ">
             <p>{Prevodovka || "N/A"}</p>
             <p>{Palivo || "N/A"}</p>
             <p>{Výkon ? `${Výkon} kW` : "N/A"}</p>

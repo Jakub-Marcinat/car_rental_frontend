@@ -35,7 +35,7 @@ export default function HomePage({ featuredProducts, newProducts }) {
           </div>
           <div className="container mx-auto flex justify-center gap-8 flex-wrap">
             <a
-              href="/vozidla"
+              href="/ponuka-vozidiel"
               className="bg-[#151515] rounded-2xl shadow-lg flex flex-col items-center text-center max-w-[350px] cursor-pointer hover:scale-[1.02] transition-all duration-200"
             >
               <img
@@ -70,7 +70,7 @@ export default function HomePage({ featuredProducts, newProducts }) {
             </a>
 
             <a
-              href="/vozidla"
+              href="/ponuka-vozidiel"
               className="bg-[#151515] rounded-2xl shadow-lg flex flex-col items-center text-center max-w-[350px] cursor-pointer hover:scale-[1.02] transition-all duration-200"
             >
               <img

@@ -359,7 +359,7 @@ export default function SignUpPage() {
                 <p className="text-center text-zinc-400 text-sm mt-6">
                   Už máte účet?{" "}
                   <Link
-                    href="/prihlasit-sa"
+                    href="/prihlasenie"
                     className="text-corklasYellow hover:text-yellow-400 transition-colors font-medium"
                   >
                     Prihláste sa
