@@ -171,7 +171,9 @@ export default function Documents() {
 
   return (
     <div>
-      <Header />
+      <div className="max-lg:hidden">
+        <Header />
+      </div>
       <DashboardLayout title="Dokumenty">
         <div className="max-w-6xl mx-auto">
           <div className="mb-8">

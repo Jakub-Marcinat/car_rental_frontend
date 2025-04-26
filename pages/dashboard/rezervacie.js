@@ -75,7 +75,9 @@ export default function Reservations() {
   }, [userId]);
   return (
     <div>
-      <Header />
+      <div className="max-lg:hidden">
+              <Header />
+            </div>
       <DashboardLayout title="Moje rezervácie">
         <div className="max-w-6xl mx-auto">
           <div className="mb-8">

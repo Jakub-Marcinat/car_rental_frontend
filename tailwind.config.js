@@ -11,7 +11,7 @@ module.exports = {
         corklasYellow: "#F8CD02",
         corklasBackground: "#0b0a0b",
         corklasCard: "#151515",
-        yellowText: "#fffa60",
+        yellowText: "#F8CD02",
       },
       backgroundImage: {
         "hero-pattern": "url('/Etron.png')",

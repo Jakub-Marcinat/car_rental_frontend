@@ -97,7 +97,9 @@ export default function Dashboard({ user }) {
   };
   return (
     <div>
-      <Header />
+      <div className="max-lg:hidden">
+        <Header />
+      </div>
 
       <DashboardLayout title={`Vitajte, ${user.name}`} user={user}>
         <div className="max-w-6xl mx-auto">
@@ -137,11 +139,11 @@ export default function Dashboard({ user }) {
                     <div className="flex flex-col items-center">
                       <div className="relative w-24 h-24 rounded-full overflow-hidden bg-zinc-800 mb-4">
                         <Image
-                          src={formData.image || "/placeholder.svg"}
+                          src={formData.image || "/placeholder.png"}
                           alt="User avatar"
                           width={96}
                           height={96}
-                          className="object-cover rounded-full"
+                          className="object-cover rounded-full h-full"
                         />
                       </div>
                       <input

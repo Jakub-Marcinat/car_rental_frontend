@@ -12,7 +12,7 @@ import {
   LogOut,
   Menu,
   Car,
-  Bell,
+  Phone,
 } from "lucide-react";
 import { usePathname } from "next/navigation";
 
@@ -26,7 +26,7 @@ export default function DashboardLayout({
   const isActive = (path) => pathname === path;
 
   return (
-    <div className="min-h-screen bg-black">
+    <div className="min-h-screen bg-black ">
       <div className="lg:hidden bg-zinc-900/80 backdrop-blur-md border-b border-zinc-800/50 sticky top-0 z-50">
         <div className="flex items-center justify-between p-4">
           <Link
@@ -50,7 +50,7 @@ export default function DashboardLayout({
         <aside
           className={`${
             mobileMenuOpen ? "block" : "hidden"
-          } lg:flex flex-col w-72 h-screen sticky top-0 bg-zinc-900/80 backdrop-blur-md border-r border-zinc-800/50`}
+          } lg:flex flex-col w-72 h-screen sticky top-0 bg-zinc-900/80 backdrop-blur-md border-r border-zinc-800/50 z-[60]`}
         >
           <div className="p-6 border-b border-zinc-800/50">
             <Link
@@ -122,6 +122,43 @@ export default function DashboardLayout({
                     {user.reservations.length}
                   </span>
                 )}
+              </Link>
+
+              <Link
+                href="/ponuka-vozidiel"
+                className={`${
+                  mobileMenuOpen ? "flex" : "hidden"
+                }  items-center gap-3 px-4 py-3 rounded-xl transition-colors text-zinc-400`}
+              >
+                <Car className="w-5 h-5 text-corklasYellow" />
+                <span>Ponuka vozidiel</span>
+              </Link>
+              {/* <Link
+                href="/ponuka-vozidiel"
+                className={`${
+                  mobileMenuOpen ? "flex" : "hidden"
+                }  items-center gap-3 px-4 py-3 rounded-xl transition-colors text-zinc-400`}
+              >
+                <Car className="w-5 h-5 text-corklasYellow" />
+                <span>FAQ</span>
+              </Link> */}
+              <Link
+                href="/#kontakt"
+                className={`${
+                  mobileMenuOpen ? "flex" : "hidden"
+                }  items-center gap-3 px-4 py-3 rounded-xl transition-colors text-zinc-400`}
+              >
+                <Phone className="w-5 h-5 text-corklasYellow" />
+                <span>Kontakt</span>
+              </Link>
+              <Link
+                href="/o-nas"
+                className={`${
+                  mobileMenuOpen ? "flex" : "hidden"
+                }  items-center gap-3 px-4 py-3 rounded-xl transition-colors text-zinc-400`}
+              >
+                <User className="w-5 h-5 text-corklasYellow" />
+                <span>O nás</span>
               </Link>
               <button
                 onClick={() => signOut({ callbackUrl: "/" })}
