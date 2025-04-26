@@ -1,9 +1,22 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useSession, signOut } from "next-auth/react";
 
 export default function mainHeader({ cartProducts }) {
   const [isOpen, setIsOpen] = useState(false);
   const { data: session } = useSession();
+
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+    }
+
+    // Clean up on unmount
+    return () => {
+      document.body.style.overflow = "auto";
+    };
+  }, [isOpen]);
 
   return (
     <>
@@ -33,7 +46,7 @@ export default function mainHeader({ cartProducts }) {
         </div>
 
         <div
-          className={`fixed inset-0 bg-black text-white flex flex-col items-center justify-center space-y-8 transform ${
+          className={`fixed inset-0 z-[5000] bg-black text-white flex flex-col items-center justify-center space-y-8 transform ${
             isOpen ? "translate-x-0 opacity-100" : "translate-x-full opacity-0"
           } transition-transform duration-500 ease-in-out custom-hidden`}
         >

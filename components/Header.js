@@ -1,6 +1,7 @@
 import Link from "next/link";
 import styled from "styled-components";
 import { useState } from "react";
+import { useSession } from "next-auth/react";
 
 const StyledHeader = styled.header`
   background-color: #030303;
@@ -91,6 +92,7 @@ const Hamburger = styled.button`
 
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const { data: session } = useSession();
 
   return (
     <StyledHeader>
@@ -101,7 +103,26 @@ export default function Header() {
           <Nav open={menuOpen}>
             <NavLink href="/">Domov</NavLink>
             <NavLink href="/ponuka-vozidiel">Ponuka vozidiel</NavLink>
-            <NavLink href="/prihlasenie">Prihlásiť sa</NavLink>
+            {session?.user ? (
+              <>
+                <a href="/dashboard" className="hover:text-[#fff] text-[#aaa]">
+                  Môj účet
+                </a>
+                <a
+                  onClick={() => signOut({ callbackUrl: "/" })}
+                  className="hover:text-[#fff] text-[#aaa]"
+                >
+                  Odhlásiť sa
+                </a>
+              </>
+            ) : (
+              <a
+                href="/prihlasenie"
+                className="hover:text-corklasYellow text-[#aaa]"
+              >
+                Prihlásiť sa
+              </a>
+            )}
             <NavLink href="/FAQ">FAQ</NavLink>
             <NavLink href="/#kontakt">Kontakt</NavLink>
             <NavLink href="/o-nas">O nás</NavLink>

@@ -95,6 +95,8 @@ export default function Dashboard({ user }) {
       </span>
     );
   };
+
+  
   return (
     <div>
       <div className="max-lg:hidden">
