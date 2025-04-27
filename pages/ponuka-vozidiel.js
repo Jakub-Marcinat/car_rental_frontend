@@ -30,25 +30,25 @@ export default function VozidlaPage({ products, makes, models }) {
         </div>
         <div className="flex max-md:hidden md:flex-row justify-around max-w-4xl mx-auto mt-6 px-4 opacity-70">
           <div className="mb-4 md:mb-0">
-            <p className="font-semibold text-lg">Bezplatné zrušenie do 24H</p>
-            <p className="text-sm">rezervácie</p>
+            <p className="font-semibold text-lg">Bezplatné zrušenie</p>
+            <p className="text-sm">rezervácie do 24h</p>
           </div>
           <div className="mb-4 md:mb-0">
-            <p className="font-semibold text-lg">Široká ponuka typov</p>
-            <p className="text-sm">vozidiel</p>
+            <p className="font-semibold text-lg">Prenájom vozidla na svadbu </p>
+            <p className="text-sm">s osobným šoférom </p>
           </div>
           <div className="mb-4 md:mb-0">
-            <p className="font-semibold text-lg">7 odberných miest</p>
-            <p className="text-sm">na Slovensku</p>
+            <p className="font-semibold text-lg">Transfer na letisko</p>
+            <p className="text-sm">s osobným šoférom</p>
           </div>
           <div>
-            <p className="font-semibold text-lg">500+ spokojných</p>
-            <p className="text-sm">zákazníkov ročne</p>
+            <p className="font-semibold text-lg">Dlhodobý</p>
+            <p className="text-sm">prenájom</p>
           </div>
         </div>
       </div>
 
-      <div className="flex flex-col items-center px-20">
+      <div className="flex flex-col items-center px-20 max-xl:px-8">
         <button
           onClick={toggleFilterMobile}
           className="w-full text-left bg-corklasCard text-white p-3 rounded-2xl shadow-sm mb-4 lg:hidden"
@@ -104,7 +104,7 @@ export default function VozidlaPage({ products, makes, models }) {
           </div>
         </button>
 
-        <div className="w-full flex flex-col lg:max-w-[1600px] lg:flex-row lg:justify-between">
+        <div className="w-full flex flex-col lg:max-w-[1600px] max-lg:gap-12 lg:flex-row lg:justify-between">
           <div
             className={`w-full lg:w-1/4 mb-8 lg:mb-0 lg:mr-8 ${
               showFilterMobile ? "block" : "hidden lg:block"

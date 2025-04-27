@@ -4,12 +4,12 @@ import ProductCard from "./ProductCard";
 const StyledProductsGrid = styled.div`
   display: flex;
   flex-wrap: wrap;
-  grid-template-columns: repeat(3, 1fr);
+  justify-content: center;
   gap: 40px;
   padding-top: 40px;
   padding-bottom: 80px;
-  
-  @media (max-width: 1024px) {
+
+  @media (max-width: 1050px) {
     grid-template-columns: repeat(2, 1fr);
   }
 

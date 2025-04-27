@@ -16,7 +16,7 @@ const Sidebar = styled.div`
   border-radius: 24px;
   gap: 15px;
   color: white;
-  min-width: 350px;
+  min-width: 280px;
 `;
 
 const VEHICLE_CATEGORIES = [
@@ -103,7 +103,7 @@ export default function Filter({ makes, models }) {
   };
 
   return (
-    <Sidebar className="lg:w-[350px] mb-20">
+    <Sidebar className="max-lg:w-[300px] mb-20">
       <div className="flex justify-between items-center">
         <h3 className="text-3xl font-bold mb-4">Filter</h3>
         <button onClick={resetFilters} className="flex gap-2">
