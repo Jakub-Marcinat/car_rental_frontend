@@ -11,7 +11,7 @@ export default function HomePage({ featuredProducts, newProducts }) {
     <div>
       <Hero />
       <div className=" bg-corklasBackground py-20 px-6 sm:px-10 lg:px-20">
-        <div className="container mx-auto flex justify-center gap-8 flex-wrap">
+        <div className="container justify-center gap-8 flex flex-wrap max-w-[1400px] mx-auto">
           {featuredProducts.map((product) => (
             <Featured key={product._id} product={product} />
           ))}

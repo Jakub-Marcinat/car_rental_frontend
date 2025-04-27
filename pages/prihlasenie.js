@@ -38,7 +38,7 @@ export default function SignInPage() {
     <div className="min-h-screen relative flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
       <div className="absolute inset-0 z-0">
         <Image
-          src="/cars/noir-mKOimPTdMyw-unsplash.jpg"
+          src="/cars/noir-mKOimPTdMyw.jpg"
           alt="Luxusné auto"
           fill
           className="object-cover"

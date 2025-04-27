@@ -10,7 +10,7 @@ export default function ThankYouPage() {
     <div className="min-h-screen bg-corklasBackground">
       <div className="relative h-[40vh] md:h-[50vh] w-full overflow-hidden">
         <Image
-          src="/cars/noir-mKOimPTdMyw-unsplash.jpg"
+          src="/cars/noir-mKOimPTdMyw.jpg"
           alt="Úspešná rezervácia"
           fill
           className="object-cover brightness-[0.35] scale-105 transform transition-transform duration-10000 hover:scale-100"

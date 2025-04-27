@@ -10,7 +10,7 @@ export default function AboutUs() {
       <Header />
       <div className="relative h-[50vh] md:h-[60vh] w-full overflow-hidden">
         <Image
-          src="/cars/evgeny-tchebotarev-aiwuLjLPFnU-unsplash.jpg"
+          src="/cars/evgeny-tchebotarev-aiwuLjLPFnU.jpg"
           alt="Autopožičovňa vozový park"
           fill
           className="object-cover brightness-[0.35] scale-105"
@@ -72,7 +72,7 @@ export default function AboutUs() {
 
           <div className="relative rounded-2xl overflow-hidden h-full min-h-[400px] hover:-translate-y-1 transition-all duration-300">
             <Image
-              src="/cars/victor-furtuna-0mchrVHAYzg-unsplash.jpg"
+              src="/cars/victor-furtuna-0mchrVHAYzg.jpg"
               alt="Prenájom áut"
               fill
               className="object-cover transition-transform duration-2000 hover:scale-110"
