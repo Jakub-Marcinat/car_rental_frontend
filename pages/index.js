@@ -214,12 +214,12 @@ export default function HomePage({ featuredProducts, newProducts }) {
 
 export async function getServerSideProps() {
   const featuredProductsIds = [
-    "67d7fbfb82b0d14f7d95bac3",
-    "67f4577077783ee118204934",
-    "67f458c577783ee118204a15",
-    "672b2608187ad6200a382cdb",
-    "672b2608187ad6200a382cdb",
-    "672b2608187ad6200a382cdb",
+    "67f459d477783ee118204a5c",
+    "6807a6901d1d14f5709af398",
+    "680809decdcb266d2f90babf",
+    "68081cf2ce29359b8dfec37c",
+    "6808203bce29359b8dfec41e",
+    "680aa2ee0a290c71a18f57e6",
   ];
   await mongooseConnect();
   const featuredProducts = await Product.find({
