@@ -72,7 +72,7 @@ export default function mainHeader({ cartProducts }) {
 
           <nav className="flex flex-col space-y-6 text-xl">
             <a
-              href="/home"
+              href="/"
               className="hover:text-corklasYellow"
               onClick={() => setIsOpen(false)}
             >
@@ -135,7 +135,7 @@ export default function mainHeader({ cartProducts }) {
         </div>
 
         <nav className="flex justify-center w-full custom-visible space-x-6 ">
-          <a href="/home" className="hover:text-corklasYellow">
+          <a href="/" className="hover:text-corklasYellow">
             Domov
           </a>
           <a href="/ponuka-vozidiel" className="hover:text-corklasYellow">
