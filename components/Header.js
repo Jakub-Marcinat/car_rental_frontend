@@ -2,6 +2,7 @@ import Link from "next/link";
 import styled from "styled-components";
 import { useState } from "react";
 import { useSession } from "next-auth/react";
+import { signOut } from "next-auth/react";
 
 const StyledHeader = styled.header`
   background-color: #030303;

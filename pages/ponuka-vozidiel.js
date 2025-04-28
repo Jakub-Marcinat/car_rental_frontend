@@ -25,8 +25,8 @@ export default function VozidlaPage({ products, makes, models }) {
           Autá na prenájom
         </p>
         <div className="flex justify-center items-center mb-4 z-10 relative">
-          <span className="text-yellowText  text-xl mr-1">★★★★★</span>
-          <span className="text-sm">4,85 hodnotení na Google</span>
+          <span className="text-yellowText  text-xl mr-1">★★★★☆</span>
+          <span className="text-sm">4.0 hodnotení na Google</span>
         </div>
         <div className="flex max-md:hidden md:flex-row justify-around max-w-4xl mx-auto mt-6 px-4 opacity-70">
           <div className="mb-4 md:mb-0">

@@ -71,7 +71,7 @@ export default function InformationPage() {
     {
       question: "V akom stave je vozidlo pri odovzdaní nájomcovi?",
       answer:
-        "Pri odovzdaní nájomcovi je vozidlo technicky nezávadné, má vyčistený interiér a exteriér. Vozidlo je plne dotankované.",
+        "Pri odovzdaní nájomcovi je vozidlo technicky nezávadné, má vyčistený interiér a exteriér.",
     },
     {
       question: "Do ktorých krajín môžem s vozidlom vycestovať?",

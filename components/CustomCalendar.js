@@ -47,35 +47,49 @@ const CustomCalendar = ({
       currentMonth.getMonth(),
       i + 1
     );
+
     const isSelected =
       selectedDate && date.toDateString() === selectedDate.toDateString();
+
+    const isPastDate =
+      date.setHours(0, 0, 0, 0) < new Date().setHours(0, 0, 0, 0);
+
     days.push(
       <div
         key={i}
-        className={`calendar-day ${isSelected ? "selected" : ""}`}
+        className={`calendar-day ${isSelected ? "selected" : ""} ${
+          isPastDate ? "disabled" : ""
+        }`}
         onClick={() => {
-          onChange(date);
-          onClose();
+          if (!isPastDate) {
+            onChange(date);
+            onClose();
+          }
         }}
         style={{
           backgroundColor: isSelected ? selectedBgColor : "transparent",
-          color: isSelected ? selectedTextColor : textColor,
+          color: isPastDate
+            ? "#777" // Gray color for disabled dates
+            : isSelected
+            ? selectedTextColor
+            : textColor,
           borderRadius: isSelected ? "4px" : "0",
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
           padding: "5px",
-          cursor: "pointer",
+          cursor: isPastDate ? "not-allowed" : "pointer",
+          pointerEvents: isPastDate ? "none" : "auto", // prevent clicking on past dates
         }}
         onMouseEnter={(e) => {
-          if (!isSelected) {
+          if (!isSelected && !isPastDate) {
             e.target.style.backgroundColor = dayHoverBg;
             e.target.style.color = "#121212";
             e.target.style.borderRadius = "4px";
           }
         }}
         onMouseLeave={(e) => {
-          if (!isSelected) {
+          if (!isSelected && !isPastDate) {
             e.target.style.backgroundColor = "transparent";
             e.target.style.color = textColor;
             e.target.style.borderRadius = "0";
