@@ -36,6 +36,7 @@ export default function Hero() {
 
   return (
     <section className="relative bg-hero-pattern bg-cover bg-center bg-no-repeat flex flex-col md:gap-[364px] items- w-full text-white">
+      <div className="absolute inset-0 bg-black -z-[5000]" />
       <div className="absolute inset-0 bg-black/20" />
       <MainHeader />
       <div className="flex-grow flex flex-col justify-between items-center p-6 z-50">
