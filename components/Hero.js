@@ -36,11 +36,11 @@ export default function Hero() {
 
   return (
     <section className="relative bg-hero-pattern bg-cover bg-center bg-no-repeat flex flex-col md:gap-[364px] items- w-full text-white">
-      <div className="absolute inset-0 bg-black/20 z-0" />
+      <div className="absolute inset-0 bg-black/20" />
       <MainHeader />
-      <div className="flex-grow flex flex-col justify-between items-center p-6 ">
+      <div className="flex-grow flex flex-col justify-between items-center p-6 z-50">
         <div className="bg-gray-900 bg-opacity-90 px-12 py-8 mb-12 rounded-xl max-w-[1000px]">
-          <div className="grid grid-cols-4 gap-4 max-md:flex max-md:flex-col">
+          <div className="grid grid-cols-4 gap-4 max-md:flex max-md:flex-col ">
             <div className="flex flex-col">
               <CustomDateInput
                 label="Dátum vyzdvihnutia"

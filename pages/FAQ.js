@@ -105,7 +105,7 @@ export default function InformationPage() {
     {
       question: "Ako mám postupovať keď viem, že budem meškať?",
       answer:
-        "Meškanie je potrebné čím skôr nahlásiť na telefónnom čísle +421 910 666 945 alebo vo svojom zákazníckom konte. V prípade neohláseného meškania viac ako 30 minút, vás budeme pokutovať vo výške 20€ až po preplatenie celého dňa nájmu vozidla.",
+        "Meškanie je potrebné čím skôr nahlásiť na telefónnom čísle +421 910 333 400 alebo vo svojom zákazníckom konte. V prípade neohláseného meškania viac ako 30 minút, vás budeme pokutovať vo výške 20€ až po preplatenie celého dňa nájmu vozidla.",
     },
     {
       question: "Čo znamená jeden deň prenájmu?",
