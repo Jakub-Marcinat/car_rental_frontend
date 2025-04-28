@@ -42,7 +42,7 @@ export default function VozidlaPage({ products, makes, models }) {
             <p className="text-sm">s osobným šoférom</p>
           </div>
           <div>
-            <p className="font-semibold text-lg">Dlhodobý</p>
+            <p className="font-semibold text-lg">Dlhodobý/krátkodobý</p>
             <p className="text-sm">prenájom</p>
           </div>
         </div>
