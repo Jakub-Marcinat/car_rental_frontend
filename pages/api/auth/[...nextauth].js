@@ -14,7 +14,6 @@ export const authOptions = {
     strategy: "jwt",
   },
   providers: [
-    // Email/password login
     CredentialsProvider({
       name: "Credentials",
       credentials: {
@@ -35,10 +34,10 @@ export const authOptions = {
         }
 
         return {
-          id: user._id,
+          id: user._id.toString(),
           name: user.name,
           email: user.email,
-          role: user.role,
+          role: user.role || "user",
         };
       },
     }),
@@ -46,33 +45,45 @@ export const authOptions = {
     GoogleProvider({
       clientId: process.env.GOOGLE_ID,
       clientSecret: process.env.GOOGLE_SECRET,
+      allowDangerousEmailAccountLinking: true, 
     }),
 
     FacebookProvider({
       clientId: process.env.FACEBOOK_CLIENT_ID,
       clientSecret: process.env.FACEBOOK_CLIENT_SECRET,
+      allowDangerousEmailAccountLinking: true,
     }),
   ],
+
   adapter: MongoDBAdapter(client),
 
   callbacks: {
-    async jwt({ token, user }) {
+    async jwt({ token, user, account, profile }) {
       if (user) {
         token.id = user.id;
         token.role = user.role || "user";
       }
       return token;
     },
+
     async session({ session, token }) {
-      session.user.id = token.id;
-      session.user.role = token.role;
+      if (token) {
+        session.user.id = token.id;
+        session.user.role = token.role;
+      }
       return session;
     },
+
+    async signIn({ user, account, profile, email, credentials }) {
+      return true;
+    },
   },
-  secret: process.env.NEXTAUTH_SECRET,
+
   pages: {
     signIn: "/prihlasenie",
   },
+
+  secret: process.env.NEXTAUTH_SECRET,
 };
 
 export default NextAuth(authOptions);

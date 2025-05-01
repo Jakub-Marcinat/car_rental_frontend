@@ -3,10 +3,14 @@ import Link from "next/link";
 import { ArrowRight, Mail, Lock } from "lucide-react";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useSearchParams } from "next/navigation";
 
 export default function SignInPage() {
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const URLerror = searchParams.get("error");
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -33,6 +37,27 @@ export default function SignInPage() {
       router.push("/");
     }
   }
+
+  useEffect(() => {
+    if (URLerror) {
+      switch (URLerror) {
+        case "OAuthAccountNotLinked":
+          setError(
+            "Tento účet je už registrovaný s iným spôsobom prihlásenia. Prosím, použite pôvodného poskytovateľa (napr. Google, Facebook, e-mail)."
+          );
+          break;
+        case "AccessDenied":
+          setError("Prístup bol zamietnutý.");
+          break;
+        case "Configuration":
+          setError("Nastala chyba konfigurácie autentifikácie.");
+          break;
+        default:
+          setError("Prihlasovanie zlyhalo. Skúste to znova.");
+          break;
+      }
+    }
+  }, [URLerror]);
 
   return (
     <div className="min-h-screen relative flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
