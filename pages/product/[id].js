@@ -21,6 +21,7 @@ import {
   FaDoorOpen,
   FaTachometerAlt,
   FaTrailer,
+  FaChair,
 } from "react-icons/fa";
 import { MdSpeed, MdCalendarToday } from "react-icons/md";
 import Footer from "@/components/Footer";
@@ -53,10 +54,10 @@ const parameterIcons = {
   Spotreba: <MdSpeed className="text-yellowText text-lg" />,
   "Typ prevodovky": <FaCogs className="text-yellowText text-lg" />,
   "Počet prevodových stupňov": <MdSpeed className="text-yellowText text-lg" />,
-  "Počet dverí": <FaDoorOpen className="text-yellowText text-lg" />,
+  "Počet miest": <FaChair className="text-yellowText text-lg" />,
   "Rok výroby": <MdCalendarToday className="text-yellowText text-lg" />,
   "Nájazd kilometrov": <FaTachometerAlt className="text-yellowText text-lg" />,
-  "Typ pohonu": <FaRoad className="text-yellowText text-lg" />,
+  Náhon: <FaRoad className="text-yellowText text-lg" />,
   "Ťažné zariadenie": <FaTrailer className="text-yellowText text-lg" />,
 };
 
