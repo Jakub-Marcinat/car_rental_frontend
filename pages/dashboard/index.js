@@ -12,6 +12,7 @@ import {
   Save,
   ArrowRight,
   CheckCircle,
+  UserCheck,
 } from "lucide-react";
 import DashboardLayout from "../../components/dashboard/DashboardLayout";
 import { getServerSession } from "next-auth";
@@ -19,15 +20,28 @@ import { authOptions } from "../api/auth/[...nextauth]";
 import { mongooseConnect } from "@/lib/mongoose";
 import { useState } from "react";
 import Header from "@/components/Header";
+import { Switch } from "@/components/CustomSwitch";
 
 export default function Dashboard({ user }) {
   const [isEditing, setIsEditing] = useState(false);
   const [formData, setFormData] = useState({
-    name: user?.name || "",
+    firstName: user?.firstName || "",
+    lastName: user?.lastName || "",
     email: user?.email || "",
     phone: user?.phone || "",
     image: user?.image || "",
-    address: user?.address || "",
+    contactStreet: user?.contactStreet || "",
+    contactCity: user?.contactCity || "",
+    contactPsc: user?.contactPsc || "",
+    contactCountry: user?.contactCountry || "",
+    companyName: user?.companyName || "",
+    ico: user?.ico || "",
+    dic: user?.dic || "",
+    icDph: user?.icDph || "",
+    billingStreet: user?.billingStreet || "",
+    billingCity: user?.billingCity || "",
+    billingPsc: user?.billingPsc || "",
+    billingCountry: user?.billingCountry || "",
     dateOfBirth: user?.dateOfBirth
       ? new Date(user.dateOfBirth).toISOString().split("T")[0]
       : "",
@@ -38,6 +52,7 @@ export default function Dashboard({ user }) {
     howDidYouHear: user?.howDidYouHear || "",
     additionalNotes: user?.additionalNotes || "",
   });
+  const [isCompany, setIsCompany] = useState(false);
 
   const handleAvatarUpload = async (e) => {
     const file = e.target.files[0];
@@ -96,7 +111,6 @@ export default function Dashboard({ user }) {
     );
   };
 
-  
   return (
     <div>
       <div className="max-lg:hidden">
@@ -163,122 +177,425 @@ export default function Dashboard({ user }) {
                       </label>
                     </div>
 
-                    <div className="flex-1 grid grid-cols-1 md:grid-cols-2 gap-6">
-                      <div className="space-y-1">
-                        <p className="text-sm text-zinc-500 flex items-center gap-2">
-                          <UserIcon className="w-4 h-4 text-corklasYellow" />
-                          Meno a priezvisko
-                        </p>
-                        {isEditing ? (
-                          <input
-                            type="text"
-                            name="name"
-                            value={formData.name}
-                            onChange={(e) =>
-                              setFormData((prev) => ({
-                                ...prev,
-                                name: e.target.value,
-                              }))
+                    <div className="space-y-8">
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div className="space-y-1 min-w-[221px]">
+                          <p className="text-sm text-zinc-500 flex items-center gap-2">
+                            <UserIcon className="w-4 h-4 text-corklasYellow" />
+                            Krstné meno
+                          </p>
+                          {isEditing ? (
+                            <input
+                              type="text"
+                              name="firstName"
+                              value={formData.firstName}
+                              onChange={(e) =>
+                                setFormData((prev) => ({
+                                  ...prev,
+                                  firstName: e.target.value,
+                                }))
+                              }
+                              className="bg-zinc-800 text-white px-2 py-1 rounded w-full"
+                            />
+                          ) : (
+                            <p className="text-white">{formData.firstName}</p>
+                          )}
+                        </div>
+                        <div className="space-y-1">
+                          <p className="text-sm text-zinc-500 flex items-center gap-2">
+                            <UserIcon className="w-4 h-4 text-corklasYellow" />
+                            Priezvisko
+                          </p>
+                          {isEditing ? (
+                            <input
+                              type="text"
+                              name="lastName"
+                              value={formData.lastName}
+                              onChange={(e) =>
+                                setFormData((prev) => ({
+                                  ...prev,
+                                  lastName: e.target.value,
+                                }))
+                              }
+                              className="bg-zinc-800 text-white px-2 py-1 rounded w-full"
+                            />
+                          ) : (
+                            <p className="text-white">{formData.lastName}</p>
+                          )}
+                        </div>
+
+                        <div className="space-y-1">
+                          <p className="text-sm text-zinc-500 flex items-center gap-2">
+                            <Mail className="w-4 h-4 text-corklasYellow" />
+                            E-mail
+                          </p>
+                          {isEditing ? (
+                            <input
+                              type="email"
+                              name="email"
+                              value={formData.email}
+                              onChange={(e) =>
+                                setFormData((prev) => ({
+                                  ...prev,
+                                  email: e.target.value,
+                                }))
+                              }
+                              className="bg-zinc-800 text-white px-2 py-1 rounded w-full"
+                            />
+                          ) : (
+                            <p className="text-white">{formData.email}</p>
+                          )}
+                        </div>
+
+                        <div className="space-y-1">
+                          <p className="text-sm text-zinc-500 flex items-center gap-2">
+                            <Phone className="w-4 h-4 text-corklasYellow" />
+                            Telefón
+                          </p>
+                          {isEditing ? (
+                            <input
+                              type="tel"
+                              name="phone"
+                              value={formData.phone}
+                              onChange={(e) =>
+                                setFormData((prev) => ({
+                                  ...prev,
+                                  phone: e.target.value,
+                                }))
+                              }
+                              className="bg-zinc-800 text-white px-2 py-1 rounded w-full"
+                            />
+                          ) : (
+                            <p className="text-white">{formData.phone}</p>
+                          )}
+                        </div>
+                        <div className="space-y-1">
+                          <p className="text-sm text-zinc-500 flex items-center gap-2">
+                            <MapPin className="w-4 h-4 text-corklasYellow" />
+                            Kontaktná Adresa - Ulica
+                          </p>
+                          {isEditing ? (
+                            <input
+                              type="text"
+                              name="contactStreet"
+                              value={formData.contactStreet}
+                              onChange={(e) =>
+                                setFormData((prev) => ({
+                                  ...prev,
+                                  contactStreet: e.target.value,
+                                }))
+                              }
+                              className="bg-zinc-800 text-white px-2 py-1 rounded w-full"
+                            />
+                          ) : (
+                            <p className="text-white">
+                              {formData.contactStreet}
+                            </p>
+                          )}
+                        </div>
+                        <div className="space-y-1">
+                          <p className="text-sm text-zinc-500 flex items-center gap-2">
+                            <MapPin className="w-4 h-4 text-corklasYellow" />
+                            Kontaktná Adresa - Mesto
+                          </p>
+                          {isEditing ? (
+                            <input
+                              type="text"
+                              name="contactCity"
+                              value={formData.contactCity}
+                              onChange={(e) =>
+                                setFormData((prev) => ({
+                                  ...prev,
+                                  contactCity: e.target.value,
+                                }))
+                              }
+                              className="bg-zinc-800 text-white px-2 py-1 rounded w-full"
+                            />
+                          ) : (
+                            <p className="text-white">{formData.contactCity}</p>
+                          )}
+                        </div>
+                        <div className="space-y-1">
+                          <p className="text-sm text-zinc-500 flex items-center gap-2">
+                            <MapPin className="w-4 h-4 text-corklasYellow" />
+                            Kontaktná Adresa - PSČ
+                          </p>
+                          {isEditing ? (
+                            <input
+                              type="text"
+                              name="contactPsc"
+                              value={formData.contactPsc}
+                              onChange={(e) =>
+                                setFormData((prev) => ({
+                                  ...prev,
+                                  contactPsc: e.target.value,
+                                }))
+                              }
+                              className="bg-zinc-800 text-white px-2 py-1 rounded w-full"
+                            />
+                          ) : (
+                            <p className="text-white">{formData.contactPsc}</p>
+                          )}
+                        </div>
+                        <div className="space-y-1">
+                          <p className="text-sm text-zinc-500 flex items-center gap-2">
+                            <MapPin className="w-4 h-4 text-corklasYellow" />
+                            Kontaktná Adresa - Krajina
+                          </p>
+                          {isEditing ? (
+                            <input
+                              type="text"
+                              name="contactCountry"
+                              value={formData.contactCountry}
+                              onChange={(e) =>
+                                setFormData((prev) => ({
+                                  ...prev,
+                                  contactCountry: e.target.value,
+                                }))
+                              }
+                              className="bg-zinc-800 text-white px-2 py-1 rounded w-full"
+                            />
+                          ) : (
+                            <p className="text-white">
+                              {formData.contactCountry}
+                            </p>
+                          )}
+                        </div>
+                        <div className="space-y-1">
+                          <p className="text-sm text-zinc-500 flex items-center gap-2">
+                            <Calendar className="w-4 h-4 text-corklasYellow" />
+                            Dátum narodenia
+                          </p>
+                          {isEditing ? (
+                            <input
+                              type="date"
+                              value={formData.dateOfBirth}
+                              onChange={(e) =>
+                                setFormData({
+                                  ...formData,
+                                  dateOfBirth: e.target.value,
+                                })
+                              }
+                              className="bg-zinc-800 text-white px-2 py-1 rounded"
+                            />
+                          ) : (
+                            <p className="text-white">
+                              {formData.dateOfBirth
+                                ? new Date(
+                                    formData.dateOfBirth
+                                  ).toLocaleDateString("sk-SK")
+                                : ""}
+                            </p>
+                          )}
+                        </div>
+                      </div>
+                      <div className="pt-6 border-t border-zinc-700">
+                        <div className="flex items-center space-x-2 mb-4">
+                          <Switch
+                            id="isCompany"
+                            checked={isCompany}
+                            onCheckedChange={() =>
+                              setIsCompany((prev) => !prev)
                             }
-                            className="bg-zinc-800 text-white px-2 py-1 rounded w-full"
                           />
-                        ) : (
-                          <p className="text-white">{formData.name}</p>
+                          <h2 className="text-white font-semibold text-lg">
+                            Som firma
+                          </h2>
+                        </div>
+
+                        {isCompany && (
+                          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div className="space-y-1">
+                              <p className="text-sm text-zinc-500 flex items-center gap-2">
+                                <UserIcon className="w-4 h-4 text-corklasYellow" />
+                                Názov spoločnosti
+                              </p>
+                              {isEditing ? (
+                                <input
+                                  type="text"
+                                  name="companyName"
+                                  value={formData.companyName || ""}
+                                  onChange={(e) =>
+                                    setFormData((prev) => ({
+                                      ...prev,
+                                      companyName: e.target.value,
+                                    }))
+                                  }
+                                  className="bg-zinc-800 text-white px-2 py-1 rounded w-full"
+                                />
+                              ) : (
+                                <p className="text-white">
+                                  {formData.companyName}
+                                </p>
+                              )}
+                            </div>
+                            <div className="space-y-1">
+                              <p className="text-sm text-zinc-500 flex items-center gap-2">
+                                <UserIcon className="w-4 h-4 text-corklasYellow" />
+                                IČO
+                              </p>
+                              {isEditing ? (
+                                <input
+                                  type="text"
+                                  name="ico"
+                                  value={formData.ico || ""}
+                                  onChange={(e) =>
+                                    setFormData((prev) => ({
+                                      ...prev,
+                                      ico: e.target.value,
+                                    }))
+                                  }
+                                  className="bg-zinc-800 text-white px-2 py-1 rounded w-full"
+                                />
+                              ) : (
+                                <p className="text-white">{formData.ico}</p>
+                              )}
+                            </div>
+                            <div className="space-y-1">
+                              <p className="text-sm text-zinc-500 flex items-center gap-2">
+                                <UserIcon className="w-4 h-4 text-corklasYellow" />
+                                DIČ
+                              </p>
+                              {isEditing ? (
+                                <input
+                                  type="text"
+                                  name="dic"
+                                  value={formData.dic || ""}
+                                  onChange={(e) =>
+                                    setFormData((prev) => ({
+                                      ...prev,
+                                      dic: e.target.value,
+                                    }))
+                                  }
+                                  className="bg-zinc-800 text-white px-2 py-1 rounded w-full"
+                                />
+                              ) : (
+                                <p className="text-white">{formData.dic}</p>
+                              )}
+                            </div>
+                            <div className="space-y-1">
+                              <p className="text-sm text-zinc-500 flex items-center gap-2">
+                                <UserIcon className="w-4 h-4 text-corklasYellow" />
+                                IČ DPH
+                              </p>
+                              {isEditing ? (
+                                <input
+                                  type="text"
+                                  name="icDph"
+                                  value={formData.icDph || ""}
+                                  onChange={(e) =>
+                                    setFormData((prev) => ({
+                                      ...prev,
+                                      icDph: e.target.value,
+                                    }))
+                                  }
+                                  className="bg-zinc-800 text-white px-2 py-1 rounded w-full"
+                                />
+                              ) : (
+                                <p className="text-white">{formData.icDph}</p>
+                              )}
+                            </div>
+                            <div className="space-y-1">
+                              <p className="text-sm text-zinc-500 flex items-center gap-2">
+                                <MapPin className="w-4 h-4 text-corklasYellow" />
+                                Fakturačná adresa - Ulica
+                              </p>
+                              {isEditing ? (
+                                <input
+                                  type="text"
+                                  name="billingStreet"
+                                  value={formData.billingStreet || ""}
+                                  onChange={(e) =>
+                                    setFormData((prev) => ({
+                                      ...prev,
+                                      billingStreet: e.target.value,
+                                    }))
+                                  }
+                                  className="bg-zinc-800 text-white px-2 py-1 rounded w-full"
+                                />
+                              ) : (
+                                <p className="text-white">
+                                  {formData.billingStreet}
+                                </p>
+                              )}
+                            </div>
+                            <div className="space-y-1">
+                              <p className="text-sm text-zinc-500 flex items-center gap-2">
+                                <MapPin className="w-4 h-4 text-corklasYellow" />
+                                Fakturačná adresa - Mesto
+                              </p>
+                              {isEditing ? (
+                                <input
+                                  type="text"
+                                  name="billingCity"
+                                  value={formData.billingCity || ""}
+                                  onChange={(e) =>
+                                    setFormData((prev) => ({
+                                      ...prev,
+                                      billingCity: e.target.value,
+                                    }))
+                                  }
+                                  className="bg-zinc-800 text-white px-2 py-1 rounded w-full"
+                                />
+                              ) : (
+                                <p className="text-white">
+                                  {formData.billingCity}
+                                </p>
+                              )}
+                            </div>
+                            <div className="space-y-1">
+                              <p className="text-sm text-zinc-500 flex items-center gap-2">
+                                <MapPin className="w-4 h-4 text-corklasYellow" />
+                                Fakturačná adresa - PSČ
+                              </p>
+                              {isEditing ? (
+                                <input
+                                  type="text"
+                                  name="billingPsc"
+                                  value={formData.billingPsc || ""}
+                                  onChange={(e) =>
+                                    setFormData((prev) => ({
+                                      ...prev,
+                                      billingPsc: e.target.value,
+                                    }))
+                                  }
+                                  className="bg-zinc-800 text-white px-2 py-1 rounded w-full"
+                                />
+                              ) : (
+                                <p className="text-white">
+                                  {formData.billingPsc}
+                                </p>
+                              )}
+                            </div>
+                            <div className="space-y-1">
+                              <p className="text-sm text-zinc-500 flex items-center gap-2">
+                                <MapPin className="w-4 h-4 text-corklasYellow" />
+                                Fakturačná adresa - Krajina
+                              </p>
+                              {isEditing ? (
+                                <input
+                                  type="text"
+                                  name="billingCountry "
+                                  value={formData.billingCountry || ""}
+                                  onChange={(e) =>
+                                    setFormData((prev) => ({
+                                      ...prev,
+                                      billingCountry: e.target.value,
+                                    }))
+                                  }
+                                  className="bg-zinc-800 text-white px-2 py-1 rounded w-full"
+                                />
+                              ) : (
+                                <p className="text-white">
+                                  {formData.billingCountry}
+                                </p>
+                              )}
+                            </div>
+                          </div>
                         )}
                       </div>
 
-                      <div className="space-y-1">
-                        <p className="text-sm text-zinc-500 flex items-center gap-2">
-                          <Mail className="w-4 h-4 text-corklasYellow" />
-                          E-mail
-                        </p>
-                        {isEditing ? (
-                          <input
-                            type="email"
-                            name="email"
-                            value={formData.email}
-                            onChange={(e) =>
-                              setFormData((prev) => ({
-                                ...prev,
-                                email: e.target.value,
-                              }))
-                            }
-                            className="bg-zinc-800 text-white px-2 py-1 rounded w-full"
-                          />
-                        ) : (
-                          <p className="text-white">{formData.email}</p>
-                        )}
-                      </div>
-
-                      <div className="space-y-1">
-                        <p className="text-sm text-zinc-500 flex items-center gap-2">
-                          <Phone className="w-4 h-4 text-corklasYellow" />
-                          Telefón
-                        </p>
-                        {isEditing ? (
-                          <input
-                            type="tel"
-                            name="phone"
-                            value={formData.phone}
-                            onChange={(e) =>
-                              setFormData((prev) => ({
-                                ...prev,
-                                phone: e.target.value,
-                              }))
-                            }
-                            className="bg-zinc-800 text-white px-2 py-1 rounded w-full"
-                          />
-                        ) : (
-                          <p className="text-white">{formData.phone}</p>
-                        )}
-                      </div>
-
-                      <div className="space-y-1">
-                        <p className="text-sm text-zinc-500 flex items-center gap-2">
-                          <MapPin className="w-4 h-4 text-corklasYellow" />
-                          Adresa
-                        </p>
-                        {isEditing ? (
-                          <input
-                            type="text"
-                            name="address"
-                            value={formData.address}
-                            onChange={(e) =>
-                              setFormData((prev) => ({
-                                ...prev,
-                                address: e.target.value,
-                              }))
-                            }
-                            className="bg-zinc-800 text-white px-2 py-1 rounded w-full"
-                          />
-                        ) : (
-                          <p className="text-white">{formData.address}</p>
-                        )}
-                      </div>
-
-                      <div className="space-y-1">
-                        <p className="text-sm text-zinc-500 flex items-center gap-2">
-                          <Calendar className="w-4 h-4 text-corklasYellow" />
-                          Dátum narodenia
-                        </p>
-                        {isEditing ? (
-                          <input
-                            type="date"
-                            value={formData.dateOfBirth}
-                            onChange={(e) =>
-                              setFormData({
-                                ...formData,
-                                dateOfBirth: e.target.value,
-                              })
-                            }
-                            className="bg-zinc-800 text-white px-2 py-1 rounded"
-                          />
-                        ) : (
-                          <p className="text-white">{formData.dateOfBirth}</p>
-                        )}
-                      </div>
-
-                      <div className="space-y-1">
+                      {/* <div className="space-y-1">
                         <p className="text-sm text-zinc-500 flex items-center gap-2">
                           <UserIcon className="w-4 h-4 text-corklasYellow" />
                           Pohlavie
@@ -305,7 +622,7 @@ export default function Dashboard({ user }) {
                             {formData.gender}
                           </p>
                         )}
-                      </div>
+                      </div> */}
                     </div>
                   </div>
                 </div>

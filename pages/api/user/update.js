@@ -10,6 +10,8 @@ export default async function handler(req, res) {
   if (!session) return res.status(401).json({ error: "Unauthorized" });
 
   const {
+    firstName,
+    lastName,
     name,
     email,
     phone,
@@ -22,11 +24,28 @@ export default async function handler(req, res) {
     rentalPurpose,
     howDidYouHear,
     additionalNotes,
+
+    contactStreet,
+    contactCity,
+    contactPsc,
+    contactCountry,
+
+    companyName,
+    ico,
+    dic,
+    icDph,
+
+    billingStreet,
+    billingCity,
+    billingPsc,
+    billingCountry,
   } = req.body;
 
   const updatedUser = await User.findOneAndUpdate(
     { email: session.user.email },
     {
+      firstName,
+      lastName,
       name,
       email,
       phone,
@@ -39,6 +58,21 @@ export default async function handler(req, res) {
       rentalPurpose,
       howDidYouHear,
       additionalNotes,
+
+      contactStreet,
+      contactCity,
+      contactPsc,
+      contactCountry,
+
+      companyName,
+      ico,
+      dic,
+      icDph,
+
+      billingStreet,
+      billingCity,
+      billingPsc,
+      billingCountry,
     },
     { new: true }
   );

@@ -26,6 +26,9 @@ import { Switch } from "@/components/CustomSwitch";
 import CustomCheckbox from "@/components/CustomCheckbox";
 import { useSession } from "next-auth/react";
 
+import axios from "axios";
+import { SquarePen } from "lucide-react";
+
 const parameterIcons = {
   Výkon: <FaBolt className="text-yellowText text-lg" />,
   Palivo: <FaGasPump className="text-yellowText text-lg" />,
@@ -188,6 +191,50 @@ export default function ReservationPage({ product }) {
     promoDiscount,
     product,
   ]);
+
+  const handleFillUserData = async () => {
+    if (!session?.user?.id) return;
+
+    try {
+      const { data: userData } = await axios.get(
+        `/api/user/${session.user.id}`
+      );
+
+      const fieldsToUpdate = [
+        "firstName",
+        "lastName",
+        "email",
+        "phone",
+        "contactStreet",
+        "contactCity",
+        "contactPsc",
+        "contactCountry",
+        "companyName",
+        "ico",
+        "dic",
+        "icDph",
+        "billingStreet",
+        "billingCity",
+        "billingPsc",
+        "billingCountry",
+      ];
+
+      setFormData((prev) => ({
+        ...prev,
+        ...Object.fromEntries(
+          fieldsToUpdate
+            .filter((field) => userData[field]) // only defined values
+            .map((field) => [field, userData[field]])
+        ),
+      }));
+
+      if (userData.companyName) {
+        setIsCompany(true);
+      }
+    } catch (err) {
+      console.error("Failed to fetch user data", err);
+    }
+  };
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -438,6 +485,16 @@ export default function ReservationPage({ product }) {
           <h3 className="text-2xl font-semibold my-6 py-2 text-yellowText">
             Rezervácia vozidla
           </h3>
+          {session?.user && (
+            <button
+              type="button"
+              onClick={handleFillUserData}
+              className="flex items-center mb-6 gap-3"
+            >
+              Vyplniť údaje
+              <SquarePen className="w-5 h-5 text-corklasYellow" />
+            </button>
+          )}
 
           <form onSubmit={handleSubmit} className="space-y-4">
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
@@ -615,6 +672,7 @@ export default function ReservationPage({ product }) {
                     type="text"
                     id="firstName"
                     name="firstName"
+                    value={formData.firstName || ""}
                     placeholder="Krstné meno*"
                     onChange={handleChange}
                     required
@@ -626,6 +684,7 @@ export default function ReservationPage({ product }) {
                     id="lastName"
                     name="lastName"
                     placeholder="Priezvisko*"
+                    value={formData.lastName || ""}
                     onChange={handleChange}
                     required
                   />
@@ -636,6 +695,7 @@ export default function ReservationPage({ product }) {
                     id="email"
                     name="email"
                     placeholder="Email*"
+                    value={formData.email || ""}
                     onChange={handleChange}
                     required
                   />
@@ -646,6 +706,7 @@ export default function ReservationPage({ product }) {
                     id="phone"
                     name="phone"
                     placeholder="Telefón*"
+                    value={formData.phone || ""}
                     onChange={handleChange}
                     required
                   />
@@ -671,6 +732,7 @@ export default function ReservationPage({ product }) {
                     id="contactStreet"
                     name="contactStreet"
                     placeholder="Ulica"
+                    value={formData.contactStreet || ""}
                     onChange={handleChange}
                     required
                   />
@@ -681,6 +743,7 @@ export default function ReservationPage({ product }) {
                     id="contactCity"
                     name="contactCity"
                     placeholder="Mesto"
+                    value={formData.contactCity || ""}
                     onChange={handleChange}
                     required
                   />
@@ -691,6 +754,7 @@ export default function ReservationPage({ product }) {
                     id="contactPsc"
                     name="contactPsc"
                     placeholder="PSC"
+                    value={formData.contactPsc || ""}
                     onChange={handleChange}
                     required
                   />
@@ -701,6 +765,7 @@ export default function ReservationPage({ product }) {
                     id="contactCountry"
                     name="contactCountry"
                     placeholder="Krajina"
+                    value={formData.contactCountry || ""}
                     onChange={handleChange}
                     required
                   />
@@ -737,6 +802,7 @@ export default function ReservationPage({ product }) {
                         id="companyName"
                         name="companyName"
                         placeholder="Company Name"
+                        value={formData.companyName || ""}
                         onChange={handleChange}
                         required
                       />
@@ -747,6 +813,7 @@ export default function ReservationPage({ product }) {
                         id="ico"
                         name="ico"
                         placeholder="IČO"
+                        value={formData.ico || ""}
                         onChange={handleChange}
                         required
                       />
@@ -757,6 +824,7 @@ export default function ReservationPage({ product }) {
                         id="dic"
                         name="dic"
                         placeholder="DIČ"
+                        value={formData.dic || ""}
                         onChange={handleChange}
                       />
                     </div>
@@ -766,6 +834,7 @@ export default function ReservationPage({ product }) {
                         id="icDph"
                         name="icDph"
                         placeholder="IČ DPH"
+                        value={formData.icDph || ""}
                         onChange={handleChange}
                       />
                     </div>
@@ -775,6 +844,7 @@ export default function ReservationPage({ product }) {
                         id="billingStreet"
                         name="billingStreet"
                         placeholder="Ulica"
+                        value={formData.billingStreet || ""}
                         onChange={handleChange}
                         required
                       />
@@ -785,6 +855,7 @@ export default function ReservationPage({ product }) {
                         id="billingCity"
                         name="billingCity"
                         placeholder="Mesto"
+                        value={formData.billingCity || ""}
                         onChange={handleChange}
                         required
                       />
@@ -795,6 +866,7 @@ export default function ReservationPage({ product }) {
                         id="billingPsc"
                         name="billingPsc"
                         placeholder="PSC"
+                        value={formData.billingPsc || ""}
                         onChange={handleChange}
                         required
                       />
@@ -805,6 +877,7 @@ export default function ReservationPage({ product }) {
                         id="billingCountry"
                         name="billingCountry"
                         placeholder="Krajina"
+                        value={formData.billingCountry || ""}
                         onChange={handleChange}
                         required
                       />
