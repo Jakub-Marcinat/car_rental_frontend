@@ -48,16 +48,16 @@ const FeatureTile = styled.div`
 `;
 
 const parameterIcons = {
-  Výkon: <FaBolt className="text-yellowText text-lg" />,
-  Palivo: <FaGasPump className="text-yellowText text-lg" />,
+  Výkon: <FaBolt className="text-corklasRed text-lg" />,
+  Palivo: <FaGasPump className="text-corklasRed text-lg" />,
   "Objem valcov": <FaCar className="text-yellowText text-lg" />,
   Spotreba: <MdSpeed className="text-yellowText text-lg" />,
-  "Typ prevodovky": <FaCogs className="text-yellowText text-lg" />,
+  Prevodovka: <FaCogs className="text-corklasRed text-lg" />,
   "Počet prevodových stupňov": <MdSpeed className="text-yellowText text-lg" />,
-  "Počet miest": <FaChair className="text-yellowText text-lg" />,
+  "Počet miest": <FaChair className="text-corklasRed text-lg" />,
   "Rok výroby": <MdCalendarToday className="text-yellowText text-lg" />,
   "Nájazd kilometrov": <FaTachometerAlt className="text-yellowText text-lg" />,
-  Náhon: <FaRoad className="text-yellowText text-lg" />,
+  Náhon: <FaRoad className="text-corklasRed text-lg" />,
   "Ťažné zariadenie": <FaTrailer className="text-yellowText text-lg" />,
 };
 
@@ -227,7 +227,7 @@ export default function ProductPage({ product }) {
                 onChange={handlePickupDateChange}
                 placeholder="Dátum vyzdvihnutia"
                 bgColor="#1f1f1f"
-                borderColor="#1f1f1f"
+                borderColor="#D70006"
                 calendarBgColor="#121212"
                 calendarTextColor="#f3f4f6"
                 calendarBorderColor="#2b2b2b"
@@ -242,7 +242,7 @@ export default function ProductPage({ product }) {
                 onChange={setPickupTime}
                 placeholder="Čas odovzdania"
                 bgColor="#1F1F1F"
-                borderColor="#1F1F1F"
+                borderColor="#D70006"
                 timePickerBgColor="#121212"
                 timePickerTextColor="white"
                 timePickerBorderColor="#2b2b2b"
@@ -256,7 +256,7 @@ export default function ProductPage({ product }) {
                 onChange={handleDropoffDateChange}
                 placeholder="Dátum odovzdania"
                 bgColor="#1f1f1f"
-                borderColor="#1f1f1f"
+                borderColor="#D70006"
                 calendarBgColor="#121212"
                 calendarTextColor="#f3f4f6"
                 calendarBorderColor="#2b2b2b"
@@ -271,7 +271,7 @@ export default function ProductPage({ product }) {
                 onChange={setDropoffTime}
                 placeholder="Čas odovzdania"
                 bgColor="#1F1F1F"
-                borderColor="#1F1F1F"
+                borderColor="#D70006"
                 timePickerBgColor="#121212"
                 timePickerTextColor="white"
                 timePickerBorderColor="#2b2b2b"

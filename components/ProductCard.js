@@ -89,7 +89,7 @@ export default function ProductCard({ product }) {
           <div className="flex justify-between items-end mt-auto">
             <p>
               <span className="opacity-70">od </span>
-              <span className="text-3xl opacity-100 text-corklasYellow">
+              <span className="text-3xl opacity-100 text-corklasRed">
                 {lowestRentalPrice}€
                 <span className="opacity-70 text-2xl text-white"> / deň</span>
               </span>

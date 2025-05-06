@@ -503,7 +503,7 @@ export default function ReservationPage({ product }) {
                 onChange={setPickupDate}
                 placeholder="Dátum odovzdania"
                 bgColor="#1f1f1f"
-                borderColor="#1f1f1f"
+                borderColor="#D70006"
                 calendarBgColor="#121212"
                 calendarTextColor="#f3f4f6"
                 calendarBorderColor="#2b2b2b"
@@ -517,7 +517,7 @@ export default function ReservationPage({ product }) {
                 onChange={setPickupTime}
                 placeholder="Čas odovzdania"
                 bgColor="#1F1F1F"
-                borderColor="#1F1F1F"
+                borderColor="#D70006"
                 timePickerBgColor="#121212"
                 timePickerTextColor="white"
                 timePickerBorderColor="#2b2b2b"
@@ -531,7 +531,7 @@ export default function ReservationPage({ product }) {
                 onChange={setDropoffDate}
                 placeholder="Dátum odovzdania"
                 bgColor="#1f1f1f"
-                borderColor="#1f1f1f"
+                borderColor="#D70006"
                 calendarBgColor="#121212"
                 calendarTextColor="#f3f4f6"
                 calendarBorderColor="#2b2b2b"
@@ -546,7 +546,7 @@ export default function ReservationPage({ product }) {
                 onChange={setDropoffTime}
                 placeholder="Čas odovzdania"
                 bgColor="#1F1F1F"
-                borderColor="#1F1F1F"
+                borderColor="#D70006"
                 timePickerBgColor="#121212"
                 timePickerTextColor="white"
                 timePickerBorderColor="#2b2b2b"

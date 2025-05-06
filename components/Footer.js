@@ -34,7 +34,7 @@ export default function Footer() {
             <div className="flex flex-col mb-3 gap-4">
               <div className="flex gap-4 items-center">
                 <svg
-                  className="w-6 h-6 text-corklasYellow"
+                  className="w-6 h-6 text-corklasRed"
                   fill="currentColor"
                   viewBox="0 0 24 24"
                 >
@@ -46,7 +46,7 @@ export default function Footer() {
               </div>
               <div className="flex gap-4 items-center">
                 <svg
-                  className="w-6 h-6 text-corklasYellow"
+                  className="w-6 h-6 text-corklasRed"
                   fill="currentColor"
                   viewBox="0 0 24 24"
                 >
@@ -59,7 +59,7 @@ export default function Footer() {
             </div>
             <div className="flex items-center gap-4 mb-3">
               <svg
-                className="w-6 h-6 text-corklasYellow"
+                className="w-6 h-6 text-corklasRed"
                 fill="currentColor"
                 viewBox="0 0 24 24"
               >

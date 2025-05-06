@@ -141,7 +141,7 @@ export default function HomePage({ featuredProducts, newProducts }) {
       >
         <div className="flex flex-col items-center mb-10  ">
           <h1 className="text-white text-4xl font-bold">Kontakt</h1>
-          <div className="bg-corklasYellow w-20 h-3 mt-4 rounded-xl"></div>
+          <div className="bg-corklasRed w-20 h-3 mt-4 rounded-xl"></div>
         </div>
         <div className="max-w-6xl mx-auto flex flex-col lg:flex-row items-center gap-12">
           <div className="w-full lg:w-1/2 h-96 rounded-lg overflow-hidden shadow-lg">
@@ -157,7 +157,7 @@ export default function HomePage({ featuredProducts, newProducts }) {
 
             <div className="flex items-center gap-4 mb-3">
               <svg
-                className="w-6 h-6 text-corklasYellow"
+                className="w-6 h-6 text-corklasRed"
                 fill="currentColor"
                 viewBox="0 0 24 24"
               >
@@ -168,7 +168,7 @@ export default function HomePage({ featuredProducts, newProducts }) {
 
             <div className="flex items-center gap-4 mb-3">
               <svg
-                className="w-6 h-6 text-corklasYellow"
+                className="w-6 h-6 text-corklasRed"
                 fill="currentColor"
                 viewBox="0 0 24 24"
               >
@@ -179,7 +179,7 @@ export default function HomePage({ featuredProducts, newProducts }) {
 
             <div className="flex items-center gap-4 mb-6">
               <svg
-                className="w-6 h-6 text-corklasYellow"
+                className="w-6 h-6 text-corklasRed"
                 fill="currentColor"
                 viewBox="0 0 24 24"
               >
