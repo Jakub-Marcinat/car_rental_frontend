@@ -18,7 +18,7 @@ const Card = styled.div`
   border-radius: 32px;
   border: 1px solid #2b2b2b;
   box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.3);
-  text-align: center;
+  text-align: left;
   width: 350px;
   display: flex;
   align-items: center;
@@ -80,7 +80,7 @@ export default function Featured({ product }) {
         <div className="flex justify-between items-end">
           <p>
             <span className="opacity-70">od </span>
-            <span className="text-3xl opacity-100 text-corklasYellow">
+            <span className="text-3xl opacity-100 text-corklasRed">
               {lowestRentalPrice}€
               <span className="opacity-70 text-2xl text-white"> / deň</span>
             </span>

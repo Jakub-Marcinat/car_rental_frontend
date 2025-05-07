@@ -130,7 +130,7 @@ export default function Filter({ makes, models }) {
         onChange={handlePickupDateChange}
         placeholder="Dostupné od"
         bgColor="#1f1f1f"
-        borderColor="#1f1f1f"
+        borderColor="#D70006"
         calendarBgColor="#121212"
         calendarTextColor="#f3f4f6"
         calendarBorderColor="#2b2b2b"
@@ -143,7 +143,7 @@ export default function Filter({ makes, models }) {
         onChange={handleDropoffDateChange}
         placeholder="Dostupné do"
         bgColor="#1f1f1f"
-        borderColor="#1f1f1f"
+        borderColor="#D70006"
         calendarBgColor="#121212"
         calendarTextColor="#f3f4f6"
         calendarBorderColor="#2b2b2b"
