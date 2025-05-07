@@ -6,7 +6,7 @@ import { Clock, Car, Calendar, CheckCircle, ArrowRight } from "lucide-react";
 
 export default function AboutUs() {
   return (
-    <div className="min-h-screen bg-corklasBackground">
+    <div className="min-h-screen bg-background-image">
       <Header />
       <div className="relative h-[50vh] md:h-[60vh] w-full overflow-hidden">
         <Image

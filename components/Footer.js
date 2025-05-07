@@ -5,7 +5,7 @@ export default function Footer() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12 px-32">
           <div>
             <img
-              src="/CorklasLogo.png"
+              src="/CorklasLogoWhiteTrans1.png"
               alt="Corklas Logo"
               className="max-w-full h-auto"
             />
@@ -14,6 +14,23 @@ export default function Footer() {
             V CORKLAS ponúkame široký výber kvalitných vozidiel, ktoré vyhovujú
             vašim potrebám a rozpočtu. S rokmi skúseností v automobilovom
             priemysle.
+            <br />
+            <br />
+            <a
+              href="/vop.pdf"
+              className="cursor-pointer hover:text-corklasYellow underline"
+              download="VseobecneObchodnePodmienky.pdf"
+            >
+              VOP
+            </a>
+            <br />
+            <a
+              href="/vop.pdf"
+              className="cursor-pointer hover:text-corklasYellow underline"
+              download="DokumentNaStiahnutie.pdf"
+            >
+              PDF na stiahnutie
+            </a>
           </p>
           <div>
             <h3 className="text-white text-xl font-bold mb-4">

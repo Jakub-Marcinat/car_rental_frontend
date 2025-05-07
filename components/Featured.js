@@ -43,6 +43,7 @@ const Title = styled.h2`
   font-size: 1.8rem;
   margin: 20px 0 4px;
   font-weight: 600;
+  color: #fdd724;
   display: flex;
 `;
 

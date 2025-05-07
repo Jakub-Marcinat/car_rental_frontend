@@ -105,7 +105,7 @@ export default function Filter({ makes, models }) {
   return (
     <Sidebar className="max-lg:w-[300px] mb-20">
       <div className="flex justify-between items-center">
-        <h3 className="text-3xl font-bold mb-4">Filter</h3>
+        <h3 className="text-3xl font-bold mb-4 text-corklasYellow">Filter</h3>
         <button onClick={resetFilters} className="flex gap-2">
           Zmazať filtre{" "}
           <svg
@@ -152,7 +152,7 @@ export default function Filter({ makes, models }) {
         calendarDayHoverBgColor="#FFFA00"
       />
       <div className="w-full border border-[#2b2b2b] mb-4 mt-2"></div>
-      <p className="text-xl">Vozidlo</p>
+      <p className="text-xl text-corklasYellow">Vozidlo</p>
       <CustomMakeSelect
         options={[
           { value: "", label: "Značka vozidla" },
@@ -181,7 +181,7 @@ export default function Filter({ makes, models }) {
         onChange={setCategory}
       />
       <div className="w-full border border-[#2b2b2b] mb-4 mt-2"></div>
-      <p className="text-xl">Parametre vozidla</p>
+      <p className="text-xl text-corklasYellow">Parametre vozidla</p>
       <CustomSelect
         options={[
           { value: "", label: "Typ prevodovky" },
@@ -217,7 +217,7 @@ export default function Filter({ makes, models }) {
         onChange={setAccessories}
       />
       <div className="w-full border border-[#2b2b2b] mb-4 mt-2"></div>
-      <p className="text-xl">Zoradiť</p>
+      <p className="text-xl text-corklasYellow">Zoradiť</p>
       <CustomSelect
         options={[
           { value: "", label: "Odporúčané" },

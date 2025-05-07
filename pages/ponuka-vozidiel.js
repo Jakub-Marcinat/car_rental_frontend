@@ -14,9 +14,9 @@ export default function VozidlaPage({ products, makes, models }) {
     setShowFilterMobile(!showFilterMobile);
   };
   return (
-    <div className="w-screen bg-corklasBackground">
+    <div className="w-screen bg-background-image">
       <Header />
-      <div className="py-28 bg-corklasBackground text-white text-center">
+      <div className="py-28 text-white text-center">
         <div className="absolute flex left-0 -top-[200px] w-[80%] h-[80%] bg-[#141419] blur-[250px] opacity-50 z-0"></div>
         <h1 className="text-3xl lg:text-5xl font-medium mb-4 text-yellowText z-10 relative">
           Požičovňa aút SK

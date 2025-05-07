@@ -47,6 +47,7 @@ const Title = styled.h2`
   font-size: 1.6rem;
   font-weight: 600;
   display: flex;
+  color: #fdd724;
 `;
 
 export default function ProductCard({ product }) {

@@ -14,7 +14,7 @@ function FaqItem({ question, answer }) {
   return (
     <div className="border border-zinc-800/50 rounded-xl overflow-hidden mb-4">
       <button
-        className="w-full flex items-center justify-between p-5 text-left bg-zinc-900/70 hover:bg-zinc-800/70 transition-colors"
+        className="w-full flex items-center justify-between p-5 text-left bg-zinc-900/90 hover:bg-zinc-800/90 transition-colors"
         onClick={() => setIsOpen(!isOpen)}
       >
         <span className="text-white font-medium">{question}</span>
@@ -25,7 +25,7 @@ function FaqItem({ question, answer }) {
         />
       </button>
       {isOpen && (
-        <div className="p-5 bg-zinc-800/30 border-t border-zinc-800/50">
+        <div className="p-5 bg-zinc-800/70 border-t border-zinc-800/50">
           <p className="text-zinc-300">{answer}</p>
         </div>
       )}
@@ -36,7 +36,7 @@ function FaqItem({ question, answer }) {
 // Fee Item Component
 function FeeItem({ title, description, amount }) {
   return (
-    <div className="border border-zinc-800/50 rounded-xl overflow-hidden mb-4 bg-zinc-900/70">
+    <div className="border border-zinc-800 rounded-xl overflow-hidden mb-4 bg-zinc-900/90">
       <div className="p-5 flex justify-between items-start">
         <div>
           <h3 className="text-white font-medium mb-1 ">{title}</h3>
@@ -215,7 +215,7 @@ export default function InformationPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-corklasBackground">
+    <div className="min-h-screen bg-background-image">
       <Header />
       {/* Hero Section */}
       <div className="relative h-[40vh] md:h-[50vh] w-full overflow-hidden">
@@ -284,7 +284,7 @@ export default function InformationPage() {
             </h2>
           </div>
 
-          <div className="bg-zinc-900/30 rounded-2xl p-6 md:p-8 border border-zinc-800/50 mb-8">
+          <div className="bg-zinc-900/70 rounded-2xl p-6 md:p-8 border border-zinc-800 mb-8">
             <div className="flex items-center gap-3">
               <Info className="w-5 h-5 text-yellow-300" />
               <h3 className="text-lg font-medium text-white">

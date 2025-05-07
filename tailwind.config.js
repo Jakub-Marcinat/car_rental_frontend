@@ -11,7 +11,7 @@ module.exports = {
         corklasYellow: "#F8CD02",
         corklasBackground: "#0b0a0b",
         corklasCard: "#151515",
-        yellowText: "#F8CD02",
+        yellowText: "#fdd724",
       },
       backgroundImage: {
         "hero-pattern": "url('/Logo Corklas karbon.webp')",
