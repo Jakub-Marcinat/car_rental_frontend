@@ -35,7 +35,6 @@ const ImageWrapper = styled.div`
     border-radius: 12px;
 
     &:hover {
-      transform: scale(1.02);
     }
   }
 `;

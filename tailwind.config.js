@@ -14,7 +14,8 @@ module.exports = {
         yellowText: "#F8CD02",
       },
       backgroundImage: {
-        "hero-pattern": "url('/Logo_Corklas_karbon.jpg')",
+        "hero-pattern": "url('/Logo Corklas karbon.webp')",
+        "background-image": "url('/CORKLAS_ABSTRACT 1.webp')",
       },
       fontFamily: {
         aeonik: ["Aeonik", "sans-serif"],

@@ -199,12 +199,12 @@ h2 {
 .fade-out {
   mask-image: linear-gradient(
     to right,
-    rgba(0, 0, 0, 1) 50%,
+    rgba(0, 0, 0, 1) 90%,
     rgba(0, 0, 0, 0) 100%
   );
   -webkit-mask-image: linear-gradient(
     to right,
-    rgba(0, 0, 0, 1) 60%,
+    rgba(0, 0, 0, 1) 90%,
     rgba(0, 0, 0, 0) 100%
   );
 }

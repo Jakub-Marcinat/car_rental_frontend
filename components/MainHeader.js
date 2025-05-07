@@ -20,7 +20,7 @@ export default function mainHeader({ cartProducts }) {
 
   return (
     <>
-      <header className="flex justify-between items-center px-10 py-5 w-full z-10">
+      <header className="flex justify-between items-center px-10 py-5 w-full z-[5000]">
         <h1 className="text-3xl font-bold tracking-widest whitespace-nowrap">
           COR KLAS
         </h1>
@@ -85,13 +85,13 @@ export default function mainHeader({ cartProducts }) {
             >
               Ponuka vozidiel
             </a>
-            <a
+            {/* <a
               href="/registracia"
               className="hover:text-corklasYellow"
               onClick={() => setIsOpen(false)}
             >
               Prihlásiť sa
-            </a>
+            </a> */}
             <a
               href="/FAQ"
               className="hover:text-corklasYellow"
@@ -141,7 +141,7 @@ export default function mainHeader({ cartProducts }) {
           <a href="/ponuka-vozidiel" className="hover:text-corklasYellow">
             Ponuka vozidiel
           </a>
-          {session?.user ? (
+          {/* {session?.user ? (
             <>
               <a href="/dashboard" className="hover:text-corklasYellow">
                 Môj účet
@@ -157,7 +157,7 @@ export default function mainHeader({ cartProducts }) {
             <a href="/prihlasenie" className="hover:text-corklasYellow">
               Prihlásiť sa
             </a>
-          )}
+          )} */}
           <a href="/FAQ" className="hover:text-corklasYellow">
             FAQ
           </a>

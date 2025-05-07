@@ -8,9 +8,9 @@ import Footer from "@/components/Footer";
 
 export default function HomePage({ featuredProducts, newProducts }) {
   return (
-    <div>
+    <div className="bg-background-image">
       <Hero />
-      <div className=" bg-corklasBackground py-20 px-6 sm:px-10 lg:px-20">
+      <div className="py-20 px-6 sm:px-10 lg:px-20">
         <div className="container justify-center gap-8 flex flex-wrap max-w-[1400px] mx-auto">
           {featuredProducts.map((product) => (
             <Featured key={product._id} product={product} />
@@ -20,7 +20,7 @@ export default function HomePage({ featuredProducts, newProducts }) {
 
       {/* <NewProducts products={newProducts} /> */}
 
-      <section className="relative bg-corklasBackground flex flex-col items-center justify-center px-4 h-fit">
+      <section className="relative flex flex-col items-center justify-center px-4 h-fit">
         <div className="absolute top-1/3 left-1/2 transform -translate-x-1/2 -translate-y-1/2 aspect-w-1 aspect-h-1 w-64 h-64 md:w-96 lg:w-[600px] bg-corklasRed opacity-20 rounded-full blur-[100px] overflow-hidden"></div>
         <div className="relative z-10 py-12 px-6 sm:px-10 lg:px-20">
           <div className="flex flex-col items-center mb-32 z-10">
@@ -90,7 +90,7 @@ export default function HomePage({ featuredProducts, newProducts }) {
         </div>
       </section>
 
-      <section className="relative bg-corklasBackground flex flex-col items-end text-white pt-20">
+      <section className="relative  flex flex-col items-end text-white pt-20">
         <div className="max-w-6xl mx-auto flex flex-col items-center">
           <div className="absolute lg:top-[100px] lg:-left-0 lg:w-[500px] lg:h-[700px] bg-corklasYellow rounded-lg hidden lg:block"></div>
 
@@ -110,10 +110,10 @@ export default function HomePage({ featuredProducts, newProducts }) {
             <img
               src="/MercedesGTR.jpg"
               alt="Mercedes GTR"
-              className="rounded-lg shadow-lg w-full fade-out"
+              className="rounded-lg shadow-lg w-full"
             />
             <div className="relative flex justify-center md:justify-end ">
-              <div className="mt-12 z-10 lg:max-w-[900px] bg-[#1a1a1a] text-black rounded-lg shadow-lg p-6 flex flex-col lg:flex-row justify-between md:items-center gap-6 fade-out-button md:px-20">
+              <div className="mt-12 z-10 lg:max-w-[900px] bg-[#1a1a1a] text-black rounded-lg shadow-lg p-6 flex flex-col lg:flex-row justify-between md:items-center gap-6  md:px-20">
                 <div>
                   <h3 className="text-md md:text-2xl z-10 font-bold mb-2 text-white">
                     Zažite jazdu bez kompromisov
@@ -135,10 +135,7 @@ export default function HomePage({ featuredProducts, newProducts }) {
         </div>
       </section>
 
-      <section
-        id="kontakt"
-        className="bg-corklasBackground py-40 px-4 lg:px-12"
-      >
+      <section id="kontakt" className=" py-40 px-4 lg:px-12">
         <div className="flex flex-col items-center mb-10  ">
           <h1 className="text-white text-4xl font-bold">Kontakt</h1>
           <div className="bg-corklasRed w-20 h-3 mt-4 rounded-xl"></div>

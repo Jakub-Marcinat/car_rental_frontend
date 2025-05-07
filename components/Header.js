@@ -104,7 +104,7 @@ export default function Header() {
           <Nav open={menuOpen}>
             <NavLink href="/">Domov</NavLink>
             <NavLink href="/ponuka-vozidiel">Ponuka vozidiel</NavLink>
-            {session?.user ? (
+            {/* {session?.user ? (
               <>
                 <a href="/dashboard" className="hover:text-[#fff] text-[#aaa]">
                   Môj účet
@@ -123,7 +123,7 @@ export default function Header() {
               >
                 Prihlásiť sa
               </a>
-            )}
+            )} */}
             <NavLink href="/FAQ">FAQ</NavLink>
             <NavLink href="/#kontakt">Kontakt</NavLink>
             <NavLink href="/o-nas">O nás</NavLink>
