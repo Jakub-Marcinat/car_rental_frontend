@@ -34,7 +34,7 @@ export default function Hero() {
     };
 
     router.push({
-      pathname: "/vozidla",
+      pathname: "/ponuka-vozidiel",
       query,
     });
   };
