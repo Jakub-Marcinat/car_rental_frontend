@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import MainHeader from "./MainHeader";
 import { useRouter } from "next/router";
 import dynamic from "next/dynamic";
@@ -44,7 +44,7 @@ export default function Hero() {
       <div className="absolute inset-0 bg-black -z-[5000]" />
       <div className="absolute inset-0 bg-black/70" />
       <MainHeader />
-      <div className="md:flex flex-col justify-between items-center p-6 z-50">
+      <div className="flex flex-col justify-between items-center p-6 z-50 max-w-[1000px] w-full mx-auto">
         <div className="bg-gray-900 bg-opacity-90 px-12 py-8 mb-12 rounded-xl max-w-[1000px]">
           <div className="grid grid-cols-4 gap-4 max-md:flex max-md:flex-col ">
             <div className="flex flex-col">

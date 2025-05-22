@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { useRouter } from "next/router";
+import Image from "next/image";
 
 const Bg = styled.div`
   background-color: #0b0a0b;
@@ -62,11 +63,15 @@ export default function Featured({ product }) {
     <Card
       onClick={handleClick}
       className="transition-all hover:scale-[1.02] duration-200"
+      style={{ willChange: "transform" }}
     >
       <ImageWrapper>
-        <img
+        <Image
           src={product.images[0] || "/placeholder.jpg"}
           alt={product.title}
+          width={350}
+          height={200}
+          style={{ objectFit: "cover", borderRadius: 12 }}
         />
       </ImageWrapper>
       <div className="flex flex-col w-full">
