@@ -7,6 +7,7 @@ import { Category } from "@/models/Category";
 import mongoose from "mongoose";
 import Footer from "@/components/Footer";
 import { useState } from "react";
+import Head from "next/head";
 
 export default function VozidlaPage({ products, makes, models }) {
   const [showFilterMobile, setShowFilterMobile] = useState(false);
@@ -15,6 +16,26 @@ export default function VozidlaPage({ products, makes, models }) {
   };
   return (
     <div className="w-screen bg-background-image">
+      <Head>
+        <title>Ponuka vozidiel | Autopožičovňa COR KLAS</title>
+        <meta
+          name="description"
+          content="Prezrite si našu širokú ponuku vozidiel na prenájom. SUV, hatchback, sedany a ďalšie."
+        />
+        <meta
+          property="og:title"
+          content="Ponuka vozidiel | Autopožičovňa COR KLAS"
+        />
+        <meta
+          property="og:description"
+          content="Vyberte si z rôznych kategórií áut pripravených na prenájom."
+        />
+        <meta property="og:image" content="/opengraph-image.png" />
+        <meta
+          property="og:url"
+          content="https://pozicovnaaut.sk/ponuka-vozidiel"
+        />
+      </Head>
       <Header />
       <div className="py-28 text-white text-center">
         <div className="absolute flex left-0 -top-[200px] w-[80%] h-[80%] bg-[#141419] blur-[250px] opacity-50 z-0"></div>

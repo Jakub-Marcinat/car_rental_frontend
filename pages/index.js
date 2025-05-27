@@ -1,14 +1,30 @@
 import { mongooseConnect } from "@/lib/mongoose";
 import { Product } from "@/models/Product";
-
 import Featured from "@/components/Featured";
 import Hero from "@/components/Hero";
-import NewProducts from "@/components/Newproducts";
 import Footer from "@/components/Footer";
+import Head from "next/head";
 
 export default function HomePage({ featuredProducts, newProducts }) {
   return (
     <div className="bg-background-image">
+      <Head>
+        <title>Autopožičovňa COR KLAS – Prenájom áut jednoducho a rýchlo</title>
+        <meta
+          name="description"
+          content="Najlacnejší a najspoľahlivejší prenájom vozidiel na Slovensku. Rezervujte si auto ešte dnes s COR KLAS."
+        />
+        <meta
+          property="og:title"
+          content="Autopožičovňa COR KLAS  – Prenájom áut"
+        />
+        <meta
+          property="og:description"
+          content="Online prenájom áut za výhodné ceny. Vyberte si vozidlo jednoducho a rýchlo."
+        />
+        <meta property="og:image" content="/opengraph-image.png" />
+        <meta property="og:url" content="https://pozicovnaaut.sk/" />
+      </Head>
       <Hero />
       <div className="min-h-[800px] py-20 px-6 sm:px-10 lg:px-20">
         <div className="container justify-center gap-8 flex flex-wrap max-w-[1400px] mx-auto">

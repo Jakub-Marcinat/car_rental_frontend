@@ -14,6 +14,7 @@ import { useState } from "react";
 import { signIn } from "next-auth/react";
 import Header from "@/components/Header";
 import CustomCheckbox from "@/components/CustomCheckbox";
+import Head from "next/head";
 
 export default function SignUpPage() {
   const [form, setForm] = useState({
@@ -103,6 +104,13 @@ export default function SignUpPage() {
 
   return (
     <>
+      <Head>
+        <title>Registrácia | Autopožičovňa COR KLAS</title>
+        <meta
+          name="description"
+          content="Zaregistrujte sa a využite všetky výhody online správy prenájmov."
+        />
+      </Head>
       <Header />
       <main className="min-h-screen relative flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
         <div className="absolute inset-0 z-0">

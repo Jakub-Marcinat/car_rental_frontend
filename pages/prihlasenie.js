@@ -5,6 +5,7 @@ import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
+import Head from "next/head";
 
 export default function SignInPage() {
   const router = useRouter();
@@ -61,6 +62,13 @@ export default function SignInPage() {
 
   return (
     <div className="min-h-screen relative flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+      <Head>
+        <title>Prihlásenie | Autopožičovňa COR KLAS</title>
+        <meta
+          name="description"
+          content="Prihláste sa do svojho účtu a spravujte svoje rezervácie pohodlne online."
+        />
+      </Head>
       <div className="absolute inset-0 z-0">
         <Image
           src="/cars/noir-mKOimPTdMyw.jpg"

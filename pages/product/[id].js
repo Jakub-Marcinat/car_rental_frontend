@@ -25,6 +25,7 @@ import {
 } from "react-icons/fa";
 import { MdSpeed, MdCalendarToday } from "react-icons/md";
 import Footer from "@/components/Footer";
+import Head from "next/head";
 
 export const PriceRow = styled.div`
   display: flex;
@@ -180,6 +181,18 @@ export default function ProductPage({ product }) {
 
   return (
     <div className="bg-corklasBackground text-white min-h-screen">
+      <Head>
+        <title>{product.title} | Autopožičovňa COR KLAS</title>
+        <meta
+          name="description"
+          content={`Prenajmite si ${product.title} už od ${product.price}€ na deň.`}
+        />
+        <meta property="og:image" content={product.images[0]} />
+        <meta
+          property="og:url"
+          content={`https://pozicovnaaut.sk/product/${product._id}`}
+        />
+      </Head>
       <Header />
       <div className="mx-auto px-4 lg:px-12 lg:py-20 xl:px-20 max-w-[1410px]">
         <Title>{product.title}</Title>

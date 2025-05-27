@@ -2,14 +2,6 @@ import { CartContextProvider } from "@/components/CartContext";
 import "@/styles/globals.css";
 import { SessionProvider } from "next-auth/react";
 import Head from "next/head";
-import { createGlobalStyle } from "styled-components";
-
-// const GlobalStyles = createGlobalStyle`
-// body {
-//   padding: 0;
-//   margin: 0;
-//   font-family: 'Roboto', sans-serif;
-// }`;
 
 export default function App({
   Component,
@@ -18,7 +10,6 @@ export default function App({
   return (
     <>
       <Head>
-        {/* Preconnect to Google Fonts */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link
           rel="preconnect"
@@ -26,13 +17,31 @@ export default function App({
           crossOrigin=""
         />
 
-        {/* Load fonts with display=swap */}
         <link
           href="https://fonts.googleapis.com/css2?family=Poppins&display=swap"
           rel="stylesheet"
         />
+
+        <title>Autopožičovňa COR KLAS</title>
+        <meta
+          name="description"
+          content="Prenájom áut jednoducho, rýchlo a spoľahlivo."
+        />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta
+          name="keywords"
+          content="autopožičovňa, prenájom auta, Trenčín, požičanie auta"
+        />
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content="Autopožičovňa COR KLAS" />
+        <meta
+          property="og:description"
+          content="Prenájom áut jednoducho, rýchlo a spoľahlivo."
+        />
+        <meta property="og:image" content="/opengraph-image.png" />
+        <meta property="og:url" content="https://pozicovnaaut.sk/" />
+        <link rel="icon" href="/favicon.ico" />
       </Head>
-      {/* <GlobalStyles /> */}
       <CartContextProvider>
         <SessionProvider session={session}>
           <Component {...pageProps} />

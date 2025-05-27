@@ -14,7 +14,7 @@ export default function Document() {
         href="https://fonts.gstatic.com/s/xyz.woff2"
         as="font"
         type="font/woff2"
-        crossorigin="anonymous"
+        crossOrigin="anonymous"
       />
       <link
         rel="preload"

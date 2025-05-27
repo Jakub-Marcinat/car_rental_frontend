@@ -28,6 +28,7 @@ import { useSession } from "next-auth/react";
 
 import axios from "axios";
 import { SquarePen } from "lucide-react";
+import Head from "next/head";
 
 const parameterIcons = {
   Výkon: <FaBolt className="text-yellowText text-lg" />,
@@ -456,6 +457,13 @@ export default function ReservationPage({ product }) {
 
   return (
     <main className="bg-corklasBackground text-white">
+      <Head>
+        <title>Rezervácia vozidla | Autopožičovňa COR KLAS</title>
+        <meta
+          name="description"
+          content="Vyplňte rezerváciu a zarezervujte si svoje vozidlo jednoducho a rýchlo."
+        />
+      </Head>
       <div className="p-6 max-w-7xl mx-auto flex flex-col lg:flex-row gap-8">
         <div className="flex-1 lg:w-[70%]">
           <img

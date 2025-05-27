@@ -3,10 +3,25 @@ import Header from "@/components/Header";
 import Image from "next/image";
 import Link from "next/link";
 import { Clock, Car, Calendar, CheckCircle, ArrowRight } from "lucide-react";
+import Head from "next/head";
 
 export default function AboutUs() {
   return (
     <div className="min-h-screen bg-background-image">
+      <Head>
+        <title>O nás | Autopožičovňa COR KLAS</title>
+        <meta
+          name="description"
+          content="Zistite viac o Autopožičovni COR KLAS – kto sme, čo robíme a prečo sme vaša najlepšia voľba na prenájom auta."
+        />
+        <meta property="og:title" content="O nás – Autopožičovňa Corklas" />
+        <meta
+          property="og:description"
+          content="Sme lokálna autopožičovňa s dôrazom na kvalitu a spokojnosť zákazníkov."
+        />
+        <meta property="og:image" content="/opengraph-image.png" />
+        <meta property="og:url" content="https://pozicovnaaut.sk/o-nas" />
+      </Head>
       <Header />
       <div className="relative h-[50vh] md:h-[60vh] w-full overflow-hidden">
         <Image

@@ -6,6 +6,7 @@ import { ChevronDown, Info, AlertTriangle, HelpCircle } from "lucide-react";
 import { useState } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import Head from "next/head";
 
 // FAQ Accordion Item Component
 function FaqItem({ question, answer }) {
@@ -216,6 +217,20 @@ export default function InformationPage() {
 
   return (
     <div className="min-h-screen bg-background-image">
+      <Head>
+        <title>Najčastejšie otázky | Autopožičovňa COR KLAS</title>
+        <meta
+          name="description"
+          content="Získajte odpovede na často kladené otázky o prenájme áut, poistení, platbách a ďalšie."
+        />
+        <meta property="og:title" content="FAQ | Autopožičovňa COR KLAS" />
+        <meta
+          property="og:description"
+          content="Všetko, čo potrebujete vedieť pred prenájmom vozidla."
+        />
+        <meta property="og:image" content="/opengraph-image.png" />
+        <meta property="og:url" content="https://pozicovnaaut.sk/FAQ" />
+      </Head>
       <Header />
       {/* Hero Section */}
       <div className="relative h-[40vh] md:h-[50vh] w-full overflow-hidden">
