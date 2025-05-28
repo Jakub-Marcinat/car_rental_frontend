@@ -43,13 +43,15 @@ const CustomCalendar = ({
 
   for (let i = 1; i <= daysInMonth; i++) {
     const date = new Date(
-      currentMonth.getFullYear(),
-      currentMonth.getMonth(),
-      i + 1
+      Date.UTC(currentMonth.getFullYear(), currentMonth.getMonth(), i)
     );
 
+    const normalizeDate = (d) =>
+      new Date(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate()));
+
     const isSelected =
-      selectedDate && date.toDateString() === selectedDate.toDateString();
+      selectedDate &&
+      normalizeDate(date).getTime() === normalizeDate(selectedDate).getTime();
 
     const isPastDate =
       date.setHours(0, 0, 0, 0) < new Date().setHours(0, 0, 0, 0);
@@ -62,14 +64,17 @@ const CustomCalendar = ({
         }`}
         onClick={() => {
           if (!isPastDate) {
-            onChange(date);
+            const normalizedDate = new Date(
+              Date.UTC(date.getFullYear(), date.getMonth(), date.getDate())
+            );
+            onChange(normalizedDate);
             onClose();
           }
         }}
         style={{
           backgroundColor: isSelected ? selectedBgColor : "transparent",
           color: isPastDate
-            ? "#777" // Gray color for disabled dates
+            ? "#777"
             : isSelected
             ? selectedTextColor
             : textColor,
@@ -79,7 +84,7 @@ const CustomCalendar = ({
           alignItems: "center",
           padding: "5px",
           cursor: isPastDate ? "not-allowed" : "pointer",
-          pointerEvents: isPastDate ? "none" : "auto", // prevent clicking on past dates
+          pointerEvents: isPastDate ? "none" : "auto",
         }}
         onMouseEnter={(e) => {
           if (!isSelected && !isPastDate) {
