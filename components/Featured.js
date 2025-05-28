@@ -53,7 +53,7 @@ export default function Featured({ product }) {
   const router = useRouter();
 
   const handleClick = () => {
-    router.push(`/product/${product._id}`);
+    router.push(`/product/${product.title}`);
   };
   const lowestRentalPrice =
     product.priceListing?.[product.priceListing.length - 1]?.dailyRentalPrice ||

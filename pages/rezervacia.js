@@ -9,7 +9,7 @@ import CustomTimeInput from "@/components/CustomTimeInput";
 import CustomSelect from "@/components/CustomSelect";
 import { motion, AnimatePresence } from "framer-motion";
 import Button from "@/components/Button";
-import { Price, PriceRow } from "./product/[id]";
+import { Price, PriceRow } from "./product/[title]";
 import Input from "@/components/Input";
 import {
   FaBolt,

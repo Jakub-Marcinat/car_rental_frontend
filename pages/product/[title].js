@@ -190,7 +190,7 @@ export default function ProductPage({ product }) {
         <meta property="og:image" content={product.images[0]} />
         <meta
           property="og:url"
-          content={`https://pozicovnaaut.sk/product/${product._id}`}
+          content={`https://pozicovnaaut.sk/product/${product.title}`}
         />
       </Head>
       <Header />
@@ -345,8 +345,17 @@ export default function ProductPage({ product }) {
 
 export async function getServerSideProps(context) {
   await mongooseConnect();
-  const { id } = context.query;
-  const product = await Product.findById(id);
+  const { title } = context.query;
+
+  const decodedTitle = decodeURIComponent(title); 
+  const product = await Product.findOne({ title: decodedTitle });
+
+  if (!product) {
+    return {
+      notFound: true,
+    };
+  }
+
   return {
     props: { product: JSON.parse(JSON.stringify(product)) },
   };
