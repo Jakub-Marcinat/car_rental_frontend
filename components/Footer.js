@@ -1,8 +1,8 @@
 export default function Footer() {
   return (
-    <footer className="bg-corklasCard flex flex-col px-6 sm:px-10 lg:px-16 py-12 lg:pb-0 sm:py-16 overflow-auto">
+    <footer className="bg-corklasCard flex lg:flex-col px-6 sm:px-10 lg:px-16 py-12 lg:pb-0 sm:py-16 overflow-auto">
       <div className="max-w-7xl mx-auto w-full">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12 px-32">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12 px-20 max-sm:px-12">
           <div>
             <img
               src="/CorklasLogoWhiteTrans1.png"
