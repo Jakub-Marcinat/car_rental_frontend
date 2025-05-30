@@ -76,7 +76,7 @@ export default function Footer() {
             </div>
             <div className="flex items-center gap-4 mb-3">
               <svg
-                className="w-6 h-6 text-corklasRed"
+                className="w-12 h-6 text-corklasRed"
                 fill="currentColor"
                 viewBox="0 0 24 24"
               >
