@@ -17,7 +17,7 @@ export default function Footer() {
             <br />
             <br />
             <a
-              href="/vop.pdf"
+              href="/download/VOP.pdf"
               className="cursor-pointer hover:text-corklasYellow underline"
               download="VseobecneObchodnePodmienky.pdf"
             >
@@ -25,7 +25,7 @@ export default function Footer() {
             </a>
             <br />
             <a
-              href="/vop.pdf"
+              href="/download/VOP.pdf"
               className="cursor-pointer hover:text-corklasYellow underline"
               download="DokumentNaStiahnutie.pdf"
             >
