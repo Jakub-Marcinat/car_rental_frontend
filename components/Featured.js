@@ -47,6 +47,7 @@ const Title = styled.h2`
   color: #fdd724;
   display: flex;
 `;
+const loader = ({ src }) => src;
 
 export default function Featured({ product }) {
   const { Palivo, Prevodovka, Výkon } = product.properties || {};
@@ -69,8 +70,10 @@ export default function Featured({ product }) {
         <Image
           src={product.images[0] || "/placeholder.jpg"}
           alt={product.title}
+          loader={loader}
           width={350}
           height={200}
+          unoptimized
           style={{ objectFit: "cover", borderRadius: 12 }}
         />
       </ImageWrapper>
