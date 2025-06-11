@@ -114,7 +114,7 @@ export default function Footer() {
         </div>
         <div className="flex justify-center text-white py-8 mt-8 lg:mt-20 border-t border-corklasCardLight">
           <p className="text-sm sm:text-md">
-            Copyright ©2024. Všetky práva vyhradené.
+            Copyright ©2025o. Všetky práva vyhradené.
           </p>
         </div>
       </div>

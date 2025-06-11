@@ -204,26 +204,35 @@ export default function ProductPage({ product }) {
             <BlackBox>
               <h3 className="text-2xl font-bold text-yellowText">Cenník</h3>
               <CustomTable headers={tableHeaders} data={tableData} />
-
               <h3 className="text-2xl font-bold mt-12 mb-4 text-yellowText">
-                Vlastnosti
+                Výbava
               </h3>
               {product.features.map((feature, index) => (
                 <FeatureTile key={index}>{feature}</FeatureTile>
               ))}
-
               <h3 className="text-2xl font-bold mt-12 mb-4 text-yellowText">
                 Technické parametre
               </h3>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-2 text-white">
-                {Object.entries(product.properties).map(([key, value]) => (
-                  <div key={key} className="flex items-center gap-2">
-                    {parameterIcons[key] || (
-                      <FaCogs className="text-yellowText text-lg" />
-                    )}
-                    <strong>{key}:</strong> {value}
-                  </div>
-                ))}
+                {Object.entries(product.properties).map(([key, value]) => {
+                  // Map specific values to localized names
+                  const valueMap = {
+                    FWD: "Predný",
+                    RWD: "Zadný",
+                    Diesel: "Nafta",
+                  };
+
+                  const displayValue = valueMap[value] || value;
+
+                  return (
+                    <div key={key} className="flex items-center gap-2">
+                      {parameterIcons[key] || (
+                        <FaCogs className="text-yellowText text-lg" />
+                      )}
+                      <strong>{key}:</strong> {displayValue}
+                    </div>
+                  );
+                })}
               </div>
             </BlackBox>
           </div>
@@ -347,7 +356,7 @@ export async function getServerSideProps(context) {
   await mongooseConnect();
   const { title } = context.query;
 
-  const decodedTitle = decodeURIComponent(title); 
+  const decodedTitle = decodeURIComponent(title);
   const product = await Product.findOne({ title: decodedTitle });
 
   if (!product) {
